@@ -10,7 +10,9 @@ export default function VocabularyForm() {
     e.preventDefault();
     console.log('word, explanation, example', word, explanation, example)
 
+    // Ein Objekt von der gelesenen Daten mit zusäzlichen Informationen erzeugen.
 
+    // Das Objekt in Datenbank einfügen.
     setWord('');
     setExplanation('');
     setExample('');

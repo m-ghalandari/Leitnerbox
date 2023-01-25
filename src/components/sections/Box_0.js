@@ -1,7 +1,8 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
 
 export default function Box_0() {
   return (
-    <div>BOX-0</div>
+    <Container>All reserve Vocabularies</Container>
   )
 }
