@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import Level from '../levels/Level'
+import Level from './Level'
 
 const Box = ({ levels , flashcards, boxNumber}) => {
   const [showLevels, setShowLevels] = useState(Array(levels).fill(false));
