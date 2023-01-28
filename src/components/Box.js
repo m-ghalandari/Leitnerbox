@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Level from './Level'
 
-const Box = ({ levels , flashcards, boxNumber}) => {
+const Box = ({ levels , flashcards, boxNumber, deleteFlashcard,updataFlashcard}) => {
   const [showLevels, setShowLevels] = useState(Array(levels).fill(false));
   const boxKarte = flashcards.filter(f=>f.box===boxNumber);
 
@@ -26,7 +26,7 @@ const Box = ({ levels , flashcards, boxNumber}) => {
             {showLevels[i] && (
                 
             
-            <Level level={i} flashcards={boxKarte}/>
+            <Level level={i} flashcards={boxKarte} deleteFlashcard={deleteFlashcard} updataFlashcard={updataFlashcard}/>
             
             )}
           </>

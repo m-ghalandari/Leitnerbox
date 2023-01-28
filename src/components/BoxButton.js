@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from "react-bootstrap/Button";
 import Box from "./Box";
-export default function BoxButton({levels, flashcards, boxNumber, setShowBox, showBox }) {
+export default function BoxButton({levels, flashcards, boxNumber,deleteFlashcard, setShowBox, showBox,updataFlashcard }) {
   return (
     <>
         <Button
@@ -13,7 +13,7 @@ export default function BoxButton({levels, flashcards, boxNumber, setShowBox, sh
         </Button>
         
         {showBox && (
-          <Box levels={levels} flashcards={flashcards} boxNumber={boxNumber} />
+          <Box levels={levels} flashcards={flashcards} boxNumber={boxNumber} deleteFlashcard={deleteFlashcard} updataFlashcard={updataFlashcard}/>
         )}
       </>
   )
