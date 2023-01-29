@@ -56,6 +56,7 @@ function App() {
       example: "I live in Berlin",
     },
   ]);
+  // level 17 is final level. it indicates the completed cards 
 
   const addFlashcard = (newFlashcard) => {
     setFlashcards([...flashcards, newFlashcard]);
@@ -68,6 +69,7 @@ function App() {
     setFlashcards(updatedFlashcards);
   };
 
+  // id:Falshcardid, box and level: have to change
   const changeFlashcardProperties = (id, box, level) => {
     const updatedFlashcards = flashcards.map((flashcard) => {
       if (flashcard.id === id) {
@@ -91,15 +93,80 @@ function App() {
           break;
         case 1:
           console.log("Box 1");
+          if (card.level === 1) {
+            changeFlashcardProperties(card.id, 1, 2);
+          } else {
+            changeFlashcardProperties(card.id, 2, 1);
+          }
+
           break;
         case 2:
           console.log("Box 2");
+          if (card.level === 1) {
+            changeFlashcardProperties(card.id, 2, 2);
+          } else if (card.level === 2) {
+            changeFlashcardProperties(card.id, 2, 3);
+          } else if (card.level === 3) {
+            changeFlashcardProperties(card.id, 2, 4);
+          } else if (card.level === 4) {
+            changeFlashcardProperties(card.id, 3, 1);
+          }
           break;
         case 3:
           console.log("Box 3");
+          if (card.level === 1) {
+            changeFlashcardProperties(card.id, 3, 2);
+          } else if (card.level === 2) {
+            changeFlashcardProperties(card.id, 3, 3);
+          } else if (card.level === 3) {
+            changeFlashcardProperties(card.id, 3, 4);
+          } else if (card.level === 4) {
+            changeFlashcardProperties(card.id, 3, 5);
+          } else if (card.level === 5) {
+            changeFlashcardProperties(card.id, 3, 6);
+          } else if (card.level === 6) {
+            changeFlashcardProperties(card.id, 3, 7);
+          } else if (card.level === 7) {
+            changeFlashcardProperties(card.id, 3, 8);
+          } else if (card.level === 8) {
+            changeFlashcardProperties(card.id, 4, 1);
+          }
           break;
         case 4:
           console.log("Box 4");
+          if (card.level === 1) {
+            changeFlashcardProperties(card.id, 4, 2);
+            } else if (card.level === 2) {
+            changeFlashcardProperties(card.id, 4, 3);
+            } else if (card.level === 3) {
+            changeFlashcardProperties(card.id, 4, 4);
+            } else if (card.level === 4) {
+            changeFlashcardProperties(card.id, 4, 5);
+            } else if (card.level === 5) {
+            changeFlashcardProperties(card.id, 4, 6);
+            } else if (card.level === 6) {
+            changeFlashcardProperties(card.id, 4, 7);
+            } else if (card.level === 7) {
+            changeFlashcardProperties(card.id, 4, 8);
+            } else if (card.level === 8) {
+            changeFlashcardProperties(card.id, 4, 9);
+            } else if (card.level === 9) {
+            changeFlashcardProperties(card.id, 4, 10);
+            } else if (card.level === 10) {
+            changeFlashcardProperties(card.id, 4, 11);
+            } else if (card.level === 11) {
+            changeFlashcardProperties(card.id, 4, 12);
+            } else if (card.level === 12) {
+            changeFlashcardProperties(card.id, 4, 13);
+            } else if (card.level === 13) {
+            changeFlashcardProperties(card.id, 4, 14);
+            } else if (card.level === 14) {
+            changeFlashcardProperties(card.id, 4, 15);
+            } else if (card.level === 15) {
+            changeFlashcardProperties(card.id, 4, 16);
+            } else if (card.level === 16) {
+            changeFlashcardProperties(card.id, 4, 17);
+            }
           break;
         default:
           console.log("error");
@@ -109,32 +176,6 @@ function App() {
     }
   };
 
-  // const updataFlashcard = (id, box, level, nextLevel) => {
-  //   if (nextLevel) {
-  //     switch (box) {
-  //       case 0:
-  //         console.log("Box 0");
-  //         changeFlashcardProperties(id, 1, 1);
-  //         break;
-  //       case 1:
-  //         console.log("Box 1");
-  //         break;
-  //       case 2:
-  //         console.log("Box 2");
-  //         break;
-  //       case 3:
-  //         console.log("Box 3");
-  //         break;
-  //       case 4:
-  //         console.log("Box 4");
-  //         break;
-  //       default:
-  //         console.log("error");
-  //     }
-  //   } else {
-  //     changeFlashcardProperties(id, 0, 0);
-  //   }
-  // };
 
   return (
     <Container>
