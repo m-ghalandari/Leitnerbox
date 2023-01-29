@@ -1,23 +1,15 @@
-
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Level from "./Level";
 
-const Box = ({
-  levels,
-  flashcards,
-  boxNumber,
-  deleteFlashcard,
-  updataFlashcard,
-}) => {
-  const [showLevels, setShowLevels] = useState(Array(levels).fill(false));
-  const boxKarte = flashcards.filter((f) => f.box === boxNumber);
+const LevelList = ({ numberOflevelBox }) => {
+  const [showLevels, setShowLevels] = useState(Array(numberOflevelBox).fill(false));
 
   return (
     <Container>
       <div className="d-grid gap-4">
-        {Array.from({ length: levels }, (_, i) => (
+        {Array.from({ length: numberOflevelBox }, (_, i) => (
           <>
             <Button
               variant="primary"
@@ -31,14 +23,7 @@ const Box = ({
               Level {i + 1}
             </Button>
 
-            {showLevels[i] && (
-              <Level
-                level={i}
-                flashcards={boxKarte}
-                deleteFlashcard={deleteFlashcard}
-                updataFlashcard={updataFlashcard}
-              />
-            )}
+            {showLevels[i] && <Level />}
           </>
         ))}
       </div>
@@ -46,4 +31,4 @@ const Box = ({
   );
 };
 
-export default Box;
+export default LevelList;

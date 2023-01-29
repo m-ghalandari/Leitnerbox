@@ -1,13 +1,11 @@
+
 import VocabularyForm from "./components/VocabularyForm";
-import Box from "./components/Box";
 import Box_0 from "./components/Box_0";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Button from "react-bootstrap/Button";
 import { Container } from "react-bootstrap";
 import BoxButton from "./components/BoxButton";
-import { nanoid } from "nanoid";
-// import axios from 'axios';
+import BoxList from "./components/BoxList";
 
 function App() {
   const [showBox1, setShowBox1] = useState(false);
@@ -47,23 +45,7 @@ function App() {
       front: "What is the currency of France?",
       back: "Euro",
       example: "I live in Berlin",
-    },
-    {
-      id: 5,
-      box: 0,
-      level: 0,
-      front: "What is the currency of France?",
-      back: "Euro",
-      example: "I live in Berlin",
-    },
-    {
-      id: 6,
-      box: 0,
-      level: 0,
-      front: "What is the currency of France?",
-      back: "Euro",
-      example: "I live in Berlin",
-    },
+    }
   ]);
 
   const addFlashcard = (newFlashcard) => {
@@ -124,12 +106,16 @@ function App() {
   };
 
   return (
+    
     <Container>
       <div className="App d-grid gap-4">
         <VocabularyForm addFlashcard={addFlashcard} />
+        
         <Box_0 flashcards={flashcards.filter((card)=> card.box===0)} deleteFlashcard={deleteFlashcard} updataFlashcard={updataFlashcard}/>
 
-        <BoxButton
+      <BoxList />
+
+        {/* <BoxButton
           levels={2}
           flashcards={flashcards.filter((card) => card.box === 1)}
           boxNumber={1}
@@ -164,7 +150,7 @@ function App() {
           updataFlashcard={updataFlashcard}
           setShowBox={setShowBox4}
           showBox={showBox4}
-        />
+        /> */}
       </div>
     </Container>
   );
