@@ -10,7 +10,7 @@ function App() {
   const [flashcards, setFlashcards] = useState([
     {
       id: 1,
-      box: 0,
+      box: 2,
       level: 1,
       front: "What is the capital of Germany?",
       back: "Berlin",
@@ -27,7 +27,7 @@ function App() {
     {
       id: 3,
       box: 2,
-      level: 2,
+      level: 3,
       front: "What is the currency of France?",
       back: "Euro",
       example: "I live in Berlin",
@@ -42,8 +42,8 @@ function App() {
     },
     {
       id: 5,
-      box: 4,
-      level: 16,
+      box: 1,
+      level: 1,
       front: "What is the currency of France?",
       back: "Euro",
       example: "I live in Berlin",
@@ -81,6 +81,13 @@ function App() {
         };
       }
       return flashcard;
+    });
+    setFlashcards(updatedFlashcards);
+  };
+
+  const changeFlashcardsLevels = (cards) => {
+    const updatedFlashcards = cards.map((card) => {
+      return { ...card, level: card.level + 1 };
     });
     setFlashcards(updatedFlashcards);
   };
@@ -220,6 +227,7 @@ function App() {
           )}
           deleteFlashcard={deleteFlashcard}
           updataFlashcard={updataFlashcard}
+          changeFlashcardsLevels={changeFlashcardsLevels}
         />
 
         <CompletedCards

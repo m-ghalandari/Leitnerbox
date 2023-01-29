@@ -6,6 +6,7 @@ export default function BoxList({
   flashcards,
   deleteFlashcard,
   updataFlashcard,
+  changeFlashcardsLevels
 }) {
   const [showBoxes, setShowBoxes] = useState(Array(4).fill(false));
 
@@ -32,6 +33,7 @@ export default function BoxList({
               )}
               deleteFlashcard={deleteFlashcard}
               updataFlashcard={updataFlashcard}
+              changeFlashcardsLevels={changeFlashcardsLevels}
             />
           )}
         </>

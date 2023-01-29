@@ -8,11 +8,13 @@ const LevelList = ({
   flashcards,
   deleteFlashcard,
   updataFlashcard,
+  changeFlashcardsLevels
 }) => {
   const [showLevels, setShowLevels] = useState(
     Array(numberOfLevelBox).fill(false)
   );
 
+  
   return (
     <Container>
       <div className="d-grid gap-4">
@@ -41,6 +43,15 @@ const LevelList = ({
             )}
           </>
         ))}
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-info"
+            onClick={()=>{changeFlashcardsLevels(flashcards)}}
+          >
+            Move
+          </button>
+        </div>
       </div>
     </Container>
   );
