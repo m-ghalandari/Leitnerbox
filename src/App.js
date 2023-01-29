@@ -4,6 +4,7 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import BoxList from "./components/BoxList";
+import CompletedCards from "./components/CompletedCards";
 
 function App() {
   const [flashcards, setFlashcards] = useState([
@@ -56,7 +57,7 @@ function App() {
       example: "I live in Berlin",
     },
   ]);
-  // level 17 is final level. it indicates the completed cards 
+  // box 5 is final. it indicates the completed cards
 
   const addFlashcard = (newFlashcard) => {
     setFlashcards([...flashcards, newFlashcard]);
@@ -136,37 +137,37 @@ function App() {
           console.log("Box 4");
           if (card.level === 1) {
             changeFlashcardProperties(card.id, 4, 2);
-            } else if (card.level === 2) {
+          } else if (card.level === 2) {
             changeFlashcardProperties(card.id, 4, 3);
-            } else if (card.level === 3) {
+          } else if (card.level === 3) {
             changeFlashcardProperties(card.id, 4, 4);
-            } else if (card.level === 4) {
+          } else if (card.level === 4) {
             changeFlashcardProperties(card.id, 4, 5);
-            } else if (card.level === 5) {
+          } else if (card.level === 5) {
             changeFlashcardProperties(card.id, 4, 6);
-            } else if (card.level === 6) {
+          } else if (card.level === 6) {
             changeFlashcardProperties(card.id, 4, 7);
-            } else if (card.level === 7) {
+          } else if (card.level === 7) {
             changeFlashcardProperties(card.id, 4, 8);
-            } else if (card.level === 8) {
+          } else if (card.level === 8) {
             changeFlashcardProperties(card.id, 4, 9);
-            } else if (card.level === 9) {
+          } else if (card.level === 9) {
             changeFlashcardProperties(card.id, 4, 10);
-            } else if (card.level === 10) {
+          } else if (card.level === 10) {
             changeFlashcardProperties(card.id, 4, 11);
-            } else if (card.level === 11) {
+          } else if (card.level === 11) {
             changeFlashcardProperties(card.id, 4, 12);
-            } else if (card.level === 12) {
+          } else if (card.level === 12) {
             changeFlashcardProperties(card.id, 4, 13);
-            } else if (card.level === 13) {
+          } else if (card.level === 13) {
             changeFlashcardProperties(card.id, 4, 14);
-            } else if (card.level === 14) {
+          } else if (card.level === 14) {
             changeFlashcardProperties(card.id, 4, 15);
-            } else if (card.level === 15) {
+          } else if (card.level === 15) {
             changeFlashcardProperties(card.id, 4, 16);
-            } else if (card.level === 16) {
-            changeFlashcardProperties(card.id, 4, 17);
-            }
+          } else if (card.level === 16) {
+            changeFlashcardProperties(card.id, 5, 0);
+          }
           break;
         default:
           console.log("error");
@@ -175,7 +176,6 @@ function App() {
       changeFlashcardProperties(card.id, 0, 0);
     }
   };
-
 
   return (
     <Container>
@@ -189,7 +189,15 @@ function App() {
         />
 
         <BoxList
-          flashcards={flashcards.filter((flashcard) => flashcard.box !== 0)}
+          flashcards={flashcards.filter(
+            (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
+          )}
+          deleteFlashcard={deleteFlashcard}
+          updataFlashcard={updataFlashcard}
+        />
+
+        <CompletedCards
+          flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
           deleteFlashcard={deleteFlashcard}
           updataFlashcard={updataFlashcard}
         />
