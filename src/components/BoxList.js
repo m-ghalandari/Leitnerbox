@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Box from "./Box";
 import Button from "react-bootstrap/Button";
 import LevelList from "./LevelList";
 
