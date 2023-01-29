@@ -3,7 +3,11 @@ import Box from "./Box";
 import Button from "react-bootstrap/Button";
 import LevelList from "./LevelList";
 
-export default function BoxList() {
+export default function BoxList({
+  flashcards,
+  deleteFlashcard,
+  updataFlashcard,
+}) {
   const [showBoxes, setShowBoxes] = useState(Array(4).fill(false));
 
   const toggleBox = (index) => {
@@ -21,7 +25,16 @@ export default function BoxList() {
           <Button variant="success" size="lg" onClick={() => toggleBox(i)}>
             Box {i + 1}
           </Button>
-          {showBoxes[i] && <LevelList numberOflevelBox={Math.pow(2,i+1)}/>}
+          {showBoxes[i] && (
+            <LevelList
+              numberOfLevelBox={Math.pow(2, i + 1)}
+              flashcards={flashcards.filter(
+                (flashcard) => flashcard.box === i + 1
+              )}
+              deleteFlashcard={deleteFlashcard}
+              updataFlashcard={updataFlashcard}
+            />
+          )}
         </>
       ))}
     </>
