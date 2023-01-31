@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 export default function VocabularyForm({ addFlashcard }) {
   const [showVocabularyForm, setShowVocabularyForm] = useState(false);
@@ -8,9 +9,13 @@ export default function VocabularyForm({ addFlashcard }) {
   const [explanation, setExplanation] = useState("");
   const [example, setExample] = useState("");
 
-  const handleSubmit = (e) => {
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log('word, explanation, example', word, explanation, example)
+    setError(false);
+    setIsPending(true);
     const newFlashcard = {
       id: nanoid(),
       box: 0,
@@ -22,15 +27,27 @@ export default function VocabularyForm({ addFlashcard }) {
 
     addFlashcard(newFlashcard);
     console.log(newFlashcard);
-    // Ein Objekt von der gelesenen Daten mit zusäzlichen Informationen erzeugen.
-
-    // Das Objekt in Datenbank einfügen.
+    try {
+    const result = await axios.post("http://localhost:8000/flashcards", newFlashcard)
+    console.log(result);
+    setError(false);
+    setIsPending(false);
     setWord("");
     setExplanation("");
     setExample("");
+    } catch (error){
+      setError(true);
+    }
+    
   };
+
+  
+
   return (
+    <>
+    {error && <p>there is an error</p>}
     <div className="App d-grid gap-4">
+      
       <Button
         variant="primary"
         size="lg"
@@ -73,5 +90,7 @@ export default function VocabularyForm({ addFlashcard }) {
         </form>
       )}
     </div>
+    
+    </>
   );
 }

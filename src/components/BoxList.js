@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,Fragment  } from "react";
 import Button from "react-bootstrap/Button";
 import LevelList from "./LevelList";
 
@@ -21,7 +21,7 @@ export default function BoxList({
   return (
     <>
       {Array.from({ length: 4 }, (_, i) => (
-        <>
+        <Fragment key={i}>
           <Button variant="success" size="lg" onClick={() => toggleBox(i)}>
             Box {i + 1}
           </Button>
@@ -36,7 +36,7 @@ export default function BoxList({
               changeFlashcardsLevels={changeFlashcardsLevels}
             />
           )}
-        </>
+        </Fragment>
       ))}
     </>
   );

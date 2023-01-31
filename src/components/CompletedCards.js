@@ -13,10 +13,10 @@ export default function CompletedCards({
     <div>
       <button
         type="button"
-        class="btn btn-outline-info"
+        className="btn btn-outline-info mb-3"
         onClick={() => setShowCompletedCards(!showCompletedCards)}
       >
-        Info
+        All completed cards
       </button>
 
       {showCompletedCards && (

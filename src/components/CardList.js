@@ -5,7 +5,7 @@ export default function CardList({flashcards, deleteFlashcard, updataFlashcard})
   return (
     <div className='card-list card'>
         {/* <Card /> */}
-        {flashcards.map(card=>(<Card card={card} deleteFlashcard={deleteFlashcard} updataFlashcard={updataFlashcard}/>))}
+        {flashcards.map(card=>(<Card key={card.id} card={card} deleteFlashcard={deleteFlashcard} updataFlashcard={updataFlashcard}/>))}
     </div>
   )
 }

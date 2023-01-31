@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment  } from "react";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Level from "./Level";
@@ -19,7 +19,7 @@ const LevelList = ({
     <Container>
       <div className="d-grid gap-4">
         {Array.from({ length: numberOfLevelBox }, (_, i) => (
-          <>
+          <Fragment key={i}>
             <Button
               variant="primary"
               size="sm"
@@ -41,12 +41,12 @@ const LevelList = ({
                 updataFlashcard={updataFlashcard}
               />
             )}
-          </>
+          </Fragment>
         ))}
         <div>
           <button
             type="button"
-            class="btn btn-outline-info"
+            className="btn btn-outline-info"
             onClick={()=>{changeFlashcardsLevels(flashcards)}}
           >
             Move

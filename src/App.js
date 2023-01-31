@@ -1,73 +1,74 @@
 import VocabularyForm from "./components/VocabularyForm";
 import Box_0 from "./components/Box_0";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import BoxList from "./components/BoxList";
 import CompletedCards from "./components/CompletedCards";
+import axios from "axios";
+import useFetch from "./components/useFetch";
 
 function App() {
-  const [flashcards, setFlashcards] = useState([
-    {
-      id: 1,
-      box: 2,
-      level: 1,
-      front: "What is the capital of Germany?",
-      back: "Berlin",
-      example: "I live in Berlin",
-    },
-    {
-      id: 2,
-      box: 2,
-      level: 2,
-      front: "What is the currency of France?",
-      back: "Euro",
-      example: "I live in Berlin",
-    },
-    {
-      id: 3,
-      box: 2,
-      level: 3,
-      front: "What is the currency of France?",
-      back: "Euro",
-      example: "I live in Berlin",
-    },
-    {
-      id: 4,
-      box: 2,
-      level: 3,
-      front: "What is the currency of France?",
-      back: "Euro",
-      example: "I live in Berlin",
-    },
-    {
-      id: 5,
-      box: 1,
-      level: 1,
-      front: "What is the currency of France?",
-      back: "Euro",
-      example: "I live in Berlin",
-    },
-    {
-      id: 6,
-      box: 5,
-      level: 2,
-      front: "Who is the best person dude?",
-      back: "Momo",
-      example: "I live in Berlin",
-    },
-  ]);
+  const [flashcards, setFlashcards] = useState([]);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(false);
+  const [search, setSearch] = useState("");
   // box 5 is final. it indicates the completed cards
+  // const [flashcards, isPending, error] = useFetch("http://localhost:8000/flashcards");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setError(false);
+        setIsPending(true);
+        const result = await axios.get("http://localhost:8000/flashcards");
+        setFlashcards(result.data);
+        setIsPending(false);
+        setError(false);
+      } catch (error) {
+        setError(true);
+        setIsPending(true);
+      }
+    })();
+  }, []);
 
   const addFlashcard = (newFlashcard) => {
     setFlashcards([...flashcards, newFlashcard]);
   };
 
-  const deleteFlashcard = (id) => {
+  const deleteFlashcard = async (id) => {
     const updatedFlashcards = flashcards.filter(
       (flashcard) => id !== flashcard.id
     );
     setFlashcards(updatedFlashcards);
+    // Delete the flashcard from the database
+    try {
+      await axios.delete(`http://localhost:8000/flashcards/${id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const findFlashcardById = (id) => {
+    return flashcards.find((flashcard) => flashcard.id === id);
+  };
+
+  const handleUpdate = async (id, newBox, newLevel) => {
+    const findedFlashcard = findFlashcardById(id);
+    try {
+      const updatedFlashcard = {
+        ...findedFlashcard,
+        box: newBox,
+        level: newLevel,
+      };
+      await axios.put(
+        `http://localhost:8000/flashcards/${id}`,
+        updatedFlashcard
+      );
+      console.log("updatedFlashcard", updatedFlashcard);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // id:Falshcardid, box and level: have to change
@@ -83,13 +84,7 @@ function App() {
       return flashcard;
     });
     setFlashcards(updatedFlashcards);
-  };
-
-  const changeFlashcardsLevels = (cards) => {
-    const updatedFlashcards = cards.map((card) => {
-      return { ...card, level: card.level + 1 };
-    });
-    setFlashcards(updatedFlashcards);
+    handleUpdate(id, box, level);
   };
 
   const updataFlashcard = (card, nextLevel) => {
@@ -118,124 +113,49 @@ function App() {
     }
   };
 
-  // const updataFlashcard = (card, nextLevel) => {
-  //   if (nextLevel) {
-  //     switch (card.box) {
-  //       case 0:
-  //         console.log("Box 0");
-  //         changeFlashcardProperties(card.id, 1, 1);
-  //         break;
-  //       case 1:
-  //         console.log("Box 1");
-  //         if (card.level === 1) {
-  //           changeFlashcardProperties(card.id, 1, 2);
-  //         } else {
-  //           changeFlashcardProperties(card.id, 2, 1);
-  //         }
-
-  //         break;
-  //       case 2:
-  //         console.log("Box 2");
-  //         if (card.level === 1) {
-  //           changeFlashcardProperties(card.id, 2, 2);
-  //         } else if (card.level === 2) {
-  //           changeFlashcardProperties(card.id, 2, 3);
-  //         } else if (card.level === 3) {
-  //           changeFlashcardProperties(card.id, 2, 4);
-  //         } else if (card.level === 4) {
-  //           changeFlashcardProperties(card.id, 3, 1);
-  //         }
-  //         break;
-  //       case 3:
-  //         console.log("Box 3");
-  //         if (card.level === 1) {
-  //           changeFlashcardProperties(card.id, 3, 2);
-  //         } else if (card.level === 2) {
-  //           changeFlashcardProperties(card.id, 3, 3);
-  //         } else if (card.level === 3) {
-  //           changeFlashcardProperties(card.id, 3, 4);
-  //         } else if (card.level === 4) {
-  //           changeFlashcardProperties(card.id, 3, 5);
-  //         } else if (card.level === 5) {
-  //           changeFlashcardProperties(card.id, 3, 6);
-  //         } else if (card.level === 6) {
-  //           changeFlashcardProperties(card.id, 3, 7);
-  //         } else if (card.level === 7) {
-  //           changeFlashcardProperties(card.id, 3, 8);
-  //         } else if (card.level === 8) {
-  //           changeFlashcardProperties(card.id, 4, 1);
-  //         }
-  //         break;
-  //       case 4:
-  //         console.log("Box 4");
-  //         if (card.level === 1) {
-  //           changeFlashcardProperties(card.id, 4, 2);
-  //         } else if (card.level === 2) {
-  //           changeFlashcardProperties(card.id, 4, 3);
-  //         } else if (card.level === 3) {
-  //           changeFlashcardProperties(card.id, 4, 4);
-  //         } else if (card.level === 4) {
-  //           changeFlashcardProperties(card.id, 4, 5);
-  //         } else if (card.level === 5) {
-  //           changeFlashcardProperties(card.id, 4, 6);
-  //         } else if (card.level === 6) {
-  //           changeFlashcardProperties(card.id, 4, 7);
-  //         } else if (card.level === 7) {
-  //           changeFlashcardProperties(card.id, 4, 8);
-  //         } else if (card.level === 8) {
-  //           changeFlashcardProperties(card.id, 4, 9);
-  //         } else if (card.level === 9) {
-  //           changeFlashcardProperties(card.id, 4, 10);
-  //         } else if (card.level === 10) {
-  //           changeFlashcardProperties(card.id, 4, 11);
-  //         } else if (card.level === 11) {
-  //           changeFlashcardProperties(card.id, 4, 12);
-  //         } else if (card.level === 12) {
-  //           changeFlashcardProperties(card.id, 4, 13);
-  //         } else if (card.level === 13) {
-  //           changeFlashcardProperties(card.id, 4, 14);
-  //         } else if (card.level === 14) {
-  //           changeFlashcardProperties(card.id, 4, 15);
-  //         } else if (card.level === 15) {
-  //           changeFlashcardProperties(card.id, 4, 16);
-  //         } else if (card.level === 16) {
-  //           changeFlashcardProperties(card.id, 5, 0);
-  //         }
-  //         break;
-  //       default:
-  //         console.log("error or is a completed card with box=5");
-  //     }
-  //   } else {
-  //     changeFlashcardProperties(card.id, 0, 0);
-  //   }
-  // };
+  //hier wird alle Flashcard ihre level um 1 erhöht
+  const changeFlashcardsLevels = (cards) => {
+    const updatedFlashcards = cards.map((card) => {
+      return { ...card, level: card.level + 1 };
+    });
+    setFlashcards(updatedFlashcards);
+  };
 
   return (
     <Container>
-      <div className="App d-grid gap-4">
-        <VocabularyForm addFlashcard={addFlashcard} />
+      {error ? (
+        <p>Somthing went wrong</p>
+      ) : (
+        isPending && <div>is loading...</div>
+      )}
+      {/* <input type="text" value={search} placeholder="type something" onChange={e=>setSearch(e.target.value)} /> */}
 
-        <Box_0
-          flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
-          deleteFlashcard={deleteFlashcard}
-          updataFlashcard={updataFlashcard}
-        />
+      {!isPending && (
+        <div className="App d-grid gap-4">
+          <VocabularyForm addFlashcard={addFlashcard} />
 
-        <BoxList
-          flashcards={flashcards.filter(
-            (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
-          )}
-          deleteFlashcard={deleteFlashcard}
-          updataFlashcard={updataFlashcard}
-          changeFlashcardsLevels={changeFlashcardsLevels}
-        />
+          <Box_0
+            flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
+            deleteFlashcard={deleteFlashcard}
+            updataFlashcard={updataFlashcard}
+          />
 
-        <CompletedCards
-          flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
-          deleteFlashcard={deleteFlashcard}
-          updataFlashcard={updataFlashcard}
-        />
-      </div>
+          <BoxList
+            flashcards={flashcards.filter(
+              (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
+            )}
+            deleteFlashcard={deleteFlashcard}
+            updataFlashcard={updataFlashcard}
+            changeFlashcardsLevels={changeFlashcardsLevels}
+          />
+
+          <CompletedCards
+            flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
+            deleteFlashcard={deleteFlashcard}
+            updataFlashcard={updataFlashcard}
+          />
+        </div>
+      )}
     </Container>
   );
 }

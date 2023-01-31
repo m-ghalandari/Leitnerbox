@@ -2,117 +2,19 @@
   "flashcards": [
     {
       "id": 1,
-      "box": 1,
+      "box": 2,
       "level": 1,
       "front": "What is the capital of Germany?",
       "back": "Berlin",
       "example": "I live in Berlin"
     },
     {
-      "id": 2,
-      "box": 2,
-      "level": 2,
-      "front": "What is the currency of France?",
-      "back": "Euro",
-      "example": "I live in Berlin"
-    },
-    {
       "id": 3,
-      "box": 2,
+      "box": 1,
       "level": 2,
-      "front": "What is the currency of France?",
+      "front": "What is the currency of Afghan?",
       "back": "Euro",
       "example": "I live in Berlin"
-    },
-    {
-      "id": 4,
-      "box": 2,
-      "level": 2,
-      "front": "What is the currency of France?",
-      "back": "Euro",
-      "example": "I live in Berlin"
-    },
-    {
-      "flashcards": [],
-      "id": 5
-    },
-    {
-      "flashcards": [],
-      "id": 6
-    },
-    {
-      "flashcards": [
-        {
-          "id": 1,
-          "box": 1,
-          "level": 1,
-          "front": "What is the capital of Germany?",
-          "back": "Berlin",
-          "example": "I live in Berlin"
-        },
-        {
-          "id": 2,
-          "box": 2,
-          "level": 2,
-          "front": "What is the currency of France?",
-          "back": "Euro",
-          "example": "I live in Berlin"
-        },
-        {
-          "id": 3,
-          "box": 2,
-          "level": 2,
-          "front": "What is the currency of France?",
-          "back": "Euro",
-          "example": "I live in Berlin"
-        },
-        {
-          "id": 4,
-          "box": 2,
-          "level": 2,
-          "front": "What is the currency of France?",
-          "back": "Euro",
-          "example": "I live in Berlin"
-        }
-      ],
-      "id": 7
-    },
-    {
-      "flashcards": [
-        {
-          "id": 1,
-          "box": 1,
-          "level": 1,
-          "front": "What is the capital of Germany?",
-          "back": "Berlin",
-          "example": "I live in Berlin"
-        },
-        {
-          "id": 2,
-          "box": 2,
-          "level": 2,
-          "front": "What is the currency of France?",
-          "back": "Euro",
-          "example": "I live in Berlin"
-        },
-        {
-          "id": 3,
-          "box": 2,
-          "level": 2,
-          "front": "What is the currency of France?",
-          "back": "Euro",
-          "example": "I live in Berlin"
-        },
-        {
-          "id": 4,
-          "box": 2,
-          "level": 2,
-          "front": "What is the currency of France?",
-          "back": "Euro",
-          "example": "I live in Berlin"
-        }
-      ],
-      "id": 8
     }
   ]
 }
