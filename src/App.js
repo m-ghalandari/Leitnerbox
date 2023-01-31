@@ -113,8 +113,23 @@ function App() {
     }
   };
 
+  const increaseLevelInDb = async (cards) => {
+    cards.forEach(async (flashcard) => {
+      try {
+        const response = await axios.patch(
+          `http://localhost:8000/flashcards/${flashcard.id}`,
+          { level: flashcard.level + 1 }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  };
+
   //hier wird alle Flashcard ihre level um 1 erhöht
   const changeFlashcardsLevels = (cards) => {
+    increaseLevelInDb(cards);
     const updatedFlashcards = cards.map((card) => {
       return { ...card, level: card.level + 1 };
     });

@@ -3,7 +3,7 @@
     {
       "id": 1,
       "box": 2,
-      "level": 1,
+      "level": 4,
       "front": "What is the capital of Germany?",
       "back": "Berlin",
       "example": "I live in Berlin"
