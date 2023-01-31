@@ -7,6 +7,7 @@ import BoxList from "./components/BoxList";
 import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import useFetch from "./components/useFetch";
+import Search from "./components/Search";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
@@ -142,11 +143,11 @@ function App() {
       ) : (
         isPending && <div>is loading...</div>
       )}
-      {/* <input type="text" value={search} placeholder="type something" onChange={e=>setSearch(e.target.value)} /> */}
+        <Search />
 
       {!isPending && (
         <div className="App d-grid gap-4">
-          <h1 className="text-center">Leitner-System</h1>
+          
           <VocabularyForm addFlashcard={addFlashcard} />
 
           <Box_0
