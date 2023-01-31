@@ -1,20 +1,20 @@
 {
   "flashcards": [
     {
-      "id": 1,
-      "box": 2,
-      "level": 4,
-      "front": "What is the capital of Germany?",
-      "back": "Berlin",
-      "example": "I live in Berlin"
-    },
-    {
       "id": 3,
       "box": 1,
-      "level": 2,
+      "level": 1,
       "front": "What is the currency of Afghan?",
-      "back": "Euro",
-      "example": "I live in Berlin"
+      "back": "Afghani",
+      "example": "I am afghan"
+    },
+    {
+      "id": "N5Y1y2kUadl6K8vSIDkom",
+      "box": 1,
+      "level": 1,
+      "front": "Don't even",
+      "back": "\"Don't even\" is a slang expression meaning \"not even\" or \"don't bother.\" It's used to warn someone not to do or say something, expressing surprise, outrage, or rejection.",
+      "example": "Person 1: \"Can you lend me some money?\"\nPerson 2: \"Don't even think about it.\""
     }
   ]
 }

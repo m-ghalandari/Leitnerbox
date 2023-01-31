@@ -65,7 +65,6 @@ function App() {
         `http://localhost:8000/flashcards/${id}`,
         updatedFlashcard
       );
-      console.log("updatedFlashcard", updatedFlashcard);
     } catch (error) {
       console.error(error);
     }
@@ -147,6 +146,7 @@ function App() {
 
       {!isPending && (
         <div className="App d-grid gap-4">
+          <h1 className="text-center">Leitner-System</h1>
           <VocabularyForm addFlashcard={addFlashcard} />
 
           <Box_0
