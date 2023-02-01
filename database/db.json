@@ -1,28 +1,108 @@
 {
   "flashcards": [
     {
-      "id": 3,
-      "box": 1,
-      "level": 1,
-      "front": "What is the currency of Afghan?",
-      "back": "Afghani",
-      "example": "I am afghan"
-    },
-    {
       "id": "N5Y1y2kUadl6K8vSIDkom",
-      "box": 1,
+      "box": 2,
       "level": 1,
       "front": "Don't even",
       "back": "\"Don't even\" is a slang expression meaning \"not even\" or \"don't bother.\" It's used to warn someone not to do or say something, expressing surprise, outrage, or rejection.",
       "example": "Person 1: \"Can you lend me some money?\"\nPerson 2: \"Don't even think about it.\""
     },
     {
-      "id": "9YedXm3J147esFu3QX_dd",
+      "id": "tUqyn5p945dCuLRlizvzp",
+      "box": 1,
+      "level": 2,
+      "front": "committed",
+      "back": "verpflichtet",
+      "example": "We are fully committed to Equal Opportunity policies."
+    },
+    {
+      "id": "l0WWhK4q6pnIwqfRDBsmT",
+      "box": 1,
+      "level": 2,
+      "front": "One or two differences",
+      "back": "a lot ... (know a thing or two about something)",
+      "example": "She knows a thing or two about international law (Sie weißt viel und ist erfahren)"
+    },
+    {
+      "id": "wzZDlWEMdt8-QG7oPr-w1",
+      "box": 1,
+      "level": 2,
+      "front": "To be well put toghether",
+      "back": "looks good and dresses well (حواسشون به لباس پوشیدنشون هست)",
+      "example": "She's elegant and well put toghether."
+    },
+    {
+      "id": "5t38KWgl3bbDk1hDKLtK5",
+      "box": 1,
+      "level": 2,
+      "front": "acknowledge",
+      "back": "anerkennen",
+      "example": "Both defendants refused to acknowledge the authority of the court.\nShe won't acknowledge that there's a problem."
+    },
+    {
+      "id": "G1GlZKHcJnWSPUfzFOWgG",
+      "box": 1,
+      "level": 2,
+      "front": "mean",
+      "back": "gemein",
+      "example": "That was a mean thing to do."
+    },
+    {
+      "id": "C7wv4SqgtrLnX5nuxQI2e",
+      "box": 1,
+      "level": 2,
+      "front": "tease",
+      "back": "ärgern",
+      "example": "She used to tease me about my hair."
+    },
+    {
+      "id": "88V2pR3qQzb4eUFVxZBB8",
+      "box": 1,
+      "level": 2,
+      "front": "Few nights in to s.th",
+      "back": "از اول تا آخر چیزی",
+      "example": "The movie was terrible. 30 minutes into it, l left the theater."
+    },
+    {
+      "id": "QgjEFwJuLm-Dt8psn1kJQ",
+      "box": 1,
+      "level": 2,
+      "front": "To be like",
+      "back": "to say",
+      "example": "I was like, \"What's the best way to learn English?\""
+    },
+    {
+      "id": "bk7NU6sPJVjCbf59thzJ2",
+      "box": 1,
+      "level": 2,
+      "front": "someone or s.th is somthing else",
+      "back": "کسی یا چیزی استسنایی یا خاصه(er ist was anderes)",
+      "example": "They're all good soccer players, but Mark is really something else."
+    },
+    {
+      "id": "wn-zQ6WcsBgol2lITVRpU",
       "box": 0,
       "level": 0,
-      "front": "fari",
-      "back": "momo",
-      "example": "fari loves momo"
+      "front": "four basic conditional forms?",
+      "back": "",
+      "example": "1.Zero Conditional: Used to express a general truth or a scientific fact.\nExample: \"If you heat ice, it melts.\"\n\n2.First Conditional: Used to express a future possibility or probability.\nExample: \"If it rains, I will stay at home.\"\n\n3.Second Conditional: Used to express an imaginary or hypothetical situation.\nExample: \"If I won the lottery, I would buy a house.\"\n\n4.Third Conditional: Used to express a hypothetical past situation and its hypothetical past result.\nExample: \"If I had studied harder, I would have passed the exam.\""
+    },
+    {
+      "id": "2ukEDi68fCCXvshkp4QhZ",
+      "box": 0,
+      "level": 0,
+      "front": "second or third conditionals?",
+      "back": "",
+      "example": "1) Second Conditional: Describes a hypothetical ***present or future*** situation and its likely outcome.\nIf she had a car, she could drive to work.\nIf I knew how to swim, I would go to the beach more often.\n\n2) Third Conditional: Describes a hypothetical ***past situation*** and its imagined result.\nIf I had gone to the party, I would have met her.\nIf I had studied harder, I would have passed the exam."
+    },
+    {
+      "id": "pGC-qpQXgtWbQsXl8x7p0",
+      "box": 0,
+      "level": 0,
+      "front": "Mixed conditionals?",
+      "back": "",
+      "example": "Mixed conditionals are a combination of two or more different conditionals (e.g. first, second, third) in one sentence to express a hypothetical situation and its outcome. These types of sentences are used to talk about a situation that started in the past and has consequences in the present or future.\n\nHere are a few examples of mixed conditionals:\n\nIf she had listened to the advice, she wouldn't be in this situation now. (third conditional + second conditional)\nIf I had known about the traffic, I would be at work now. (third conditional + present simple)\nIf he had taken his umbrella, he wouldn't be wet now. (third conditional + present continuous)"
     }
   ]
 }

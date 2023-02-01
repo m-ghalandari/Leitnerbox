@@ -2,7 +2,7 @@ import React, { useState, Fragment  } from "react";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Level from "./Level";
-
+import { BsArrowDownCircle } from "react-icons/bs";
 const LevelList = ({
   numberOfLevelBox,
   flashcards,
@@ -43,14 +43,15 @@ const LevelList = ({
             )}
           </Fragment>
         ))}
-        <div>
-          <button
+        <div className="text-left">
+          {/* <button
             type="button"
             className="btn btn-outline-info"
             onClick={()=>{changeFlashcardsLevels(flashcards)}}
           >
             Move
-          </button>
+          </button> */}
+          <BsArrowDownCircle size="30" onClick={()=>{changeFlashcardsLevels(flashcards)}}/>
         </div>
       </div>
     </Container>

@@ -10,10 +10,10 @@ export default function CompletedCards({
   const [showCompletedCards, setShowCompletedCards] = useState(false);
 
   return (
-    <div>
+    <div className="text-center mt-5">
       <button
         type="button"
-        className="btn btn-outline-info mb-3"
+        className="btn btn-outline-info mb-3 "
         onClick={() => setShowCompletedCards(!showCompletedCards)}
       >
         All completed cards
