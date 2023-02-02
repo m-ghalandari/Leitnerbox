@@ -3,14 +3,14 @@
     {
       "id": "N5Y1y2kUadl6K8vSIDkom",
       "box": 2,
-      "level": 1,
+      "level": 3,
       "front": "Don't even",
       "back": "\"Don't even\" is a slang expression meaning \"not even\" or \"don't bother.\" It's used to warn someone not to do or say something, expressing surprise, outrage, or rejection.",
       "example": "Person 1: \"Can you lend me some money?\"\nPerson 2: \"Don't even think about it.\""
     },
     {
       "id": "tUqyn5p945dCuLRlizvzp",
-      "box": 1,
+      "box": 2,
       "level": 2,
       "front": "committed",
       "back": "verpflichtet",
@@ -18,7 +18,7 @@
     },
     {
       "id": "l0WWhK4q6pnIwqfRDBsmT",
-      "box": 1,
+      "box": 2,
       "level": 2,
       "front": "One or two differences",
       "back": "a lot ... (know a thing or two about something)",
@@ -26,7 +26,7 @@
     },
     {
       "id": "wzZDlWEMdt8-QG7oPr-w1",
-      "box": 1,
+      "box": 2,
       "level": 2,
       "front": "To be well put toghether",
       "back": "looks good and dresses well (حواسشون به لباس پوشیدنشون هست)",
@@ -34,7 +34,7 @@
     },
     {
       "id": "5t38KWgl3bbDk1hDKLtK5",
-      "box": 1,
+      "box": 2,
       "level": 2,
       "front": "acknowledge",
       "back": "anerkennen",
@@ -42,7 +42,7 @@
     },
     {
       "id": "G1GlZKHcJnWSPUfzFOWgG",
-      "box": 1,
+      "box": 2,
       "level": 2,
       "front": "mean",
       "back": "gemein",
@@ -50,7 +50,7 @@
     },
     {
       "id": "C7wv4SqgtrLnX5nuxQI2e",
-      "box": 1,
+      "box": 2,
       "level": 2,
       "front": "tease",
       "back": "ärgern",
@@ -58,7 +58,7 @@
     },
     {
       "id": "88V2pR3qQzb4eUFVxZBB8",
-      "box": 1,
+      "box": 2,
       "level": 2,
       "front": "Few nights in to s.th",
       "back": "از اول تا آخر چیزی",
@@ -66,7 +66,7 @@
     },
     {
       "id": "QgjEFwJuLm-Dt8psn1kJQ",
-      "box": 1,
+      "box": 2,
       "level": 2,
       "front": "To be like",
       "back": "to say",
@@ -74,7 +74,7 @@
     },
     {
       "id": "bk7NU6sPJVjCbf59thzJ2",
-      "box": 1,
+      "box": 2,
       "level": 2,
       "front": "someone or s.th is somthing else",
       "back": "کسی یا چیزی استسنایی یا خاصه(er ist was anderes)",
@@ -82,171 +82,275 @@
     },
     {
       "id": "wn-zQ6WcsBgol2lITVRpU",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "four basic conditional forms?",
       "back": "",
       "example": "1.Zero Conditional: Used to express a general truth or a scientific fact.\nExample: \"If you heat ice, it melts.\"\n\n2.First Conditional: Used to express a future possibility or probability.\nExample: \"If it rains, I will stay at home.\"\n\n3.Second Conditional: Used to express an imaginary or hypothetical situation.\nExample: \"If I won the lottery, I would buy a house.\"\n\n4.Third Conditional: Used to express a hypothetical past situation and its hypothetical past result.\nExample: \"If I had studied harder, I would have passed the exam.\""
     },
     {
       "id": "2ukEDi68fCCXvshkp4QhZ",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "second or third conditionals?",
       "back": "",
       "example": "1) Second Conditional: Describes a hypothetical ***present or future*** situation and its likely outcome.\nIf she had a car, she could drive to work.\nIf I knew how to swim, I would go to the beach more often.\n\n2) Third Conditional: Describes a hypothetical ***past situation*** and its imagined result.\nIf I had gone to the party, I would have met her.\nIf I had studied harder, I would have passed the exam."
     },
     {
       "id": "pGC-qpQXgtWbQsXl8x7p0",
-      "box": 0,
-      "level": 0,
+      "box": 2,
+      "level": 1,
       "front": "Mixed conditionals?",
       "back": "",
       "example": "Mixed conditionals are a combination of two or more different conditionals (e.g. first, second, third) in one sentence to express a hypothetical situation and its outcome. These types of sentences are used to talk about a situation that started in the past and has consequences in the present or future.\n\nHere are a few examples of mixed conditionals:\n\nIf she had listened to the advice, she wouldn't be in this situation now. (third conditional + second conditional)\nIf I had known about the traffic, I would be at work now. (third conditional + present simple)\nIf he had taken his umbrella, he wouldn't be wet now. (third conditional + present continuous)"
     },
     {
       "id": "f_KXya7icYTuTABXToQQl",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "Umgangsprachliche \"This is going to get you\"",
       "back": "this is gonna getch-ya",
       "example": "\"This is going to get you\" bedeutet in der Regel, dass etwas negative Auswirkungen auf jemanden haben wird oder dass jemand in Schwierigkeiten geraten wird."
     },
     {
       "id": "Ok6pP_rqMVNMT_JzfIUU0",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "out there",
       "back": "anywhere outside",
       "example": "\"There are so many opportunities waiting for us out there, we just need to be brave enough to go after them.\""
     },
     {
       "id": "Tu4foX5gRWQ_kYxzAiao9",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "Umgangssprachliche \"Had you ...\"",
       "back": "ha-ju ....",
       "example": ""
     },
     {
       "id": "iREP1fy1Wu6l4G4lx1ouc",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "attorney",
       "back": "Rechtsanwalt",
       "example": "\"My attorney advised me to take the plea deal to avoid a lengthy court battle.\""
     },
     {
       "id": "ZjGbN6VlHPi16SywiY5Fy",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "would (andere Bedeutung)",
       "back": "a routine action in the past",
       "example": "When I was a kid my grandma always would tell me to eat all my vegetables."
     },
     {
       "id": "XXvBxXiAqGDFOadz8hRsF",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "Get into trouble",
       "back": "Schwierigkeiten bekommem oder in Schwierigkeiten geraten",
       "example": "he got into trouble with the police."
     },
     {
       "id": "wkWqPQfq-mblbWslDb1U1",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "white picket fence",
       "back": "The american Dream (a strong symbol)",
       "example": "Der Begriff wird oft verwendet, um das Konzept einer perfekten, friedlichen und sicheren Umgebung zu beschreiben"
     },
     {
       "id": "Pw8bYhfIjIwda2ei-GOYc",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "Doing what i'm doing",
       "back": "dass man an seiner gegenwärtigen Arbeit, seinem Projekt oder seiner Verpflichtung festhält und weitermacht.",
       "example": ""
     },
     {
       "id": "C9QtLoXScG0uLGHfvXvbE",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "Good old (ol')",
       "back": "for something reliable (vertraut)",
       "example": "All I need to feel happy is my favorite music and this good ol' journal"
     },
     {
       "id": "jB9rdO5O25zfd9y29xQEB",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "A lot of times (sound?)",
       "back": "a-lodda times",
       "example": ""
     },
     {
       "id": "X0oqvddu7Yw0DZCNZqTQL",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "Get on well with someone",
       "back": "get along with someone(American)",
       "example": "I get on well with my mother-in-law"
     },
     {
       "id": "1wQJYF2V3p3v7KecINxwv",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "Down-to-earth",
       "back": "bodenständig",
       "example": "Fran’s a friendly, down-to-earth person."
     },
     {
       "id": "Uf385Iysk-SM_KitG2mSv",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "Stick together",
       "back": "if people stick together, they continue to support each other when they have problems (zusammenhalten)",
       "example": "We’re a family, and we stick together no matter what."
     },
     {
       "id": "UrR7BZgtcWSuJkXZK4UJX",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "Hurl",
       "back": "to throw something with a lot of force, especially because you are angry",
       "example": "They hurled a rock through the window"
     },
     {
       "id": "UTNWkSSBsqO95-2j-umPS",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "Plummet",
       "back": "abstürzen",
       "example": "The plane plummeted towards the Earth."
     },
     {
       "id": "L9Hwv-DslYjoI7--aMjQW",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 2,
       "front": "chute (شوت)",
       "back": "short for parachute",
       "example": ""
     },
     {
       "id": "tYW-8zIFiXbh-tnLSWu-M",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "Eight by ten glossies (گلاسیس) of my life",
       "back": "اون حالتی که قبل مرگ تمام خاطرات جلوی چشم آدم میاد",
       "example": ""
     },
     {
       "id": "16KBwX708F0WZ0y17zQAi",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "Why do I have to die today (sound?)",
       "back": "why do i hafta die du-day",
       "example": ""
+    },
+    {
+      "id": "6ScietzgEOLw0gsvKYEgQ",
+      "box": 0,
+      "level": 0,
+      "front": "nasal breathing",
+      "back": "Nasenatmung",
+      "example": "Nasal breathing helps to keep the mouth closed, which can improve overall breathing."
+    },
+    {
+      "id": "p5mnrewVMD7yA3qDxevy3",
+      "box": 0,
+      "level": 0,
+      "front": "Flossing ",
+      "back": "Zahnseide, Zahnseide benutzen",
+      "example": "Flossing has several advantages for oral health"
+    },
+    {
+      "id": "bWZvmSC47RdlN-6nTRfYj",
+      "box": 0,
+      "level": 0,
+      "front": "to come in late ",
+      "back": " to arrive at a place after the expected or scheduled time",
+      "example": "I'm afraid I'll come in late to the meeting today"
+    },
+    {
+      "id": "v9bK9K44q54zU5lPwht4O",
+      "box": 0,
+      "level": 0,
+      "front": "Raving about something",
+      "back": "to express strong and enthusiastic praise or admiration for something",
+      "example": "I was raving about the new restaurant I tried last night"
+    },
+    {
+      "id": "0Ez9Np9pKetON_JPOo9Mv",
+      "box": 0,
+      "level": 0,
+      "front": "To binge-watch",
+      "back": "to watch multiple episodes of a television show or multiple movies in a single sitting, often in one day or over a short period of time.",
+      "example": "I've been binge-watching the season since this morning."
+    },
+    {
+      "id": "y4UG1YDCOSwLxX6vm8X6s",
+      "box": 0,
+      "level": 0,
+      "front": "Ahead of time",
+      "back": "means before the scheduled or expected time",
+      "example": "I finished my work ahead of time"
+    },
+    {
+      "id": "bUWjIKTGmgqZZUuKWdMje",
+      "box": 0,
+      "level": 0,
+      "front": "This is going to be huge",
+      "back": "it is going to become very popular or famous",
+      "example": "I think this band is going to be huge."
+    },
+    {
+      "id": "gPCBukZrbXXqY2RPc_Cmj",
+      "box": 0,
+      "level": 0,
+      "front": "one of those things",
+      "back": " is used to describe something that is difficult to explain or understand, or something that is unpredictable or beyond control",
+      "example": "It's just one of those things, there's not much we can do about it"
+    },
+    {
+      "id": "jDL7936KusaRnh7TrUyd_",
+      "box": 0,
+      "level": 0,
+      "front": "to make it",
+      "back": " means to succeed or to achieve something, especially in a difficult or competitive situation",
+      "example": "We need to make it to the top of the mountain if we want to see the view"
+    },
+    {
+      "id": "_aO3VAvD2roVyvEyj1d27",
+      "box": 0,
+      "level": 0,
+      "front": "Duvet",
+      "back": "لحاف",
+      "example": ""
+    },
+    {
+      "id": "zn6TKxU6-rb08izTdbhlo",
+      "box": 0,
+      "level": 0,
+      "front": "sheet",
+      "back": "ملافه",
+      "example": ""
+    },
+    {
+      "id": "p1igMoSZ-xifcj9fMcqY2",
+      "box": 0,
+      "level": 0,
+      "front": "to yank",
+      "back": "to pull or tug something suddenly and with force",
+      "example": "He yanked her to her feet"
+    },
+    {
+      "id": "RINSjK7FBu6ZfmEHZqofa",
+      "box": 0,
+      "level": 0,
+      "front": "Tasefully done",
+      "back": "that something has been done in a way that is pleasing to the senses or in good taste",
+      "example": "I usually find tattoss ugly, but i like hers. It is small and tasteful."
     }
   ]
 }

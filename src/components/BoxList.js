@@ -18,11 +18,15 @@ export default function BoxList({
     });
   };
 
+  const hasFlashcard = (box) => {
+    return flashcards.some(flashcard => flashcard.box === box);
+  }
+
   return (
     <>
       {Array.from({ length: 4 }, (_, i) => (
         <Fragment key={i}>
-          <Button variant="success" size="lg" onClick={() => toggleBox(i)}>
+          <Button variant={hasFlashcard(i + 1) ? "success" : "danger"} size="lg" onClick={() => toggleBox(i)}>
             Box {i + 1}
           </Button>
           {showBoxes[i] && (

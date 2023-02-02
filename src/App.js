@@ -138,6 +138,7 @@ function App() {
 
   return (
     <Container>
+      {/* npx json-server --watch database/db.json --port 8000 */}
       {error ? (
         <p>Somthing went wrong</p>
       ) : (

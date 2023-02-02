@@ -13,36 +13,40 @@ const LevelList = ({
   const [showLevels, setShowLevels] = useState(
     Array(numberOfLevelBox).fill(false)
   );
-
   
   return (
     <Container>
       <div className="d-grid gap-4">
-        {Array.from({ length: numberOfLevelBox }, (_, i) => (
-          <Fragment key={i}>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() =>
-                setShowLevels((prev) =>
-                  prev.map((val, j) => (j === i ? !val : val))
-                )
-              }
-            >
-              Level {i + 1}
-            </Button>
+        {Array.from({ length: numberOfLevelBox }, (_, i) => {
+          const levelFlashcards = flashcards.filter(
+            (flashcard) => flashcard.level === i + 1
+          );
+          const buttonVariant = levelFlashcards.length > 0 ? "primary" : "danger";
 
-            {showLevels[i] && (
-              <Level
-                flashcards={flashcards.filter(
-                  (flashcard) => flashcard.level === i + 1
-                )}
-                deleteFlashcard={deleteFlashcard}
-                updataFlashcard={updataFlashcard}
-              />
-            )}
-          </Fragment>
-        ))}
+          return (
+            <Fragment key={i}>
+              <Button
+                variant={buttonVariant}
+                size="sm"
+                onClick={() =>
+                  setShowLevels((prev) =>
+                    prev.map((val, j) => (j === i ? !val : val))
+                  )
+                }
+              >
+                Level {i + 1}
+              </Button>
+
+              {showLevels[i] && (
+                <Level
+                  flashcards={levelFlashcards}
+                  deleteFlashcard={deleteFlashcard}
+                  updataFlashcard={updataFlashcard}
+                />
+              )}
+            </Fragment>
+          );
+        })}
         <div className="text-left">
           {/* <button
             type="button"
