@@ -144,7 +144,7 @@ function App() {
       ) : (
         isPending && <div>is loading...</div>
       )}
-        <Search />
+        <Search flashcards={flashcards}/>
 
       {!isPending && (
         <div className="App d-grid gap-4">
