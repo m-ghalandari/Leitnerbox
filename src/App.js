@@ -50,12 +50,8 @@ function App() {
     }
   };
 
-  const findFlashcardById = (id) => {
-    return flashcards.find((flashcard) => flashcard.id === id);
-  };
-
   const handleUpdate = async (id, newBox, newLevel) => {
-    const findedFlashcard = findFlashcardById(id);
+    const findedFlashcard = flashcards.find((flashcard) => flashcard.id === id);
     try {
       const updatedFlashcard = {
         ...findedFlashcard,
@@ -128,12 +124,32 @@ function App() {
   };
 
   //hier wird alle Flashcard ihre level um 1 erhöht
-  const changeFlashcardsLevels = (cards) => {
-    increaseLevelInDb(cards);
-    const updatedFlashcards = cards.map((card) => {
-      return { ...card, level: card.level + 1 };
+  const changeFlashcardsLevels = async (cards) => {
+
+    cards.map((card) => {
+      setFlashcards((prevFlashcards) =>
+        prevFlashcards.map((flashcard) => {
+          if (flashcard.id === card.id) {
+            return { ...flashcard, level: card.level + 1 };
+          }
+          return flashcard;
+        })
+      );
     });
-    setFlashcards(updatedFlashcards);
+
+
+    cards.forEach(async (flashcard) => {
+      try {
+        const response = await axios.patch(
+          `http://localhost:8000/flashcards/${flashcard.id}`,
+          { level: flashcard.level + 1 }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
   };
 
   return (
@@ -144,11 +160,10 @@ function App() {
       ) : (
         isPending && <div>is loading...</div>
       )}
-        <Search flashcards={flashcards}/>
+      <Search flashcards={flashcards} />
 
       {!isPending && (
         <div className="App d-grid gap-4">
-          
           <VocabularyForm addFlashcard={addFlashcard} />
 
           <Box_0
