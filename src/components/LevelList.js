@@ -22,6 +22,7 @@ const LevelList = ({
             (flashcard) => flashcard.level === i + 1
           );
           const buttonVariant = levelFlashcards.length > 0 ? "primary" : "danger";
+          const flashcardNumber = levelFlashcards.length;
 
           return (
             <Fragment key={i}>
@@ -34,7 +35,8 @@ const LevelList = ({
                   )
                 }
               >
-                Level {i + 1}
+                Level {i + 1} 
+                <span> ( {flashcardNumber} )</span> 
               </Button>
 
               {showLevels[i] && (

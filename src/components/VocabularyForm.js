@@ -11,6 +11,7 @@ export default function VocabularyForm({ addFlashcard }) {
 
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(false);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +54,7 @@ export default function VocabularyForm({ addFlashcard }) {
         size="lg"
         onClick={() => setShowVocabularyForm(!showVocabularyForm)}
       >
-        Add a new vocabulary
+        Add a new vocabulary 
       </Button>
 
       {showVocabularyForm && (

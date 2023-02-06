@@ -1,22 +1,4 @@
-// import React from "react";
 
-// export default function Search({flashcards}) {
-  
-//   return (
-//     <>
-//       <h1 className="text-center mt-3">Leitner-System</h1>
-//       <div className="input-group rounded mb-5 mt-3">
-//         <input
-//           type="search"
-//           className="form-control rounded"
-//           placeholder="Search for a flashcard..."
-//           aria-label="Search"
-//           aria-describedby="search-addon"
-//         />
-//       </div>
-//     </>
-//   );
-// }
 import React, { useState } from "react";
 import CardList from "./CardList";
 
@@ -36,10 +18,12 @@ export default function Search({flashcards}) {
       return flashcard;
     }
   })
+  const number = flashcards.length;
 
   return (
     <>
-      <h1 className="text-center mt-3">Leitner-System</h1>
+      <h1 className="text-center mt-3">Leitner-Box</h1>
+      <h5 className="text-center mt-3">The number of flashcards: {number}</h5>
       <div className="input-group rounded mb-5 mt-3">
         <input
           type="search"
