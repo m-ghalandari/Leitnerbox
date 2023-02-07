@@ -8,6 +8,11 @@ import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import useFetch from "./components/useFetch";
 import Search from "./components/Search";
+import { EventEmitter } from 'events';
+
+
+const myEmitter = new EventEmitter();
+myEmitter.setMaxListeners(40);
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
@@ -109,7 +114,6 @@ function App() {
     }
   };
 
-
   //hier wird alle Flashcard ihre level um 1 erhöht
   const changeFlashcardsLevels = async (cards) => {
 
@@ -124,7 +128,6 @@ function App() {
       );
     });
 
-
     cards.forEach(async (flashcard) => {
       try {
         const response = await axios.patch(
@@ -138,6 +141,8 @@ function App() {
     });
 
   };
+
+
 
   return (
     <Container>
