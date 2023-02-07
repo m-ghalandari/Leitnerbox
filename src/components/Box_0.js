@@ -5,6 +5,8 @@ import CardList from "./CardList";
 export default function Box_0({ flashcards, deleteFlashcard , updataFlashcard}) {
   const [showBox0, setShowBox0] = useState(false);
 
+  const number = flashcards.length;
+
   return (
     <div className="d-grid gap-4">
       <Button
@@ -12,7 +14,7 @@ export default function Box_0({ flashcards, deleteFlashcard , updataFlashcard}) 
         size="lg"
         onClick={() => setShowBox0(!showBox0)}
       >
-        Box 0
+        Reserved cards ( {number} )
       </Button>
 
       {showBox0 && <CardList flashcards={flashcards} deleteFlashcard={deleteFlashcard} updataFlashcard={updataFlashcard}/>}

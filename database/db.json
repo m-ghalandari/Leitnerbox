@@ -450,8 +450,8 @@
     },
     {
       "id": "Aj6VU16WPygxuk98OTawb",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "nuts /nʌts/",
       "back": " informal  crazy",
       "example": "I’m going to go nuts (=become crazy) if I don’t find a new job soon."
@@ -506,8 +506,8 @@
     },
     {
       "id": "WEynDla4oSp-cD6E3l0pn",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "make a point of doing something",
       "back": "bedeutet, dass man sich bewusst Zeit nimmt und Anstrengungen unternimmt, um etwas zu tun, das man für wichtig hält.",
       "example": "I always make a point of being early."
@@ -570,16 +570,16 @@
     },
     {
       "id": "gJqsRsCNW5aNQuoVHj257",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "kind of (sound)",
       "back": "kina کاینا",
       "example": ""
     },
     {
       "id": "UAEgYzV7FzqIGQYyiPhRL",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "mess up phrasal verb informal",
       "back": "to make a mistake and do something badly",
       "example": "I think I messed up on the last question."
@@ -602,8 +602,8 @@
     },
     {
       "id": "W8c4zyQ52qTepjCmM_f1K",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "be meant for somebody",
       "back": "if two people are meant for each other, they are very suitable as partners for each other",
       "example": "They were meant for each other(Sie waren füreinander bestimmt.)."
@@ -650,24 +650,24 @@
     },
     {
       "id": "4Kr84G0A0qHOl4Ih8FGZi",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "make it",
       "back": " informal to continue to live after you have been seriously ill or badly injured",
       "example": "Frank was very ill, and the doctors didn’t think he’d make it"
     },
     {
       "id": "5jBXXrJdGhzWKzF6o5M1X",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "screw around",
       "back": "informal to do silly things that may cause trouble SYN mess around",
       "example": "The kids were screwing around down by the bus station."
     },
     {
       "id": "d-z5v2PrjI8i3Hls1QCkS",
-      "box": 0,
-      "level": 0,
+      "box": 1,
+      "level": 1,
       "front": "culprit  ˈkʌlprɪt",
       "back": "مقصر",
       "example": "Police finally managed to catch the culprit."
@@ -695,6 +695,270 @@
       "front": "how did that go?",
       "back": "Wie ging das?  چطور شد؟",
       "example": ""
+    },
+    {
+      "id": "ykfPRjoBRiiu_dTJPEdmp",
+      "box": 1,
+      "level": 1,
+      "front": "so that in essence",
+      "back": "also im Wesentlichen",
+      "example": "I condensed my report to only include the key findings so that in essence, the reader can quickly grasp the main points."
+    },
+    {
+      "id": "1KYctKQytFewXzqCi_FFY",
+      "box": 1,
+      "level": 1,
+      "front": "on the flip side",
+      "back": "bedeutet, dass man eine andere Perspektive oder Sichtweise betrachtet. Es wird verwendet, um einen Gegensatz oder eine Alternative zu einer bereits vorgestellten Idee oder Argumentation darzustellen. ",
+      "example": "On the flip side, while the new policy may be beneficial in some ways, it could also result in unintended consequences that need to be considered."
+    },
+    {
+      "id": "A7tEVdZRyi98EuSkrSCjx",
+      "box": 0,
+      "level": 0,
+      "front": "that is freaking awesome",
+      "back": "das ist wahnsinnig toll",
+      "example": "The new virtual reality game is so realistic and immersive, that is freaking awesome!"
+    },
+    {
+      "id": "URXAhevH84TBcAbussPX0",
+      "box": 0,
+      "level": 0,
+      "front": "revert to",
+      "back": " zurückzukehren oder zurückzugreifen auf etwas, das man früher hatte oder tat.",
+      "example": "Due to technical difficulties, we had to revert to the manual process for the time being until the system is fixed."
+    },
+    {
+      "id": "6jjSi-VWblyLrWMQkZGJK",
+      "box": 1,
+      "level": 1,
+      "front": "To be tricky",
+      "back": "bedeutet, dass jemand schwierig, knifflig oder listig ist. Es kann bedeuten, dass eine Person absichtlich versucht, andere zu täuschen oder zu verwirren.",
+      "example": "The crossword puzzle was tricky, but I finally figured out all the answers."
+    },
+    {
+      "id": "t4QfdNcWZDaxNv7lbvhem",
+      "box": 1,
+      "level": 1,
+      "front": "no fucking way",
+      "back": "auf keinen Fall",
+      "example": "I heard that the company is planning to lay off half the staff, and I'm telling you, there's no fucking way that's going to happen without a fight"
+    },
+    {
+      "id": "tnkDDD8t8xI2HmP_r5dSx",
+      "box": 1,
+      "level": 1,
+      "front": "To sleep over",
+      "back": "to sleep at another person's house",
+      "example": "I slept over at my friend's house."
+    },
+    {
+      "id": "oo0ImP9AtOtI75ncRnDIA",
+      "box": 1,
+      "level": 1,
+      "front": "no way",
+      "back": "a stronger way of saying no",
+      "example": ""
+    },
+    {
+      "id": "p9oYZDnFclJB0AgSVMSGu",
+      "box": 1,
+      "level": 1,
+      "front": "to go for a wee",
+      "back": "is a colloquial expression used to describe someone going to urinate.",
+      "example": "he went for a wee."
+    },
+    {
+      "id": "DpRiE2X5KBoUC7WliptYU",
+      "box": 1,
+      "level": 1,
+      "front": "favorite curse word",
+      "back": "Lieblingsschimpfwort",
+      "example": ""
+    },
+    {
+      "id": "hVn3MiITbMU3ANIRfwZWk",
+      "box": 1,
+      "level": 1,
+      "front": "go out on a limb",
+      "back": "The expression is often used to describe a situation where someone takes a bold or unpopular stance, or makes a bold or risky decision.",
+      "example": "John decided to go out on a limb and start his own business, even though he knew it would be a big risk."
+    },
+    {
+      "id": "VOicgMd7esVcuC56pPazI",
+      "box": 0,
+      "level": 0,
+      "front": "What is your (sound)",
+      "back": "waddiz-yir ",
+      "example": "waddiz-yir favorite body part?"
+    },
+    {
+      "id": "TIkskiYvUPro933YnASC-",
+      "box": 1,
+      "level": 1,
+      "front": "though",
+      "back": "spoken used after adding a fact, opinion, or question which seems surprising after what you have just said, or which makes what you have just said seem less true",
+      "example": "Two heart attacks in a year. It hasn’t stopped him smoking, though."
+    },
+    {
+      "id": "QGJMAvhQmVBIfMVuC2Mr4",
+      "box": 1,
+      "level": 1,
+      "front": "perform a task",
+      "back": "انجام یک وظیفه یا کاری",
+      "example": "the surgeon performed the operation without complications."
+    },
+    {
+      "id": "kR9FG7UzTMzpu7wFjbBtw",
+      "box": 1,
+      "level": 1,
+      "front": "to curse",
+      "back": "schimpfen",
+      "example": "Don't curse in front of the kids!"
+    },
+    {
+      "id": "XIBhmNYkiZlxU527de96S",
+      "box": 1,
+      "level": 1,
+      "front": "impersonate",
+      "back": "imitieren,  to pretend to be someone else by copying their appearance, voice, and behaviour, especially in order to deceive people",
+      "example": "Do you know it is a very serious offence to impersonate a police officer?"
+    },
+    {
+      "id": "oFmnbqCB9MmJMcPulIohu",
+      "box": 1,
+      "level": 1,
+      "front": "Yell at",
+      "back": "فریاد زدن برسر, Anschreien",
+      "example": "He yelled \"Watch out!\""
+    },
+    {
+      "id": "JQkJuQpZ3KPyF5CCPie-t",
+      "box": 1,
+      "level": 1,
+      "front": "cool-headed",
+      "back": "not easily excited or upset, خونسرد",
+      "example": "We need a quick-thinking, cool-headed person for the job."
+    },
+    {
+      "id": "AsmEL_FGopmR1G9JqfBZn",
+      "box": 1,
+      "level": 1,
+      "front": "hothead",
+      "back": "someone who does things too quickly without thinking",
+      "example": "neither of you hotheads would listen to me when I asked you to stop this nonsense"
+    },
+    {
+      "id": "gC-acuU0Zhj_Wkd0pX56P",
+      "box": 1,
+      "level": 1,
+      "front": "call somebody/something ↔ off",
+      "back": "to decide that a planned event will not take place SYN cancel",
+      "example": "The trip to Italy might be called off."
+    },
+    {
+      "id": "IRS_jVzBMPAh2ECKo_rZV",
+      "box": 0,
+      "level": 0,
+      "front": "go astray",
+      "back": "to be lost or stolen",
+      "example": "The letter had gone astray in the post."
+    },
+    {
+      "id": "5qXrBR6CDwIbVgyeu5FSp",
+      "box": 0,
+      "level": 0,
+      "front": "airship",
+      "back": "بالون",
+      "example": ""
+    },
+    {
+      "id": "tRI1-176mYnNpUwwZ-6R0",
+      "box": 0,
+      "level": 0,
+      "front": "debris  ˈdebriː",
+      "back": "باقی مانده, خرده",
+      "example": "the bomb hits it, showering debris from all sides"
+    },
+    {
+      "id": "ABSbyrAGZxTiRBYLRYhnB",
+      "box": 0,
+      "level": 0,
+      "front": "fray",
+      "back": "increasingly upset or annoying",
+      "example": "amid fraying tensions"
+    },
+    {
+      "id": "wFtnfIejRyUzRnkhj1Noj",
+      "box": 0,
+      "level": 0,
+      "front": "violate  ˈvaɪəleɪt",
+      "back": "verletzen, نقض کردن",
+      "example": "regimes that violate human rights"
+    },
+    {
+      "id": "xwDdX04vCihEu0aD3eABX",
+      "box": 0,
+      "level": 0,
+      "front": "territory",
+      "back": "Staatsgebiet",
+      "example": "The plane was flying over enemy territory."
+    },
+    {
+      "id": "euUNY5faUTDONUXcClsdS",
+      "box": 0,
+      "level": 0,
+      "front": "sovereign country",
+      "back": "کشور مستقل",
+      "example": ""
+    },
+    {
+      "id": "RyLUT2jReWCREzhQZxE1e",
+      "box": 0,
+      "level": 0,
+      "front": "in a calm and reliable manner",
+      "back": "به شیوه ای آرام و قابل اعتماد",
+      "example": ""
+    },
+    {
+      "id": "GNKMZ_fXPWLmjdJ03Z8Aq",
+      "box": 0,
+      "level": 0,
+      "front": "would not accept any groundless conjecture or hype",
+      "back": "هیچ گونه حدس و گمان یا هیاهوی بی اساس را نمی پذیرد",
+      "example": ""
+    },
+    {
+      "id": "9zUpPJsdvkciOiNH096Zn",
+      "box": 0,
+      "level": 0,
+      "front": "as a pretext to attack and smear China",
+      "back": "بهانه ای برای حمله و لکه دار کردن چین است",
+      "example": ""
+    },
+    {
+      "id": "7xU9toIib5Xh30s_CpVuP",
+      "box": 0,
+      "level": 0,
+      "front": "US officials",
+      "back": "مقامات آمریکایی",
+      "example": ""
+    },
+    {
+      "id": "gwdv2hm7PcR2cMsvpw4Fd",
+      "box": 0,
+      "level": 0,
+      "front": "missile",
+      "back": "موشک",
+      "example": ""
+    },
+    {
+      "id": "0k-fw1oHZ77Dtd_WWItlw",
+      "box": 0,
+      "level": 0,
+      "front": "the eve of",
+      "back": "the night before",
+      "example": "I'm planning a nice dinner the eve of my wedding. "
     }
   ]
 }
