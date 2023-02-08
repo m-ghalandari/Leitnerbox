@@ -959,6 +959,134 @@
       "front": "the eve of",
       "back": "the night before",
       "example": "I'm planning a nice dinner the eve of my wedding. "
+    },
+    {
+      "id": "kJPEEZfGECpU-GmJDd1an",
+      "box": 0,
+      "level": 0,
+      "front": "to show up",
+      "back": "to arrive",
+      "example": ""
+    },
+    {
+      "id": "K8Ww8LtyzBd3iP_EgBlBT",
+      "box": 0,
+      "level": 0,
+      "front": "stuck",
+      "back": "informal unable to do any more of something that you are working on because it is too difficult",
+      "example": "Can you help me with my homework, Dad? I’m stuck."
+    },
+    {
+      "id": "SUa0v1fD33WchMt9hGvDN",
+      "box": 0,
+      "level": 0,
+      "front": "anticipate   /ænˈtɪsəpeɪt/",
+      "back": " to think about something that is going to happen, especially something pleasant SYN look forward to (erwarten)",
+      "example": "Daniel was eagerly anticipating her arrival."
+    },
+    {
+      "id": "M-kbntGRtZIFoGgG8NlWL",
+      "box": 0,
+      "level": 0,
+      "front": "make it to some place",
+      "back": "arrive",
+      "example": "I can't believe I made it to the job interview in time. I was stuck in traffic for 20 minutes."
+    },
+    {
+      "id": "gO9DXXka4FQOh66CvkC-s",
+      "box": 0,
+      "level": 0,
+      "front": "tie تای",
+      "back": "مساوی ",
+      "example": "Who won the game?\nNobody. It was a tie (game/match)."
+    },
+    {
+      "id": "5uDOruGua_rWwwMZZfAfA",
+      "box": 0,
+      "level": 0,
+      "front": "opt for / opt to do something",
+      "back": "to choose one thing or do one thing instead of another, انتخاب کردن",
+      "example": "Many young people are opting to go on to college."
+    },
+    {
+      "id": "XS3PpytrDNWNJy0L3IYKX",
+      "box": 0,
+      "level": 0,
+      "front": "My hair is down",
+      "back": "Meine Haare sind offen",
+      "example": "opp: My hair is up"
+    },
+    {
+      "id": "mB7VUOxs2dvbTfFwRr3cg",
+      "box": 0,
+      "level": 0,
+      "front": "wonky /ˈwɒŋki",
+      "back": "wackelig",
+      "example": "i was wonky"
+    },
+    {
+      "id": "Lcr2heuG3V9oBU8keS9B-",
+      "box": 0,
+      "level": 0,
+      "front": " out of sorts",
+      "back": "feeling a little ill or upset ",
+      "example": "I felt out of sorts after riding in the boat."
+    },
+    {
+      "id": "WrKXRuTXk2cmpQnhMVCcE",
+      "box": 0,
+      "level": 0,
+      "front": "tummy",
+      "back": "Magen",
+      "example": "He was up all night with tummy ache."
+    },
+    {
+      "id": "f8DXSU17TXf5hpyNCFUvs",
+      "box": 0,
+      "level": 0,
+      "front": "for real",
+      "back": "wirklich, seriously, not just pretending",
+      "example": "After two trial runs we did it for real."
+    },
+    {
+      "id": "PADuK4hYKcSVdJMiBQdoa",
+      "box": 0,
+      "level": 0,
+      "front": "with my luck...",
+      "back": "Pech!, Wie immer!, spoken used to say that you are not surprised something bad has happened to you, because you are usually unlucky",
+      "example": "With my luck, gambling is a really bad idea."
+    },
+    {
+      "id": "okXaxFsEeST3H418f4rAM",
+      "box": 0,
+      "level": 0,
+      "front": "bottoms up!",
+      "back": "spoken used to tell someone to enjoy or finish their alcoholic drink",
+      "example": ""
+    },
+    {
+      "id": "VfCSwLyM8Y0_PPDjUEkeJ",
+      "box": 0,
+      "level": 0,
+      "front": "smooth sailing",
+      "back": "happening or operating successfully, without any problems",
+      "example": "Sarah is responsible for the smooth sailing of the sales department."
+    },
+    {
+      "id": "X2AYoccU5nrgLTY-tcX39",
+      "box": 0,
+      "level": 0,
+      "front": "Bottoms up (sound?)",
+      "back": "ba-dum-zup  بدمز آپ",
+      "example": ""
+    },
+    {
+      "id": "ZIHrrEGjHGxY5i2HJ9ijI",
+      "box": 0,
+      "level": 0,
+      "front": "sort of thing",
+      "back": "Dass etwas typisch ist",
+      "example": "Eating peanuts is a very baseball game sort of thing."
     }
   ]
 }
