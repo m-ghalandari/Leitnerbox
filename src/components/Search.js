@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import CardList from "./CardList";
+import Card_completed from "./Card_completed";
 
 export default function Search({flashcards}) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -35,7 +36,9 @@ export default function Search({flashcards}) {
           onChange={handleSearch}
         />
       </div>
-      {searchTerm &&  <CardList flashcards={filtedFlashcards}/>}
+      {/* {searchTerm &&  <CardList flashcards={filtedFlashcards}/>} */}
+      {searchTerm && filtedFlashcards.map(card=>(<Card_completed key={card.id} card={card} />))}
+
       
     </>
   );
