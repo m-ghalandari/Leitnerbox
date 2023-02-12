@@ -6,7 +6,6 @@ import { Container } from "react-bootstrap";
 import BoxList from "./components/BoxList";
 import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
-import useFetch from "./components/useFetch";
 import Search from "./components/Search";
 import { EventEmitter } from 'events';
 
@@ -72,7 +71,7 @@ function App() {
     }
   };
 
-  // id:Falshcardid, box and level: have to change
+  // id:Flashcard id, box and level: have to change
   const changeFlashcardProperties = (id, box, level) => {
     const updatedFlashcards = flashcards.map((flashcard) => {
       if (flashcard.id === id) {
@@ -144,17 +143,7 @@ function App() {
       );
     });
 
-    // cards.forEach(async (flashcard) => {
-    //   try {
-    //     const response = await axios.patch(
-    //       `http://localhost:8000/flashcards/${flashcard.id}`,
-    //       { level: flashcard.level + 1 }
-    //     );
-    //     console.log(response.data);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // });
+
     updateCards(cards);
 
   };
@@ -165,7 +154,7 @@ function App() {
     <Container>
       {/* npx json-server --watch database/db.json --port 8000 */}
       {error ? (
-        <p>Somthing went wrong</p>
+        <p>Something went wrong</p>
       ) : (
         isPending && <div>is loading...</div>
       )}
