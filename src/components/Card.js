@@ -3,23 +3,17 @@ import React, { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { VscCheck, VscChromeClose } from "react-icons/vsc";
 import "./Card.css";
+import CardForm from "./CardForm";
 
-export default function Card({ card, deleteFlashcard, updateFlashcard }) {
+export default function Card({ card, deleteFlashcard, updateFlashcard, UpdateText }) {
   const [showBack, setShowBack] = useState(false);
-
   const [editing, setEditing] = useState(false);
-
+  const [updatedCard, setUpdatedCard] = useState(card);
 
   const handleEditClick = () => {
-    setEditing(true);
+    setEditing(!editing);
   };
 
-  const handleUpdateClick = (isConfirmed, updatedCard) => {
-    setEditing(false);
-    if (isConfirmed) {
-      updateFlashcard(updatedCard);
-    }
-  };
 
   return (
     <div className="card m-3 p-3">
@@ -62,6 +56,15 @@ export default function Card({ card, deleteFlashcard, updateFlashcard }) {
           Edit
         </button>
       </div>
+      {editing && (
+        <div>
+          <CardForm
+            card={updatedCard}
+            onSubmit={UpdateText}
+            onCancel={setEditing}
+          />
+        </div>
+      )}
     </div>
   );
 }

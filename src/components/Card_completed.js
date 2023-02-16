@@ -1,16 +1,4 @@
-// import React from "react";
 
-// export default function Card_completed({ card }) {
-
-//   return (
-//     <div>
-//       <h1>{card.front}</h1>
-//       <h2>{card.back}</h2>
-//       {card.level !== 5 ? <h2>status: not completed</h2>: <h2>status: completed</h2>}
-//       <h2>Box: {card.box} - level: {card.level}</h2>
-//     </div>
-//   );
-// }
 import React from "react";
 import { Card, Button, Container } from "react-bootstrap";
 

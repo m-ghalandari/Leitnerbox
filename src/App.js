@@ -148,6 +148,25 @@ function App() {
 
   };
 
+  const UpdateText = (updatedCard, oldCard) => {
+    //komplete Flashcard wird aktualisiert
+    const updatedFlashcard = { ...oldCard, ...updatedCard };
+
+    axios.put(`http://localhost:8000/flashcards/${oldCard.id}`, updatedFlashcard)
+      .then((response) => {
+        console.log(response.data);
+        const updatedFlashcards = flashcards.map((flashcard) =>
+          flashcard.id === oldCard.id ? updatedFlashcard : flashcard
+        );
+        setFlashcards(updatedFlashcards);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+
+  }
+
 
 
   return (
@@ -168,6 +187,7 @@ function App() {
             flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
             deleteFlashcard={deleteFlashcard}
             updateFlashcard={updateFlashcard}
+            UpdateText={UpdateText}
           />
 
           <BoxList
