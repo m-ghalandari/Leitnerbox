@@ -5,7 +5,7 @@ import CardList from "./CardList";
 export default function CompletedCards({
   flashcards,
   deleteFlashcard,
-  updataFlashcard,
+  updateFlashcard,
 }) {
   const [showCompletedCards, setShowCompletedCards] = useState(false);
 
@@ -23,7 +23,7 @@ export default function CompletedCards({
         <CardList
           flashcards={flashcards}
           deleteFlashcard={deleteFlashcard}
-          updataFlashcard={updataFlashcard}
+          updateFlashcard={updateFlashcard}
         />
       )}
     </div>

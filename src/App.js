@@ -87,7 +87,7 @@ function App() {
     handleUpdate(id, box, level);
   };
 
-  const updataFlashcard = (card, nextLevel) => {
+  const updateFlashcard = (card, nextLevel) => {
     if (nextLevel) {
       if (card.box === 4 && card.level === 16) {
         changeFlashcardProperties(card.id, 5, 0);
@@ -167,7 +167,7 @@ function App() {
           <Box_0
             flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
             deleteFlashcard={deleteFlashcard}
-            updataFlashcard={updataFlashcard}
+            updateFlashcard={updateFlashcard}
           />
 
           <BoxList
@@ -175,14 +175,14 @@ function App() {
               (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
             )}
             deleteFlashcard={deleteFlashcard}
-            updataFlashcard={updataFlashcard}
+            updateFlashcard={updateFlashcard}
             changeFlashcardsLevels={changeFlashcardsLevels}
           />
 
           <CompletedCards
             flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
             deleteFlashcard={deleteFlashcard}
-            updataFlashcard={updataFlashcard}
+            updateFlashcard={updateFlashcard}
           />
         </div>
       )}

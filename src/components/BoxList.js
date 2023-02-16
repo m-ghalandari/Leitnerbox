@@ -5,7 +5,7 @@ import LevelList from "./LevelList";
 export default function BoxList({
   flashcards,
   deleteFlashcard,
-  updataFlashcard,
+  updateFlashcard,
   changeFlashcardsLevels
 }) {
   const [showBoxes, setShowBoxes] = useState(Array(4).fill(false));
@@ -36,7 +36,7 @@ export default function BoxList({
                 (flashcard) => flashcard.box === i + 1
               )}
               deleteFlashcard={deleteFlashcard}
-              updataFlashcard={updataFlashcard}
+              updateFlashcard={updateFlashcard}
               changeFlashcardsLevels={changeFlashcardsLevels}
             />
           )}

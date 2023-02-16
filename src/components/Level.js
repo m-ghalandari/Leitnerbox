@@ -5,7 +5,7 @@ import CardList from "./CardList";
 export default function Level({
   flashcards,
   deleteFlashcard,
-  updataFlashcard,
+  updateFlashcard,
 }) {
   return (
     <>
@@ -13,7 +13,7 @@ export default function Level({
         <CardList
           flashcards={flashcards}
           deleteFlashcard={deleteFlashcard}
-          updataFlashcard={updataFlashcard}
+          updateFlashcard={updateFlashcard}
         />
       ) : (
         <Container>Leer</Container>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import CardList from "./CardList";
 
-export default function Box_0({ flashcards, deleteFlashcard , updataFlashcard}) {
+export default function Box_0({ flashcards, deleteFlashcard , updateFlashcard}) {
   const [showBox0, setShowBox0] = useState(false);
 
   const number = flashcards.length;
@@ -17,7 +17,7 @@ export default function Box_0({ flashcards, deleteFlashcard , updataFlashcard}) 
         Reserved cards ( {number} )
       </Button>
 
-      {showBox0 && <CardList flashcards={flashcards} deleteFlashcard={deleteFlashcard} updataFlashcard={updataFlashcard}/>}
+      {showBox0 && <CardList flashcards={flashcards} deleteFlashcard={deleteFlashcard} updateFlashcard={updateFlashcard}/>}
     </div>
   );
 }
