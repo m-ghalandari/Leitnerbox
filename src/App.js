@@ -197,6 +197,7 @@ function App() {
             deleteFlashcard={deleteFlashcard}
             updateFlashcard={updateFlashcard}
             changeFlashcardsLevels={changeFlashcardsLevels}
+            UpdateText={UpdateText}
           />
 
           <CompletedCards

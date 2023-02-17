@@ -8,7 +8,8 @@ const LevelList = ({
   flashcards,
   deleteFlashcard,
   updateFlashcard,
-  changeFlashcardsLevels
+  changeFlashcardsLevels,
+  UpdateText
 }) => {
   const [showLevels, setShowLevels] = useState(
     Array(numberOfLevelBox).fill(false)
@@ -44,19 +45,13 @@ const LevelList = ({
                   flashcards={levelFlashcards}
                   deleteFlashcard={deleteFlashcard}
                   updateFlashcard={updateFlashcard}
+                  UpdateText={UpdateText}
                 />
               )}
             </Fragment>
           );
         })}
         <div className="text-left">
-          {/* <button
-            type="button"
-            className="btn btn-outline-info"
-            onClick={()=>{changeFlashcardsLevels(flashcards)}}
-          >
-            Move
-          </button> */}
           <BsArrowDownCircle size="30" onClick={()=>{changeFlashcardsLevels(flashcards)}}/>
         </div>
       </div>

@@ -6,6 +6,7 @@ export default function Level({
   flashcards,
   deleteFlashcard,
   updateFlashcard,
+  UpdateText
 }) {
   return (
     <>
@@ -14,6 +15,7 @@ export default function Level({
           flashcards={flashcards}
           deleteFlashcard={deleteFlashcard}
           updateFlashcard={updateFlashcard}
+          UpdateText={UpdateText}
         />
       ) : (
         <Container>Leer</Container>
