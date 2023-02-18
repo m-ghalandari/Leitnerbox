@@ -7,35 +7,18 @@ import BoxList from "./components/BoxList";
 import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
-import { EventEmitter } from 'events';
 
 
-const myEmitter = new EventEmitter();
-myEmitter.setMaxListeners(40);
+
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
   const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(false);
-  const [search, setSearch] = useState("");
-  // box 5 is final. it indicates the completed cards
-  // const [flashcards, isPending, error] = useFetch("http://localhost:8000/flashcards");
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setError(false);
-        setIsPending(true);
-        const result = await axios.get("http://localhost:8000/flashcards");
-        setFlashcards(result.data);
-        setIsPending(false);
-        setError(false);
-      } catch (error) {
-        setError(true);
-        setIsPending(true);
-      }
-    })();
-  }, []);
+
+
+
+
 
   const addFlashcard = (newFlashcard) => {
     setFlashcards([...flashcards, newFlashcard]);
@@ -172,14 +155,10 @@ function App() {
   return (
     <Container>
       {/* npx json-server --watch database/db.json --port 8000 */}
-      {error ? (
-        <p>Something went wrong</p>
-      ) : (
-        isPending && <div>is loading...</div>
-      )}
+
       <Search flashcards={flashcards} />
 
-      {!isPending && (
+      
         <div className="App d-grid gap-4">
           <VocabularyForm addFlashcard={addFlashcard} />
 
@@ -206,7 +185,7 @@ function App() {
             updateFlashcard={updateFlashcard}
           />
         </div>
-      )}
+      
     </Container>
   );
 }
