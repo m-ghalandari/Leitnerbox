@@ -19,8 +19,10 @@ function App() {
   useEffect(()=>{
     axios.get('http://localhost:3001/api/get').then(respose=>{setFlashcards(respose.data)});
   },[])
+
+
   const addFlashcard = (newFlashcard) => {
-    setFlashcards([...flashcards, newFlashcard]);
+    
     axios.post('http://localhost:3001/api/insert', {
       id: newFlashcard.id, box: newFlashcard.box,
       level: newFlashcard.level,
@@ -28,22 +30,25 @@ function App() {
       back: newFlashcard.back,
       example: newFlashcard.example
     }).then(()=>{
-      alert('successful insert');
+      setFlashcards([...flashcards, newFlashcard]);
+    }).catch(err=>{
+      alert(err);
     })
 
   };
 
-  const deleteFlashcard = async (id) => {
-    const updatedFlashcards = flashcards.filter(
+  const deleteFlashcard = (id) => {
+    
+    // Delete the flashcard from the database
+    axios.delete(`http://localhost:3001/api/delete/${id}`).then(()=>{
+      const updatedFlashcards = flashcards.filter(
       (flashcard) => id !== flashcard.id
     );
     setFlashcards(updatedFlashcards);
-    // Delete the flashcard from the database
-    try {
-      await axios.delete(`http://localhost:8000/flashcards/${id}`);
-    } catch (error) {
-      console.error(error);
-    }
+    }).catch(err=>{
+      alert(err);
+    })
+    
   };
 
   const handleUpdate = async (id, newBox, newLevel) => {

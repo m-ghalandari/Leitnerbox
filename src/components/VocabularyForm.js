@@ -10,7 +10,7 @@ export default function VocabularyForm({ addFlashcard }) {
   const [level, setLevel] = useState(0);
   const [box, setBox] = useState(0);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const newFlashcard = {
       id: nanoid(),
@@ -23,6 +23,11 @@ export default function VocabularyForm({ addFlashcard }) {
 
     addFlashcard(newFlashcard);
     console.log(newFlashcard);
+    setWord('');
+    setExplanation('');
+    setExample('');
+    setLevel(0);
+    setBox(0);
     
   };
 

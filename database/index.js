@@ -56,6 +56,35 @@ app.get('/api/get', async (req, res)=>{
   }
 })
 
+// app.delete('/api/delete/:id', async (req, res)=>{
+//   const id = req.params.id;
+//   const sqlDelete =
+//   "DELETE FROM flashcard WHERE id = ?;";
+
+//     try {
+//   const [rows, fields] = await db.query(sqlDelete, [id]);
+//   console.log(fields);
+//   res.send(rows);
+// } catch (err) {
+//   console.log(err);
+//   res.status(500).send('Internal Server Error');
+// }
+// })
+app.delete('/api/delete/:id', async (req, res)=>{
+  const id = req.params.id;
+  const sqlDelete =
+  "DELETE FROM flashcard WHERE id = ?;";
+
+  try {
+    const [rows, fields] = await db.query(sqlDelete, [id]);
+    console.log(fields);
+    res.send(rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 app.post('/api/insert', async (req, res)=>{
 
     const id = req.body.id;
