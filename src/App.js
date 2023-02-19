@@ -13,15 +13,19 @@ import Search from "./components/Search";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
-  const [isPending, setIsPending] = useState(true);
-
-
-
-
-
 
   const addFlashcard = (newFlashcard) => {
     setFlashcards([...flashcards, newFlashcard]);
+    axios.post('http://localhost:3001/api/insert', {
+      id: newFlashcard.id, box: newFlashcard.box,
+      level: newFlashcard.level,
+      front: newFlashcard.front,
+      back: newFlashcard.back,
+      example: newFlashcard.example
+    }).then(()=>{
+      alert('successful insert');
+    })
+
   };
 
   const deleteFlashcard = async (id) => {
@@ -158,34 +162,34 @@ function App() {
 
       <Search flashcards={flashcards} />
 
-      
-        <div className="App d-grid gap-4">
-          <VocabularyForm addFlashcard={addFlashcard} />
 
-          <Box_0
-            flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
-            deleteFlashcard={deleteFlashcard}
-            updateFlashcard={updateFlashcard}
-            UpdateText={UpdateText}
-          />
+      <div className="App d-grid gap-4">
+        <VocabularyForm addFlashcard={addFlashcard} />
 
-          <BoxList
-            flashcards={flashcards.filter(
-              (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
-            )}
-            deleteFlashcard={deleteFlashcard}
-            updateFlashcard={updateFlashcard}
-            changeFlashcardsLevels={changeFlashcardsLevels}
-            UpdateText={UpdateText}
-          />
+        <Box_0
+          flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
+          deleteFlashcard={deleteFlashcard}
+          updateFlashcard={updateFlashcard}
+          UpdateText={UpdateText}
+        />
 
-          <CompletedCards
-            flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
-            deleteFlashcard={deleteFlashcard}
-            updateFlashcard={updateFlashcard}
-          />
-        </div>
-      
+        <BoxList
+          flashcards={flashcards.filter(
+            (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
+          )}
+          deleteFlashcard={deleteFlashcard}
+          updateFlashcard={updateFlashcard}
+          changeFlashcardsLevels={changeFlashcardsLevels}
+          UpdateText={UpdateText}
+        />
+
+        <CompletedCards
+          flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
+          deleteFlashcard={deleteFlashcard}
+          updateFlashcard={updateFlashcard}
+        />
+      </div>
+
     </Container>
   );
 }
