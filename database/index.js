@@ -42,6 +42,20 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json())
 
+app.get('/api/get', async (req, res)=>{
+    const sqlSelect =
+    "SELECT * FROM flashcard;";
+
+      try {
+    const [rows, fields] = await db.query(sqlSelect);
+    console.log(fields);
+    res.send(rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Internal Server Error');
+  }
+})
+
 app.post('/api/insert', async (req, res)=>{
 
     const id = req.body.id;

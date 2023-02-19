@@ -14,6 +14,11 @@ import Search from "./components/Search";
 function App() {
   const [flashcards, setFlashcards] = useState([]);
 
+
+
+  useEffect(()=>{
+    axios.get('http://localhost:3001/api/get').then(respose=>{setFlashcards(respose.data)});
+  },[])
   const addFlashcard = (newFlashcard) => {
     setFlashcards([...flashcards, newFlashcard]);
     axios.post('http://localhost:3001/api/insert', {
