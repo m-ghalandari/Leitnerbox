@@ -7,13 +7,15 @@ export default function VocabularyForm({ addFlashcard }) {
   const [word, setWord] = useState("");
   const [explanation, setExplanation] = useState("");
   const [example, setExample] = useState("");
+  const [level, setLevel] = useState(0);
+  const [box, setBox] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newFlashcard = {
       id: nanoid(),
-      box: 0,
-      level: 0,
+      box: parseInt(box),
+      level: parseInt(level),
       front: word,
       back: explanation,
       example: example,
@@ -47,7 +49,7 @@ export default function VocabularyForm({ addFlashcard }) {
               onChange={(e) => setWord(e.target.value)}
               type="text"
               className="form-control"
-              placeholder="Das Wort"
+              placeholder="vocabulary"
             />
           </div>
           <div className="form-group mt-3">
@@ -56,7 +58,7 @@ export default function VocabularyForm({ addFlashcard }) {
               onChange={(e) => setExplanation(e.target.value)}
               type="text"
               className="form-control"
-              placeholder="Die Bedeutung"
+              placeholder="meaning"
             />
           </div>
           <div className="form-group mt-3">
@@ -66,8 +68,28 @@ export default function VocabularyForm({ addFlashcard }) {
               className="form-control"
               cols="45"
               rows="5"
-              placeholder="Das Beispiel"
+              placeholder="example"
             ></textarea>
+          </div>
+          
+          <div className="form-group mt-3">
+            <label>Box number</label>
+            <input
+              value={box}
+              onChange={(e) => setBox(e.target.value)}
+              type="text"
+              className="form-control"
+              placeholder="Reserved card"
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Level number</label>
+            <input
+              value={level}
+              onChange={(e) => setLevel(e.target.value)}
+              type="text"
+              className="form-control"
+            />
           </div>
           <button className="btn btn-primary mt-3">SAVE</button>
         </form>
