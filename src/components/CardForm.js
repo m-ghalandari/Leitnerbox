@@ -10,7 +10,7 @@ export default function CardForm({ card, onSubmit, onCancel }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(updatedCard, card);
+    onSubmit(updatedCard);
     onCancel(false)
   };
 

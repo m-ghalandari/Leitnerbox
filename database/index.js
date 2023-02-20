@@ -39,14 +39,14 @@ const db = mysql.createPool({
 });
 
 app.use(cors());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
 
-app.get('/api/get', async (req, res)=>{
-    const sqlSelect =
+app.get('/api/get', async (req, res) => {
+  const sqlSelect =
     "SELECT * FROM flashcard;";
 
-      try {
+  try {
     const [rows, fields] = await db.query(sqlSelect);
     console.log(fields);
     res.send(rows);
@@ -56,24 +56,10 @@ app.get('/api/get', async (req, res)=>{
   }
 })
 
-// app.delete('/api/delete/:id', async (req, res)=>{
-//   const id = req.params.id;
-//   const sqlDelete =
-//   "DELETE FROM flashcard WHERE id = ?;";
-
-//     try {
-//   const [rows, fields] = await db.query(sqlDelete, [id]);
-//   console.log(fields);
-//   res.send(rows);
-// } catch (err) {
-//   console.log(err);
-//   res.status(500).send('Internal Server Error');
-// }
-// })
-app.delete('/api/delete/:id', async (req, res)=>{
+app.delete('/api/delete/:id', async (req, res) => {
   const id = req.params.id;
   const sqlDelete =
-  "DELETE FROM flashcard WHERE id = ?;";
+    "DELETE FROM flashcard WHERE id = ?;";
 
   try {
     const [rows, fields] = await db.query(sqlDelete, [id]);
@@ -85,21 +71,21 @@ app.delete('/api/delete/:id', async (req, res)=>{
   }
 });
 
-app.post('/api/insert', async (req, res)=>{
+app.post('/api/insert', async (req, res) => {
 
-    const id = req.body.id;
-    const box = req.body.box;
-    const level = req.body.level;
-    const front = req.body.front;
-    const back = req.body.back;
-    const example = req.body.example;
+  const id = req.body.id;
+  const box = req.body.box;
+  const level = req.body.level;
+  const front = req.body.front;
+  const back = req.body.back;
+  const example = req.body.example;
 
 
-    const sqlQuery =
+  const sqlQuery =
     "INSERT INTO flashcard (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);";
 
-      try {
-    const [rows, fields] = await db.query(sqlQuery, [id,box,level,front,back,example]);
+  try {
+    const [rows, fields] = await db.query(sqlQuery, [id, box, level, front, back, example]);
     console.log(fields);
     res.send(rows);
   } catch (err) {
@@ -109,6 +95,27 @@ app.post('/api/insert', async (req, res)=>{
 
 
 })
+
+app.put("/api/editCard", async (req, res) => {
+  const id = req.body.id;
+  const box = req.body.box;
+  const level = req.body.level;
+  const front = req.body.front;
+  const back = req.body.back;
+  const example = req.body.example;
+
+  const sqlEdit = "UPDATE flashcard SET box=?, level=?, front=?, back=?, example=? WHERE id=?;";
+
+  try {
+    const [rows, fields] = await db.query(sqlEdit, [box, level, front, back, example, id]);
+    console.log(fields);
+    res.send(rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Internal Server Error');
+  }
+})
+
 
 
 app.listen(3001, () => {

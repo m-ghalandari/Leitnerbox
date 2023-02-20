@@ -8,68 +8,68 @@ import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
 
-
-
-
 function App() {
   const [flashcards, setFlashcards] = useState([]);
 
-
-
-  useEffect(()=>{
-    axios.get('http://localhost:3001/api/get').then(respose=>{setFlashcards(respose.data)});
-  },[])
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/get').then(response => { setFlashcards(response.data) });
+  }, [])
 
 
   const addFlashcard = (newFlashcard) => {
-    
+
     axios.post('http://localhost:3001/api/insert', {
       id: newFlashcard.id, box: newFlashcard.box,
       level: newFlashcard.level,
       front: newFlashcard.front,
       back: newFlashcard.back,
       example: newFlashcard.example
-    }).then(()=>{
+    }).then(() => {
       setFlashcards([...flashcards, newFlashcard]);
-    }).catch(err=>{
+    }).catch(err => {
       alert(err);
     })
 
   };
 
   const deleteFlashcard = (id) => {
-    
+
     // Delete the flashcard from the database
-    axios.delete(`http://localhost:3001/api/delete/${id}`).then(()=>{
+    axios.delete(`http://localhost:3001/api/delete/${id}`).then(() => {
       const updatedFlashcards = flashcards.filter(
-      (flashcard) => id !== flashcard.id
-    );
-    setFlashcards(updatedFlashcards);
-    }).catch(err=>{
+        (flashcard) => id !== flashcard.id
+      );
+      setFlashcards(updatedFlashcards);
+    }).catch(err => {
       alert(err);
     })
-    
+
   };
 
-  const handleUpdate = async (id, newBox, newLevel) => {
-    const findedFlashcard = flashcards.find((flashcard) => flashcard.id === id);
-    try {
-      const updatedFlashcard = {
-        ...findedFlashcard,
-        box: newBox,
-        level: newLevel,
-      };
-      await axios.put(
-        `http://localhost:8000/flashcards/${id}`,
-        updatedFlashcard
-      );
-    } catch (error) {
-      console.error(error);
-    }
+
+
+  const editFlashcard = (updatedCard) => {
+
+    axios.put('http://localhost:3001/api/editCard', {
+      id: updatedCard.id, box: updatedCard.box,
+      level: updatedCard.level,
+      front: updatedCard.front,
+      back: updatedCard.back,
+      example: updatedCard.example
+    }).then(() => {
+      const updatedFlashcards = flashcards.map((flashcard) =>
+      flashcard.id === updatedCard.id ? updatedCard : flashcard
+    );
+    setFlashcards(updatedFlashcards);
+    }).catch(err => {
+      alert(err);
+    })
+
   };
 
-  // id:Flashcard id, box and level: have to change
-  const changeFlashcardProperties = (id, box, level) => {
+
+  //update box and level in flashcards and database
+  const changeFlashcardProperties = async (id, box, level) => {
     const updatedFlashcards = flashcards.map((flashcard) => {
       if (flashcard.id === id) {
         return {
@@ -81,10 +81,25 @@ function App() {
       return flashcard;
     });
     setFlashcards(updatedFlashcards);
-    handleUpdate(id, box, level);
+    console.log(updatedFlashcards)
+    const findedFlashcard = flashcards.find((flashcard) => flashcard.id === id);
+
+    const updatedFlashcard = {
+      ...findedFlashcard,
+      box: box,
+      level: level,
+    };
+    // editFlashcard(updatedFlashcard);
+    try {
+      await editFlashcard(updatedFlashcard);
+    } catch (error) {
+      alert(error);
+    }
   };
 
-  const updateFlashcard = (card, nextLevel) => {
+  //correct or false answer?
+  
+  const correct_or_wrongAnswer = (card, nextLevel) => {
     if (nextLevel) {
       if (card.box === 4 && card.level === 16) {
         changeFlashcardProperties(card.id, 5, 0);
@@ -110,6 +125,10 @@ function App() {
     }
   };
 
+    // id:Flashcard id, box and level: have to change
+
+
+    //all flashcardslevel increasing to +1
   async function updateCards(cards) {
     for (let i = 0; i < cards.length; i++) {
       const flashcard = cards[i];
@@ -145,25 +164,6 @@ function App() {
 
   };
 
-  const UpdateText = (updatedCard, oldCard) => {
-    //komplete Flashcard wird aktualisiert
-    const updatedFlashcard = { ...oldCard, ...updatedCard };
-
-    axios.put(`http://localhost:8000/flashcards/${oldCard.id}`, updatedFlashcard)
-      .then((response) => {
-        console.log(response.data);
-        const updatedFlashcards = flashcards.map((flashcard) =>
-          flashcard.id === oldCard.id ? updatedFlashcard : flashcard
-        );
-        setFlashcards(updatedFlashcards);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-
-  }
-
 
 
   return (
@@ -179,8 +179,8 @@ function App() {
         <Box_0
           flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
           deleteFlashcard={deleteFlashcard}
-          updateFlashcard={updateFlashcard}
-          UpdateText={UpdateText}
+          correct_or_wrongAnswer={correct_or_wrongAnswer}
+          editFlashcard={editFlashcard}
         />
 
         <BoxList
@@ -188,15 +188,15 @@ function App() {
             (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
           )}
           deleteFlashcard={deleteFlashcard}
-          updateFlashcard={updateFlashcard}
-          changeFlashcardsLevels={changeFlashcardsLevels}
-          UpdateText={UpdateText}
+          correct_or_wrongAnswer={correct_or_wrongAnswer} //for correct and wrong answer
+          changeFlashcardsLevels={changeFlashcardsLevels} //for change a set of flashcardslevel
+          editFlashcard={editFlashcard}
         />
 
         <CompletedCards
           flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
           deleteFlashcard={deleteFlashcard}
-          updateFlashcard={updateFlashcard}
+          correct_or_wrongAnswer={correct_or_wrongAnswer}
         />
       </div>
 

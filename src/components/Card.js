@@ -5,7 +5,7 @@ import { VscCheck, VscChromeClose } from "react-icons/vsc";
 import "./Card.css";
 import CardForm from "./CardForm";
 
-export default function Card({ card, deleteFlashcard, updateFlashcard, UpdateText }) {
+export default function Card({ card, deleteFlashcard, correct_or_wrongAnswer, editFlashcard }) {
   const [showBack, setShowBack] = useState(false);
   const [editing, setEditing] = useState(false);
   const [updatedCard, setUpdatedCard] = useState(card);
@@ -41,12 +41,12 @@ export default function Card({ card, deleteFlashcard, updateFlashcard, UpdateTex
         />
         <VscCheck
           className="text-success mr-3"
-          onClick={() => updateFlashcard(card, true)}
+          onClick={() => correct_or_wrongAnswer(card, true)}
           size="30"
         />
         <VscChromeClose
           className="text-danger"
-          onClick={() => updateFlashcard(card, false)}
+          onClick={() => correct_or_wrongAnswer(card, false)}
           size="30"
         />
         <button
@@ -60,7 +60,7 @@ export default function Card({ card, deleteFlashcard, updateFlashcard, UpdateTex
         <div>
           <CardForm
             card={updatedCard}
-            onSubmit={UpdateText}
+            onSubmit={editFlashcard}
             onCancel={setEditing}
           />
         </div>

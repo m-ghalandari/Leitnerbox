@@ -5,8 +5,8 @@ import CardList from "./CardList";
 export default function Level({
   flashcards,
   deleteFlashcard,
-  updateFlashcard,
-  UpdateText
+  correct_or_wrongAnswer,
+  editFlashcard
 }) {
   return (
     <>
@@ -14,8 +14,8 @@ export default function Level({
         <CardList
           flashcards={flashcards}
           deleteFlashcard={deleteFlashcard}
-          updateFlashcard={updateFlashcard}
-          UpdateText={UpdateText}
+          correct_or_wrongAnswer={correct_or_wrongAnswer}
+          editFlashcard={editFlashcard}
         />
       ) : (
         <Container>Leer</Container>

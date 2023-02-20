@@ -7,9 +7,9 @@ const LevelList = ({
   numberOfLevelBox,
   flashcards,
   deleteFlashcard,
-  updateFlashcard,
+  correct_or_wrongAnswer,
   changeFlashcardsLevels,
-  UpdateText
+  editFlashcard
 }) => {
   const [showLevels, setShowLevels] = useState(
     Array(numberOfLevelBox).fill(false)
@@ -44,8 +44,8 @@ const LevelList = ({
                 <Level
                   flashcards={levelFlashcards}
                   deleteFlashcard={deleteFlashcard}
-                  updateFlashcard={updateFlashcard}
-                  UpdateText={UpdateText}
+                  correct_or_wrongAnswer={correct_or_wrongAnswer}
+                  editFlashcard={editFlashcard}
                 />
               )}
             </Fragment>

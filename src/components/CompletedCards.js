@@ -5,7 +5,7 @@ import CardList from "./CardList";
 export default function CompletedCards({
   flashcards,
   deleteFlashcard,
-  updateFlashcard,
+  correct_or_wrongAnswer,
 }) {
   const [showCompletedCards, setShowCompletedCards] = useState(false);
 
@@ -23,7 +23,7 @@ export default function CompletedCards({
         <CardList
           flashcards={flashcards}
           deleteFlashcard={deleteFlashcard}
-          updateFlashcard={updateFlashcard}
+          correct_or_wrongAnswer={correct_or_wrongAnswer}
         />
       )}
     </div>
