@@ -81,7 +81,6 @@ function App() {
       return flashcard;
     });
     setFlashcards(updatedFlashcards);
-    console.log(updatedFlashcards)
     const findedFlashcard = flashcards.find((flashcard) => flashcard.id === id);
 
     const updatedFlashcard = {
@@ -89,16 +88,14 @@ function App() {
       box: box,
       level: level,
     };
-    // editFlashcard(updatedFlashcard);
     try {
-      await editFlashcard(updatedFlashcard);
+      editFlashcard(updatedFlashcard);
     } catch (error) {
       alert(error);
     }
   };
 
   //correct or false answer?
-  
   const correct_or_wrongAnswer = (card, nextLevel) => {
     if (nextLevel) {
       if (card.box === 4 && card.level === 16) {
@@ -125,26 +122,6 @@ function App() {
     }
   };
 
-    // id:Flashcard id, box and level: have to change
-
-
-    //all flashcardslevel increasing to +1
-  async function updateCards(cards) {
-    for (let i = 0; i < cards.length; i++) {
-      const flashcard = cards[i];
-      try {
-        const response = await axios.patch(
-          `http://localhost:8000/flashcards/${flashcard.id}`,
-          { level: flashcard.level + 1 }
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-      await new Promise(resolve => setTimeout(resolve, 500));
-    }
-  }
-
   //hier wird alle Flashcard ihre level um 1 erhöht
   const changeFlashcardsLevels = async (cards) => {
 
@@ -159,8 +136,12 @@ function App() {
       );
     });
 
-
-    updateCards(cards);
+    axios.put('http://localhost:3001/api/increaseLevels', {
+      cards
+    }).then(() => {})
+      .catch(err => {
+      alert(err);
+    })
 
   };
 

@@ -1,29 +1,3 @@
-// const express = require('express');
-// const app = express();
-// const mysql = require('mysql');
-
-// const db = mysql.createPool({
-//     host: 'localhost',
-//     user: 'Mohammad',
-//     password: '19981998M.gh',
-//     database: 'flashcards',
-// })
-
-
-// app.get('/', (req, res)=>{
-//     // const sqlQuery = "INSERT INTO flashcard (question, answer, example, box, level) VALUE ('whats your name', 'momo', 'i am momo', '0','0');"
-//     const sqlQuery = "INSERT INTO flashcard (question, answer, example, box, level) VALUES ('whats your name', 'momo', 'i am momo', 0, 0);"
-
-//     db.query(sqlQuery, (err, result)=>{
-//         console.log(err)
-//         res.send(result);
-//     })
-//     res.send('hello momo');
-// })
-
-// app.listen(3001, ()=>{
-//     console.log('running on port 3001');
-// })
 
 const express = require('express');
 const app = express();
@@ -116,6 +90,22 @@ app.put("/api/editCard", async (req, res) => {
   }
 })
 
+app.put('/api/increaseLevels', async (req, res) => {
+  const { cards } = req.body;
+  const promises = [];
+
+  for (const card of cards) {
+    promises.push(db.query('UPDATE flashcard SET level = ? WHERE id = ?', [card.level + 1, card.id]));
+  }
+
+  try {
+    await Promise.all(promises);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
 
 
 app.listen(3001, () => {
