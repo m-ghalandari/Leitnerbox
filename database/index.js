@@ -1,7 +1,5 @@
 
 const express = require('express');
-// const http = require('http');
-// const App = require('../src/App');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -13,15 +11,13 @@ const db = mysql.createPool({
   password: '19981998M.gh',
   database: 'flashcards',
 });
-// const server = http.createServer(app);
-// const PORT = process.env.PORT || 3001;
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
 
 app.get('/api/get', async (req, res) => {
-  // res.send(App);
   const sqlSelect =
     "SELECT * FROM flashcard;";
 
@@ -116,6 +112,3 @@ app.put('/api/increaseLevels', async (req, res) => {
 app.listen(3001, () => {
   console.log('running on port 3001');
 });
-// server.listen(PORT, () => {
-//   console.log(`Server listening on port ${PORT}`);
-// });
