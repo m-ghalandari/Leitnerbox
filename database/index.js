@@ -9,7 +9,7 @@ const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '19981998M.gh',
-  database: 'flashcards',
+  database: 'cards',
 });
 
 
@@ -18,9 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
 
 app.get('/api/get', async (req, res) => {
-  res.send('haalo');
   const sqlSelect =
-    "SELECT * FROM flashcard;";
+    "SELECT * FROM flashcards;";
 
   try {
     const [rows, fields] = await db.query(sqlSelect);
@@ -58,7 +57,7 @@ app.post('/api/insert', async (req, res) => {
 
 
   const sqlQuery =
-    "INSERT INTO flashcard (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);";
+    "INSERT INTO flashcards (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);";
 
   try {
     const [rows, fields] = await db.query(sqlQuery, [id, box, level, front, back, example]);
@@ -80,7 +79,7 @@ app.put("/api/editCard", async (req, res) => {
   const back = req.body.back;
   const example = req.body.example;
 
-  const sqlEdit = "UPDATE flashcard SET box=?, level=?, front=?, back=?, example=? WHERE id=?;";
+  const sqlEdit = "UPDATE flashcards SET box=?, level=?, front=?, back=?, example=? WHERE id=?;";
 
   try {
     const [rows, fields] = await db.query(sqlEdit, [box, level, front, back, example, id]);
@@ -97,7 +96,7 @@ app.put('/api/increaseLevels', async (req, res) => {
   const promises = [];
 
   for (const card of cards) {
-    promises.push(db.query('UPDATE flashcard SET level = ? WHERE id = ?', [card.level + 1, card.id]));
+    promises.push(db.query('UPDATE flashcards SET level = ? WHERE id = ?', [card.level + 1, card.id]));
   }
 
   try {
