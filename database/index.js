@@ -7,7 +7,7 @@ const mysql = require('mysql2/promise');
 
 const db = mysql.createPool({
   host: 'localhost',
-  user: 'Mohammad',
+  user: 'root',
   password: '19981998M.gh',
   database: 'flashcards',
 });
@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
 
 app.get('/api/get', async (req, res) => {
+  res.send('haalo');
   const sqlSelect =
     "SELECT * FROM flashcard;";
 
