@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
+const fs = require('fs');
 
 const db = mysql.createPool({
   host: 'localhost',
@@ -107,6 +108,23 @@ app.put('/api/increaseLevels', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+async function readAll() {
+  const data = JSON.parse(fs.readFileSync('./db.json'));
+  const promises = [];
+
+  for (const card of data.flashcards){
+    promises.push(db.query("INSERT INTO flashcards (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);",[card.id,card.box,card.level, card.front, card.back, card.example]))
+
+  }
+  try {
+    await Promise.all(promises);
+  }catch (error){
+    console.log(error);
+  }
+}
+
+readAll();
 
 
 app.listen(3001, () => {
