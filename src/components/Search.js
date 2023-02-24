@@ -8,11 +8,11 @@ export default function Search({flashcards}) {
 
   const handleSearch = e => {
     setSearchTerm(e.target.value);
-    console.log(flashcards.includes(searchTerm))
-    console.log(flashcards)
+    // console.log(flashcards.includes(searchTerm))
+    // console.log(flashcards)
   };
 
-  const filtedFlashcards = flashcards.filter((flashcard)=> {
+  const filteredFlashcards = flashcards.filter((flashcard)=> {
     if(searchTerm==""){
       return "";
     } else if (flashcard.front.toLowerCase().includes(searchTerm.toLowerCase())){
@@ -36,8 +36,8 @@ export default function Search({flashcards}) {
           onChange={handleSearch}
         />
       </div>
-      {/* {searchTerm &&  <CardList flashcards={filtedFlashcards}/>} */}
-      {searchTerm && filtedFlashcards.map(card=>(<Card_completed key={card.id} card={card} />))}
+      {/* {searchTerm &&  <CardList flashcards={filtereddFlashcards}/>} */}
+      {searchTerm && filteredFlashcards.map(card=>(<Card_completed key={card.id} card={card} />))}
 
       
     </>
