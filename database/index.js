@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
+const fs = require('fs')
 
 const db = mysql.createPool({
   host: 'localhost',
@@ -108,6 +109,47 @@ app.put('/api/increaseLevels', async (req, res) => {
   }
 });
 
+app.post('/api/insertAll', async (req, res) => {
+  const data = JSON.parse(fs.readFileSync('./db.json'));
+
+  const promises = [];
+
+  for (const card of data) {
+    promises.push(db.query("INSERT INTO flashcard (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);", [card.id, card.box, card.level, card.front, card.back, card,example]));
+  }
+
+  try {
+    await Promise.all(promises);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+
+async function readJsonAndInsertData() {
+  
+
+  const data = JSON.parse(fs.readFileSync('./db.json'));
+
+  const promises = [];
+
+  for (const card of data.flashcards) {
+    promises.push(db.query("INSERT INTO flashcard (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);", [card.id, card.box, card.level, card.front, card.back, card.example]));
+  }
+
+  try {
+    await Promise.all(promises);
+    // res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    // res.sendStatus(500);
+  }
+}
+
+// Rufen Sie die Funktion auf
+readJsonAndInsertData();
 
 app.listen(3001, () => {
   console.log('running on port 3001');
