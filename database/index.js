@@ -34,7 +34,7 @@ app.get('/api/get', async (req, res) => {
 app.delete('/api/delete/:id', async (req, res) => {
   const id = req.params.id;
   const sqlDelete =
-    "DELETE FROM flashcard WHERE id = ?;";
+    "DELETE FROM flashcards WHERE id = ?;";
 
   try {
     const [rows, fields] = await db.query(sqlDelete, [id]);
