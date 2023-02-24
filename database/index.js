@@ -124,7 +124,7 @@ async function readAll() {
   }
 }
 
-readAll();
+//readAll();
 
 
 app.listen(3001, () => {
