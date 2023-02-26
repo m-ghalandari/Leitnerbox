@@ -7,6 +7,7 @@ import BoxList from "./components/BoxList";
 import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
+import AllCards from "./components/AllCards";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
@@ -125,7 +126,7 @@ function App() {
   };
 
   //hier wird alle Flashcard ihre level um 1 erhöht
-  const changeFlashcardsLevels = async (cards) => {
+ /* const changeFlashcardsLevels = async (cards) => {
 
     cards.map((card) => {
       setFlashcards((prevFlashcards) =>
@@ -146,6 +147,66 @@ function App() {
     })
 
   };
+  */
+
+    //hier wird alle Flashcard ihre level um 1 erhöht
+    const changeFlashcardsLevels = async (cards) => {
+
+      let box1 = false;
+      let box2 = false;
+      let box3 = false;
+      let box4 = false;
+  
+      cards.forEach(card => {
+        if (card.box === 1 && card.level >= 2) {
+          box1 = true;
+        }
+        if (card.box === 2 && card.level >= 4) {
+          box2 = true;
+        }
+        if (card.box === 3 && card.level >= 8) {
+          box3 = true;
+        }
+        if (card.box === 4 && card.level >= 16) {
+          box4 = true;
+        }
+      });
+      if (box1) {
+        alert("Warnung: Mindestens eine Karte aus Box 1 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+        return;
+      }
+      if (box2) {
+        alert("Warnung: Mindestens eine Karte aus Box 2 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+        return;
+      }
+      if (box3) {
+        alert("Warnung: Mindestens eine Karte aus Box 3 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+        return;
+      }
+      if (box4) {
+        alert("Warnung: Mindestens eine Karte aus Box 4 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+        return;
+      }
+  
+      cards.map((card) => {
+        setFlashcards((prevFlashcards) =>
+          prevFlashcards.map((flashcard) => {
+            if (flashcard.id === card.id) {
+              return { ...flashcard, level: card.level + 1 };
+            }
+            return flashcard;
+          })
+        );
+      });
+  
+      axios.put('http://84.150.35.142:3001/api/increaseLevels', {
+        cards
+      }).then(() => { })
+        .catch(err => {
+          alert(err);
+        })
+  
+    };
 
 
 
@@ -180,7 +241,13 @@ function App() {
           flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
           deleteFlashcard={deleteFlashcard}
           correct_or_wrongAnswer={correct_or_wrongAnswer}
+          editFlashcard={editFlashcard}
         />
+
+        <AllCards flashcards={flashcards}
+          deleteFlashcard={deleteFlashcard}
+          correct_or_wrongAnswer={correct_or_wrongAnswer}
+          editFlashcard={editFlashcard}/>
       </div>
 
     </Container>

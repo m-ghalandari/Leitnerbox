@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
 import CardList from "./CardList";
 
-export default function CompletedCards({
+export default function AllCards({
   flashcards,
   deleteFlashcard,
   correct_or_wrongAnswer,
   editFlashcard
 }) {
-  const [showCompletedCards, setShowCompletedCards] = useState(false);
+  const [showAllCards, setShowAllCards] = useState(false);
 
   return (
     <div className="text-center mt-5">
       <button
         type="button"
         className="btn btn-outline-info mb-3 "
-        onClick={() => setShowCompletedCards(!showCompletedCards)}
+        onClick={() => setShowAllCards(!showAllCards)}
       >
-        completed cards
+        all cards
       </button>
 
-      {showCompletedCards && (
+      {showAllCards && (
         <CardList
           flashcards={flashcards}
           deleteFlashcard={deleteFlashcard}
@@ -31,3 +30,4 @@ export default function CompletedCards({
     </div>
   );
 }
+
