@@ -4,11 +4,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
-const fs = require('fs')
+const fs = require('fs');
 
 const db = mysql.createPool({
   host: 'localhost',
-  user: 'Mohammad',
+  user: 'root',
   password: '19981998M.gh',
   database: 'flashcards',
 });
@@ -20,7 +20,7 @@ app.use(express.json())
 
 app.get('/api/get', async (req, res) => {
   const sqlSelect =
-    "SELECT * FROM flashcard;";
+    "SELECT * FROM flashcards;";
 
   try {
     const [rows, fields] = await db.query(sqlSelect);
@@ -35,7 +35,7 @@ app.get('/api/get', async (req, res) => {
 app.delete('/api/delete/:id', async (req, res) => {
   const id = req.params.id;
   const sqlDelete =
-    "DELETE FROM flashcard WHERE id = ?;";
+    "DELETE FROM flashcards WHERE id = ?;";
 
   try {
     const [rows, fields] = await db.query(sqlDelete, [id]);
@@ -58,7 +58,7 @@ app.post('/api/insert', async (req, res) => {
 
 
   const sqlQuery =
-    "INSERT INTO flashcard (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);";
+    "INSERT INTO flashcards (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);";
 
   try {
     const [rows, fields] = await db.query(sqlQuery, [id, box, level, front, back, example]);
@@ -80,7 +80,7 @@ app.put("/api/editCard", async (req, res) => {
   const back = req.body.back;
   const example = req.body.example;
 
-  const sqlEdit = "UPDATE flashcard SET box=?, level=?, front=?, back=?, example=? WHERE id=?;";
+  const sqlEdit = "UPDATE flashcards SET box=?, level=?, front=?, back=?, example=? WHERE id=?;";
 
   try {
     const [rows, fields] = await db.query(sqlEdit, [box, level, front, back, example, id]);
@@ -97,7 +97,7 @@ app.put('/api/increaseLevels', async (req, res) => {
   const promises = [];
 
   for (const card of cards) {
-    promises.push(db.query('UPDATE flashcard SET level = ? WHERE id = ?', [card.level + 1, card.id]));
+    promises.push(db.query('UPDATE flashcards SET level = ? WHERE id = ?', [card.level + 1, card.id]));
   }
 
   try {
@@ -109,47 +109,23 @@ app.put('/api/increaseLevels', async (req, res) => {
   }
 });
 
-app.post('/api/insertAll', async (req, res) => {
+async function readAll() {
   const data = JSON.parse(fs.readFileSync('./db.json'));
-
   const promises = [];
 
-  for (const card of data) {
-    promises.push(db.query("INSERT INTO flashcard (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);", [card.id, card.box, card.level, card.front, card.back, card,example]));
-  }
+  for (const card of data.flashcards){
+    promises.push(db.query("INSERT INTO flashcards (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);",[card.id,card.box,card.level, card.front, card.back, card.example]))
 
+  }
   try {
     await Promise.all(promises);
-    res.sendStatus(200);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
-
-
-async function readJsonAndInsertData() {
-  
-
-  const data = JSON.parse(fs.readFileSync('./db.json'));
-
-  const promises = [];
-
-  for (const card of data.flashcards) {
-    promises.push(db.query("INSERT INTO flashcard (id,box, level, front, back, example) VALUES (?,?,?,?,?,?);", [card.id, card.box, card.level, card.front, card.back, card.example]));
-  }
-
-  try {
-    await Promise.all(promises);
-    // res.sendStatus(200);
-  } catch (error) {
-    console.error(error);
-    // res.sendStatus(500);
+  }catch (error){
+    console.log(error);
   }
 }
 
-// Rufen Sie die Funktion auf
-// readJsonAndInsertData();
+//readAll();
+
 
 app.listen(3001, () => {
   console.log('running on port 3001');

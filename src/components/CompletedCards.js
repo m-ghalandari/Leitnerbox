@@ -6,6 +6,7 @@ export default function CompletedCards({
   flashcards,
   deleteFlashcard,
   correct_or_wrongAnswer,
+  editFlashcard
 }) {
   const [showCompletedCards, setShowCompletedCards] = useState(false);
 
@@ -16,7 +17,7 @@ export default function CompletedCards({
         className="btn btn-outline-info mb-3 "
         onClick={() => setShowCompletedCards(!showCompletedCards)}
       >
-        All completed cards
+        completed cards
       </button>
 
       {showCompletedCards && (
@@ -24,6 +25,7 @@ export default function CompletedCards({
           flashcards={flashcards}
           deleteFlashcard={deleteFlashcard}
           correct_or_wrongAnswer={correct_or_wrongAnswer}
+          editFlashcard={editFlashcard}
         />
       )}
     </div>

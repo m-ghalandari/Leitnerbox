@@ -17,6 +17,8 @@ export default function Search({flashcards}) {
       return "";
     } else if (flashcard.front.toLowerCase().includes(searchTerm.toLowerCase())){
       return flashcard;
+    } else if (searchTerm==="*"){
+      return flashcards;
     }
   })
   const number = flashcards.length;
