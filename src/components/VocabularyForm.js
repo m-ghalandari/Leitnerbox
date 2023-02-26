@@ -85,6 +85,7 @@ export default function VocabularyForm({ addFlashcard }) {
                 type="text"
                 className="form-control"
                 placeholder="vocabulary"
+                required="true"
               />
             </div>
             <div className="form-group mt-3">
