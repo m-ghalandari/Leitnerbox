@@ -10,6 +10,7 @@ export default function VocabularyForm({ addFlashcard }) {
   const [example, setExample] = useState("");
   const [level, setLevel] = useState(1);
   const [box, setBox] = useState(0);
+  const [showBoxLevel, setShowBoxLevel] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,34 +111,41 @@ export default function VocabularyForm({ addFlashcard }) {
                 placeholder="example"
               ></textarea>
             </div>
+            {showBoxLevel && <div>
+              <div className="form-group mt-3">
+                <label>Box number</label>
+                <input
+                  value={box}
+                  onChange={handleBoxChange}
+                  type="range"
+                  className="form-range"
+                  min="1"
+                  max="4"
+                  step="1"
+                />
+                <span>{box}</span>
+              </div>
+              <div className="form-group mt-3">
+                <label>Level number</label>
+                <input
+                  value={level}
+                  onChange={handleLevelChange}
+                  type="range"
+                  className="form-range"
+                  min="1"
+                  max={box === 1 ? 2 : box === 2 ? 4 : box === 3 ? 8 : 16}
+                  step="1"
+                />
+                <span>{level}</span>
+              </div>
+            </div>
+            }
 
-            <div className="form-group mt-3">
-              <label>Box number</label>
-              <input
-                value={box}
-                onChange={handleBoxChange}
-                type="range"
-                className="form-range"
-                min="1"
-                max="4"
-                step="1"
-              />
-              <span>{box}</span>
+            <div className="d-flex justify-content-between">
+              <button className="btn btn-primary mt-3">SET BOX AND LEVEL</button>
+              <button className="btn btn-primary mt-3">SAVE</button>
             </div>
-            <div className="form-group mt-3">
-              <label>Level number</label>
-              <input
-                value={level}
-                onChange={handleLevelChange}
-                type="range"
-                className="form-range"
-                min="1"
-                max={box === 1 ? 2 : box === 2 ? 4 : box === 3 ? 8 : 16}
-                step="1"
-              />
-              <span>{level}</span>
-            </div>
-            <button className="btn btn-primary mt-3">SAVE</button>
+
           </form>
         )}
       </div>
