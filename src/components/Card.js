@@ -47,8 +47,8 @@ export default function Card({ card, deleteFlashcard, correct_or_wrongAnswer, ed
         </div>
         {showBack && (
           <div className="mb-4">
-            <div className="font-weight-bold mb-3"><h3>Back:</h3> <h4>{card.back}</h4></div>
-            <div className="font-weight-bold"><h3>Example:</h3> <h4>{card.example}</h4></div>
+            <div className="font-weight-bold mb-3 text-center"><h3>Back</h3> <h4>{card.back}</h4></div>
+            <div className="font-weight-bold text-center"><h3>Example</h3> <h4>{card.example}</h4></div>
           </div>
         )}
         <div className="d-flex justify-content-between align-items-center">
