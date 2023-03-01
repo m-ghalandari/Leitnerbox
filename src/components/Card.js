@@ -5,15 +5,32 @@ import { VscCheck, VscChromeClose } from "react-icons/vsc";
 import "./Card.css";
 import CardForm from "./CardForm";
 import { FaEdit } from 'react-icons/fa';
+import { Modal, Button } from 'react-bootstrap';
 
 export default function Card({ card, deleteFlashcard, correct_or_wrongAnswer, editFlashcard }) {
   const [showBack, setShowBack] = useState(false);
   const [editing, setEditing] = useState(false);
   const [updatedCard, setUpdatedCard] = useState(card);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const handleDelete = () => {
+    setShowConfirm(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteFlashcard(card.id);
+    setShowConfirm(false);
+  };
+
+  const handleCancelDelete = () => {
+    setShowConfirm(false);
+  };
+
 
   const handleEditClick = () => {
     setEditing(!editing);
   };
+
 
 
   return (
@@ -35,9 +52,11 @@ export default function Card({ card, deleteFlashcard, correct_or_wrongAnswer, ed
           </div>
         )}
         <div className="d-flex justify-content-between align-items-center">
+
+
           <MdDeleteForever
             className="text-danger mr-3 cursor-pointer"
-            onClick={() => deleteFlashcard(card.id)}
+            onClick={() => handleDelete(card.id)}
             size="30"
           />
           <VscChromeClose
@@ -50,7 +69,7 @@ export default function Card({ card, deleteFlashcard, correct_or_wrongAnswer, ed
             onClick={() => correct_or_wrongAnswer(card, true)}
             size="30"
           />
-          <FaEdit size={34} onClick={() => handleEditClick()} className="cursor-pointer" />
+          <FaEdit size={30} onClick={() => handleEditClick()} className="cursor-pointer" />
         </div>
 
       </>
@@ -63,6 +82,22 @@ export default function Card({ card, deleteFlashcard, correct_or_wrongAnswer, ed
             />
           </div>
         )}
+
+      {/* Modalfenster für Bestätigung der Flashcard-Löschung */}
+      <Modal show={showConfirm} onHide={handleCancelDelete}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this flashcard?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCancelDelete}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
