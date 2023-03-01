@@ -142,7 +142,8 @@ export default function VocabularyForm({ addFlashcard }) {
             }
 
             <div className="d-flex justify-content-between">
-              <button className="btn btn-primary mt-3">SET BOX AND LEVEL</button>
+              {!showBoxLevel && <button className="btn btn-primary mt-3" onClick={()=>setShowBoxLevel(true)}>SET BOX AND LEVEL</button>}
+              {showBoxLevel && <button className="btn btn-primary mt-3" onClick={()=>setShowBoxLevel(false)}>HIDE BOX AND LEVEL</button>}
               <button className="btn btn-primary mt-3">SAVE</button>
             </div>
 
