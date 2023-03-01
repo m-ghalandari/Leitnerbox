@@ -16,7 +16,7 @@ export default function CardForm({ card, onSubmit, onCancel }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group mt-5">
+      <div className="form-group mt-2">
         <label htmlFor="front">Front:</label>
         <input
           type="text"
