@@ -9,6 +9,7 @@ export default function VocabularyForm({ addFlashcard }) {
   const [example, setExample] = useState("");
   const [level, setLevel] = useState(1);
   const [box, setBox] = useState(0);
+  const [showBoxLevel, setShowBoxLevel] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -89,12 +90,14 @@ export default function VocabularyForm({ addFlashcard }) {
               />
             </div>
             <div className="form-group mt-3">
-              <input
+              <textarea
                 value={explanation}
                 onChange={(e) => setExplanation(e.target.value)}
                 type="text"
                 className="form-control"
                 placeholder="meaning"
+                cols="45"
+                rows="3"
               />
             </div>
             <div className="form-group mt-3">
@@ -103,38 +106,46 @@ export default function VocabularyForm({ addFlashcard }) {
                 onChange={(e) => setExample(e.target.value)}
                 className="form-control"
                 cols="45"
-                rows="5"
+                rows="3"
                 placeholder="example"
               ></textarea>
             </div>
+            {showBoxLevel && <div>
+              <div className="form-group mt-3">
+                <label>Box number</label>
+                <input
+                  value={box}
+                  onChange={handleBoxChange}
+                  type="range"
+                  className="form-range"
+                  min="1"
+                  max="4"
+                  step="1"
+                />
+                <span>{box}</span>
+              </div>
+              <div className="form-group mt-3">
+                <label>Level number</label>
+                <input
+                  value={level}
+                  onChange={handleLevelChange}
+                  type="range"
+                  className="form-range"
+                  min="1"
+                  max={box === 1 ? 2 : box === 2 ? 4 : box === 3 ? 8 : 16}
+                  step="1"
+                />
+                <span>{level}</span>
+              </div>
+            </div>
+            }
 
-            <div className="form-group mt-3">
-              <label>Box number</label>
-              <input
-                value={box}
-                onChange={handleBoxChange}
-                type="range"
-                className="form-range"
-                min="1"
-                max="4"
-                step="1"
-              />
-              <span>{box}</span>
+            <div className="d-flex justify-content-between">
+              {!showBoxLevel && <button className="btn btn-primary mt-3" onClick={()=>setShowBoxLevel(true)}>SET BOX AND LEVEL</button>}
+              {showBoxLevel && <button className="btn btn-primary mt-3" onClick={()=>setShowBoxLevel(false)}>HIDE BOX AND LEVEL</button>}
+              <button className="btn btn-primary mt-3">SAVE</button>
             </div>
-            <div className="form-group mt-3">
-              <label>Level number</label>
-              <input
-                value={level}
-                onChange={handleLevelChange}
-                type="range"
-                className="form-range"
-                min="1"
-                max={box === 1 ? 2 : box === 2 ? 4 : box === 3 ? 8 : 16}
-                step="1"
-              />
-              <span>{level}</span>
-            </div>
-            <button className="btn btn-primary mt-3">SAVE</button>
+
           </form>
         )}
       </div>

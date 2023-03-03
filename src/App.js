@@ -2,17 +2,19 @@ import VocabularyForm from "./components/VocabularyForm";
 import Box_0 from "./components/Box_0";
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import BoxList from "./components/BoxList";
 import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
-import AllCards from "./components/AllCards";
+import CardList from "./components/CardList";
+import AllCards from "./components/AllCards"
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
- //192.168.178.125 localip
- //84.150.35.142 public ip
+  const [currentCards, setCurrentCards] = useState([]);
+  const [automatically, setAutomatically] = useState(false);
+
   useEffect(() => {
     axios.get('http://84.150.35.142:3001/api/get').then(response => { setFlashcards(response.data) 
     console.log(response.data)});
@@ -184,6 +186,26 @@ function App() {
   
     };
 
+  const doAutomatically = () => {
+    setCurrentCards([]);
+    const cards = [...flashcards];//Eine Kopie von alle Karten
+    for (let index = 4; index > 0; index--) { //Von box 4 bis box 1 durchlaufen
+      const box = cards.filter(card => card.box === index);
+      if (box.length > 0) { //Falls in einem Box mindestens eine karte gibtdann sollte wir oberste Level finden.
+        const cards = box.filter(card => card.level === maxLevel(box));//Karten mit oberste Levelzahl sind die Karten, die geübt werden müssen.
+        setCurrentCards(currentCards => [...currentCards, ...cards]);
+      }
+    }
+  }
+
+  const maxLevel = (box) => {
+    let max = 1;
+    box.map(card => {
+      max = Math.max(max, card.level);
+    })
+    return max;
+  }
+  
 
 
   return (
@@ -193,32 +215,55 @@ function App() {
       <Search flashcards={flashcards} />
 
 
+      <div className="d-flex justify-content-center">
+        <Button className="mb-3" onClick={() => setAutomatically(!automatically)}>Start automatically</Button>
+      </div>
+
       <div className="App d-grid gap-4">
         <VocabularyForm addFlashcard={addFlashcard} />
 
-        <Box_0
-          flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
-          deleteFlashcard={deleteFlashcard}
-          correct_or_wrongAnswer={correct_or_wrongAnswer}
-          editFlashcard={editFlashcard}
-        />
 
-        <BoxList
-          flashcards={flashcards.filter(
-            (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
-          )}
-          deleteFlashcard={deleteFlashcard}
-          correct_or_wrongAnswer={correct_or_wrongAnswer} //for correct and wrong answer
-          changeFlashcardsLevels={changeFlashcardsLevels} //for change a set of flashcardslevel
-          editFlashcard={editFlashcard}
-        />
+        {!automatically ?
+          <>
+            <Box_0
+              flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
+              deleteFlashcard={deleteFlashcard}
+              correct_or_wrongAnswer={correct_or_wrongAnswer}
+              editFlashcard={editFlashcard}
+            />
 
-        <CompletedCards
+
+            <BoxList
+              flashcards={flashcards.filter(
+                (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
+              )}
+              deleteFlashcard={deleteFlashcard}
+              correct_or_wrongAnswer={correct_or_wrongAnswer} //for correct and wrong answer
+              changeFlashcardsLevels={changeFlashcardsLevels} //for change a set of flashcardslevel
+              editFlashcard={editFlashcard}
+            />
+            <CompletedCards
           flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
           deleteFlashcard={deleteFlashcard}
           correct_or_wrongAnswer={correct_or_wrongAnswer}
           editFlashcard={editFlashcard}
         />
+          </> :
+          <>
+            <div className="justify-content-center">
+              <Button className="mb-3" onClick={doAutomatically}>Start</Button>
+              <p>Anzahl: {currentCards.length}</p>
+            </div>
+            <CardList flashcards={currentCards}
+              deleteFlashcard={deleteFlashcard}
+              correct_or_wrongAnswer={correct_or_wrongAnswer}
+              editFlashcard={editFlashcard} />
+              {/* <Button onClick={handleFinishCurrentCards}>Fertig</Button> */}
+              <Button>Finish</Button>
+          </>
+          
+        }
+
 
         <AllCards flashcards={flashcards}
           deleteFlashcard={deleteFlashcard}
