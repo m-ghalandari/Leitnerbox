@@ -10,7 +10,7 @@ const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '19981998M.gh',
-  database: 'flashcards',
+  database: 'cards',
 });
 
 

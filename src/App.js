@@ -25,7 +25,7 @@ function App() {
 
   const addFlashcard = (newFlashcard) => {
 
-    axios.post('http://localhost:3001/api/insert', {
+    axios.post('http://84.150.35.142:3001/api/insert', {
       id: newFlashcard.id, box: newFlashcard.box,
       level: newFlashcard.level,
       front: newFlashcard.front,
@@ -42,7 +42,7 @@ function App() {
   const deleteFlashcard = (id) => {
 
     // Delete the flashcard from the database 
-    axios.delete(`http://localhost:3001/api/delete/${id}`).then(() => {
+    axios.delete(`http://84.150.35.142:3001/api/delete/${id}`).then(() => {
       const updatedFlashcards = flashcards.filter(
         (flashcard) => id !== flashcard.id
       );
@@ -57,7 +57,7 @@ function App() {
 
   const editFlashcard = (updatedCard) => {
 
-    axios.put('http://localhost:3001/api/editCard', {
+    axios.put('http://84.150.35.142:3001/api/editCard', {
       id: updatedCard.id, box: updatedCard.box,
       level: updatedCard.level,
       front: updatedCard.front,
