@@ -24,7 +24,6 @@ export default function VocabularyForm({ addFlashcard }) {
     };
 
     addFlashcard(newFlashcard);
-    console.log(newFlashcard);
     setWord('');
     setExplanation('');
     setExample('');
@@ -75,7 +74,7 @@ export default function VocabularyForm({ addFlashcard }) {
           size="lg"
           onClick={() => setShowVocabularyForm(!showVocabularyForm)}
         >
-          Add a new vocabulary
+          {showVocabularyForm ? "Hide the form" : "Add a new vocabulary"}
         </Button>
 
         {showVocabularyForm && (
@@ -142,8 +141,8 @@ export default function VocabularyForm({ addFlashcard }) {
             }
 
             <div className="d-flex justify-content-between">
-              {!showBoxLevel && <button className="btn btn-primary mt-3" onClick={()=>setShowBoxLevel(true)}>SET BOX AND LEVEL</button>}
-              {showBoxLevel && <button className="btn btn-primary mt-3" onClick={()=>setShowBoxLevel(false)}>HIDE BOX AND LEVEL</button>}
+              {!showBoxLevel && <button className="btn btn-primary mt-3" onClick={() => setShowBoxLevel(true)}>SET BOX AND LEVEL</button>}
+              {showBoxLevel && <button className="btn btn-primary mt-3" onClick={() => setShowBoxLevel(false)}>HIDE BOX AND LEVEL</button>}
               <button className="btn btn-primary mt-3">SAVE</button>
             </div>
 
