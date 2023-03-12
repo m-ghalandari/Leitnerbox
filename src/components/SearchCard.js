@@ -1,14 +1,14 @@
 
 import React from "react";
-import { Card, Button, Container } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 
-export default function Card_completed({ card }) {
+export default function SearchCard({ card }) {
 
-  const tst = card.box !== 5 ? "my-3 text-center" : "my-3 text-center bg-success";
+  const cardBoxNumber = card.box !== 5 ? "my-3 text-center" : "my-3 text-center bg-success";
 
   return (
     <Container>
-    <Card className={tst} style={{fontSize: '1.5rem'}}>
+    <Card className={cardBoxNumber} style={{fontSize: '1.5rem'}}>
       <Card.Header >{card.front}</Card.Header>
       <Card.Body>
         <Card.Text >Back: {card.back}</Card.Text>
