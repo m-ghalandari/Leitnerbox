@@ -17,7 +17,7 @@ export default function CompletedCards({
         className="btn btn-outline-info mb-3 "
         onClick={() => setShowCompletedCards(!showCompletedCards)}
       >
-        completed cards
+        completed cards ({flashcards.length})
       </button>
 
       {showCompletedCards && (

@@ -1,19 +1,16 @@
 
 import React, { useState } from "react";
-import CardList from "./CardList";
-import Card_completed from "./Card_completed";
+import SearchCard from "./SearchCard";
 
 export default function Search({flashcards}) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = e => {
     setSearchTerm(e.target.value);
-    // console.log(flashcards.includes(searchTerm))
-    // console.log(flashcards)
   };
 
   const filteredFlashcards = flashcards.filter((flashcard)=> {
-    if(searchTerm==""){
+    if(searchTerm===""){
       return "";
     } else if (flashcard.front.toLowerCase().includes(searchTerm.toLowerCase())){
       return flashcard;
@@ -22,11 +19,14 @@ export default function Search({flashcards}) {
     }
   })
   const number = flashcards.length;
+  const notCompletetCards = flashcards.filter(card => card.box !== 5);
+  const notCompletetCardsNumber = notCompletetCards.length;
 
   return (
     <>
       <h1 className="text-center mt-3">Leitner-Box</h1>
-      <h5 className="text-center mt-3">The number of flashcards: {number}</h5>
+      <h5 className="text-center mt-3">The number of not completed flashcards: {notCompletetCardsNumber}</h5>
+      <h5 className="text-center mt-3">The number of all flashcards: {number}</h5>
       <div className="input-group rounded mb-5 mt-3">
         <input
           type="search"
@@ -39,7 +39,7 @@ export default function Search({flashcards}) {
         />
       </div>
       {/* {searchTerm &&  <CardList flashcards={filtereddFlashcards}/>} */}
-      {searchTerm && filteredFlashcards.map(card=>(<Card_completed key={card.id} card={card} />))}
+      {searchTerm && filteredFlashcards.map(card=>(<SearchCard key={card.id} card={card} />))}
 
       
     </>

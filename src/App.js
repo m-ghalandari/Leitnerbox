@@ -8,16 +8,19 @@ import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
 import CardList from "./components/CardList";
-import AllCards from "./components/AllCards"
+
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
   const [currentCards, setCurrentCards] = useState([]);
   const [automatically, setAutomatically] = useState(false);
-  //87.155.34.41
+
   useEffect(() => {
-    axios.get('http://87.155.34.41:3001/api/get').then(response => { setFlashcards(response.data) })
-  },[])
+    axios.get('http://87.155.34.41:3001/api/get').then(response => {
+      setFlashcards(response.data)
+      
+    });
+  }, [])
 
 
   const addFlashcard = (newFlashcard) => {
@@ -126,64 +129,64 @@ function App() {
     }
   };
 
-    //hier wird alle Flashcard ihre level um 1 erhöht
-    const changeFlashcardsLevels = async (cards) => {
+  //hier wird alle Flashcard ihre level um 1 erhöht
+  const changeFlashcardsLevels = async (cards) => {
 
-      let box1 = false;
-      let box2 = false;
-      let box3 = false;
-      let box4 = false;
-  
-      cards.forEach(card => {
-        if (card.box === 1 && card.level >= 2) {
-          box1 = true;
-        }
-        if (card.box === 2 && card.level >= 4) {
-          box2 = true;
-        }
-        if (card.box === 3 && card.level >= 8) {
-          box3 = true;
-        }
-        if (card.box === 4 && card.level >= 16) {
-          box4 = true;
-        }
-      });
-      if (box1) {
-        alert("Warnung: Mindestens eine Karte aus Box 1 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
-        return;
+    let box1 = false;
+    let box2 = false;
+    let box3 = false;
+    let box4 = false;
+
+    cards.forEach(card => {
+      if (card.box === 1 && card.level >= 2) {
+        box1 = true;
       }
-      if (box2) {
-        alert("Warnung: Mindestens eine Karte aus Box 2 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
-        return;
+      if (card.box === 2 && card.level >= 4) {
+        box2 = true;
       }
-      if (box3) {
-        alert("Warnung: Mindestens eine Karte aus Box 3 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
-        return;
+      if (card.box === 3 && card.level >= 8) {
+        box3 = true;
       }
-      if (box4) {
-        alert("Warnung: Mindestens eine Karte aus Box 4 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
-        return;
+      if (card.box === 4 && card.level >= 16) {
+        box4 = true;
       }
-  
-      cards.map((card) => {
-        setFlashcards((prevFlashcards) =>
-          prevFlashcards.map((flashcard) => {
-            if (flashcard.id === card.id) {
-              return { ...flashcard, level: card.level + 1 };
-            }
-            return flashcard;
-          })
-        );
-      });
-  
-      axios.put('http://87.155.34.41:3001/api/increaseLevels', {
-        cards
-      }).then(() => { })
-        .catch(err => {
-          alert(err);
+    });
+    if (box1) {
+      alert("Warnung: Mindestens eine Karte aus Box 1 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+      return;
+    }
+    if (box2) {
+      alert("Warnung: Mindestens eine Karte aus Box 2 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+      return;
+    }
+    if (box3) {
+      alert("Warnung: Mindestens eine Karte aus Box 3 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+      return;
+    }
+    if (box4) {
+      alert("Warnung: Mindestens eine Karte aus Box 4 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+      return;
+    }
+
+    cards.map((card) => {
+      setFlashcards((prevFlashcards) =>
+        prevFlashcards.map((flashcard) => {
+          if (flashcard.id === card.id) {
+            return { ...flashcard, level: card.level + 1 };
+          }
+          return flashcard;
         })
-  
-    };
+      );
+    });
+
+    axios.put('http://87.155.34.41:3001/api/increaseLevels', {
+      cards
+    }).then(() => { })
+      .catch(err => {
+        alert(err);
+      })
+
+  };
 
   const doAutomatically = () => {
     setCurrentCards([]);
@@ -204,7 +207,7 @@ function App() {
     })
     return max;
   }
-  
+
 
 
   return (
@@ -214,14 +217,14 @@ function App() {
       <Search flashcards={flashcards} />
 
 
-      <div className="d-flex justify-content-center">
+      {/* <div className="d-flex justify-content-center">
         <Button className="mb-3" onClick={() => setAutomatically(!automatically)}>Start automatically</Button>
-      </div>
+      </div> */}
 
       <div className="App d-grid gap-4">
         <VocabularyForm addFlashcard={addFlashcard} />
 
-
+        {/* Die automatically Button ist nocht nicht fertig */}
         {!automatically ?
           <>
             <Box_0
@@ -242,11 +245,11 @@ function App() {
               editFlashcard={editFlashcard}
             />
             <CompletedCards
-          flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
-          deleteFlashcard={deleteFlashcard}
-          correct_or_wrongAnswer={correct_or_wrongAnswer}
-          editFlashcard={editFlashcard}
-        />
+              flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
+              deleteFlashcard={deleteFlashcard}
+              correct_or_wrongAnswer={correct_or_wrongAnswer}
+              editFlashcard={editFlashcard}
+            />
           </> :
           <>
             <div className="justify-content-center">
@@ -257,17 +260,12 @@ function App() {
               deleteFlashcard={deleteFlashcard}
               correct_or_wrongAnswer={correct_or_wrongAnswer}
               editFlashcard={editFlashcard} />
-              {/* <Button onClick={handleFinishCurrentCards}>Fertig</Button> */}
-              <Button>Finish</Button>
+            {/* <Button onClick={handleFinishCurrentCards}>Fertig</Button> */}
+            <Button>Finish</Button>
           </>
-          
+
         }
 
-
-        <AllCards flashcards={flashcards}
-          deleteFlashcard={deleteFlashcard}
-          correct_or_wrongAnswer={correct_or_wrongAnswer}
-          editFlashcard={editFlashcard}/>
       </div>
 
     </Container>
