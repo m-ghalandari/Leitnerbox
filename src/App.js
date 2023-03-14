@@ -14,16 +14,15 @@ function App() {
   const [flashcards, setFlashcards] = useState([]);
   const [currentCards, setCurrentCards] = useState([]);
   const [automatically, setAutomatically] = useState(false);
-
+  //87.155.34.41
   useEffect(() => {
-    axios.get('http://84.150.35.142:3001/api/get').then(response => { setFlashcards(response.data) 
-    console.log(response.data)});
-  }, [])
+    axios.get('http://87.155.34.41:3001/api/get').then(response => { setFlashcards(response.data) })
+  },[])
 
 
   const addFlashcard = (newFlashcard) => {
 
-    axios.post('http://84.150.35.142:3001/api/insert', {
+    axios.post('http://87.155.34.41:3001/api/insert', {
       id: newFlashcard.id, box: newFlashcard.box,
       level: newFlashcard.level,
       front: newFlashcard.front,
@@ -40,7 +39,7 @@ function App() {
   const deleteFlashcard = (id) => {
 
     // Delete the flashcard from the database 
-    axios.delete(`http://84.150.35.142:3001/api/delete/${id}`).then(() => {
+    axios.delete(`http://87.155.34.41:3001/api/delete/${id}`).then(() => {
       const updatedFlashcards = flashcards.filter(
         (flashcard) => id !== flashcard.id
       );
@@ -55,7 +54,7 @@ function App() {
 
   const editFlashcard = (updatedCard) => {
 
-    axios.put('http://84.150.35.142:3001/api/editCard', {
+    axios.put('http://87.155.34.41:3001/api/editCard', {
       id: updatedCard.id, box: updatedCard.box,
       level: updatedCard.level,
       front: updatedCard.front,
@@ -177,7 +176,7 @@ function App() {
         );
       });
   
-      axios.put('http://84.150.35.142:3001/api/increaseLevels', {
+      axios.put('http://87.155.34.41:3001/api/increaseLevels', {
         cards
       }).then(() => { })
         .catch(err => {
