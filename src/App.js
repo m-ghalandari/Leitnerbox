@@ -15,8 +15,10 @@ function App() {
   const [currentCards, setCurrentCards] = useState([]);
   const [automatically, setAutomatically] = useState(false);
 
+  const ip = "84.150.44.36";
+  
   useEffect(() => {
-    axios.get('http://87.155.34.41:3001/api/get').then(response => {
+    axios.get('http://' + ip + ':3001/api/get').then(response => {
       setFlashcards(response.data)
       
     });
