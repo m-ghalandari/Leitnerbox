@@ -16,9 +16,10 @@ function App() {
   const [automatically, setAutomatically] = useState(false);
 
   const ip = "84.150.44.36";
+  const ip2 = "leitnerboxmomo.ddns.net";
   
   useEffect(() => {
-    axios.get('http://' + ip + ':3001/api/get').then(response => {
+    axios.get('http://' + ip2 + ':3001/api/get').then(response => {
       setFlashcards(response.data)
       
     });
