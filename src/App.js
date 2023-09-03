@@ -13,19 +13,8 @@ function App() {
   const [flashcards, setFlashcards] = useState([]);
   const [currentCards, setCurrentCards] = useState([]);
   const [automatically, setAutomatically] = useState(false);
-
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [password, setPassword] = useState("");
-  const [hasEnteredPassword, setHasEnteredPassword] = useState(
-    localStorage.getItem("hasEnteredPassword") === "true"
-  );
-
-  useEffect(() => {
-    // Check if the user has already entered the password
-    if (!hasEnteredPassword) {
-      setShowModal(true);
-    }
-  }, [hasEnteredPassword]);
 
   const ip = "84.150.44.36";
   const ip2 = "leitnerboxmomo.ddns.net";
@@ -38,10 +27,8 @@ function App() {
 
   const handlePasswordSubmit = () => {
     // Check if the entered password is correct
-    if (password === "12345") {
+    if (password === "momo") {
       setShowModal(false);
-      setHasEnteredPassword(true);
-      localStorage.setItem("hasEnteredPassword", "true");
     } else {
       alert("Incorrect password. Please try again.");
     }
@@ -302,7 +289,10 @@ function App() {
           </>
         )}
       </div>
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal
+        show={showModal}
+        onHide={() => alert("You have to enter the password.")}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Enter Password</Modal.Title>
         </Modal.Header>
@@ -317,13 +307,9 @@ function App() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-            F
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Cancel
-          </Button>
           <Button variant="primary" onClick={handlePasswordSubmit}>
             Submit
           </Button>
