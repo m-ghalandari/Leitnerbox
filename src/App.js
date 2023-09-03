@@ -2,81 +2,104 @@ import VocabularyForm from "./components/VocabularyForm";
 import Box_0 from "./components/Box_0";
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Modal, Form } from "react-bootstrap";
 import BoxList from "./components/BoxList";
 import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
 import CardList from "./components/CardList";
 
-
 function App() {
   const [flashcards, setFlashcards] = useState([]);
   const [currentCards, setCurrentCards] = useState([]);
   const [automatically, setAutomatically] = useState(false);
 
+  const [showModal, setShowModal] = useState(false);
+  const [password, setPassword] = useState("");
+  const [hasEnteredPassword, setHasEnteredPassword] = useState(
+    localStorage.getItem("hasEnteredPassword") === "true"
+  );
+
+  useEffect(() => {
+    // Check if the user has already entered the password
+    if (!hasEnteredPassword) {
+      setShowModal(true);
+    }
+  }, [hasEnteredPassword]);
+
   const ip = "84.150.44.36";
   const ip2 = "leitnerboxmomo.ddns.net";
-  
-  useEffect(() => {
-    axios.get('http://' + ip2 + ':3001/api/get').then(response => {
-      setFlashcards(response.data)
-      
-    });
-  }, [])
 
+  useEffect(() => {
+    axios.get("http://" + ip2 + ":3001/api/get").then((response) => {
+      setFlashcards(response.data);
+    });
+  }, []);
+
+  const handlePasswordSubmit = () => {
+    // Check if the entered password is correct
+    if (password === "12345") {
+      setShowModal(false);
+      setHasEnteredPassword(true);
+      localStorage.setItem("hasEnteredPassword", "true");
+    } else {
+      alert("Incorrect password. Please try again.");
+    }
+  };
 
   const addFlashcard = (newFlashcard) => {
-
-    axios.post('http://' + ip2 + ':3001/api/insert', {
-      id: newFlashcard.id, box: newFlashcard.box,
-      level: newFlashcard.level,
-      front: newFlashcard.front,
-      back: newFlashcard.back,
-      example: newFlashcard.example
-    }).then(() => {
-      setFlashcards([...flashcards, newFlashcard]);
-    }).catch(err => {
-      alert(err);
-    })
-
+    axios
+      .post("http://" + ip2 + ":3001/api/insert", {
+        id: newFlashcard.id,
+        box: newFlashcard.box,
+        level: newFlashcard.level,
+        front: newFlashcard.front,
+        back: newFlashcard.back,
+        example: newFlashcard.example,
+      })
+      .then(() => {
+        setFlashcards([...flashcards, newFlashcard]);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   const deleteFlashcard = (id) => {
-
-    // Delete the flashcard from the database 
-    axios.delete(`http://${ip2}:3001/api/delete/${id}`).then(() => {
-      const updatedFlashcards = flashcards.filter(
-        (flashcard) => id !== flashcard.id
-      );
-      setFlashcards(updatedFlashcards);
-    }).catch(err => {
-      alert(err);
-    })
-
+    // Delete the flashcard from the database
+    axios
+      .delete(`http://${ip2}:3001/api/delete/${id}`)
+      .then(() => {
+        const updatedFlashcards = flashcards.filter(
+          (flashcard) => id !== flashcard.id
+        );
+        setFlashcards(updatedFlashcards);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
-
-
 
   const editFlashcard = (updatedCard) => {
-
-    axios.put('http://' + ip2 + ':3001/api/editCard', {
-      id: updatedCard.id, box: updatedCard.box,
-      level: updatedCard.level,
-      front: updatedCard.front,
-      back: updatedCard.back,
-      example: updatedCard.example
-    }).then(() => {
-      const updatedFlashcards = flashcards.map((flashcard) =>
-        flashcard.id === updatedCard.id ? updatedCard : flashcard
-      );
-      setFlashcards(updatedFlashcards);
-    }).catch(err => {
-      alert(err);
-    })
-
+    axios
+      .put("http://" + ip2 + ":3001/api/editCard", {
+        id: updatedCard.id,
+        box: updatedCard.box,
+        level: updatedCard.level,
+        front: updatedCard.front,
+        back: updatedCard.back,
+        example: updatedCard.example,
+      })
+      .then(() => {
+        const updatedFlashcards = flashcards.map((flashcard) =>
+          flashcard.id === updatedCard.id ? updatedCard : flashcard
+        );
+        setFlashcards(updatedFlashcards);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
-
 
   //update box and level in flashcards and database
   const changeFlashcardProperties = async (id, box, level) => {
@@ -134,13 +157,12 @@ function App() {
 
   //hier wird alle Flashcard ihre level um 1 erhöht
   const changeFlashcardsLevels = async (cards) => {
-
     let box1 = false;
     let box2 = false;
     let box3 = false;
     let box4 = false;
 
-    cards.forEach(card => {
+    cards.forEach((card) => {
       if (card.box === 1 && card.level >= 2) {
         box1 = true;
       }
@@ -155,19 +177,27 @@ function App() {
       }
     });
     if (box1) {
-      alert("Warnung: Mindestens eine Karte aus Box 1 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+      alert(
+        "Warnung: Mindestens eine Karte aus Box 1 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen."
+      );
       return;
     }
     if (box2) {
-      alert("Warnung: Mindestens eine Karte aus Box 2 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+      alert(
+        "Warnung: Mindestens eine Karte aus Box 2 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen."
+      );
       return;
     }
     if (box3) {
-      alert("Warnung: Mindestens eine Karte aus Box 3 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+      alert(
+        "Warnung: Mindestens eine Karte aus Box 3 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen."
+      );
       return;
     }
     if (box4) {
-      alert("Warnung: Mindestens eine Karte aus Box 4 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen.");
+      alert(
+        "Warnung: Mindestens eine Karte aus Box 4 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen."
+      );
       return;
     }
 
@@ -182,43 +212,43 @@ function App() {
       );
     });
 
-    axios.put('http://' + ip2 + ':3001/api/increaseLevels', {
-      cards
-    }).then(() => { })
-      .catch(err => {
-        alert(err);
+    axios
+      .put("http://" + ip2 + ":3001/api/increaseLevels", {
+        cards,
       })
-
+      .then(() => {})
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   const doAutomatically = () => {
     setCurrentCards([]);
-    const cards = [...flashcards];//Eine Kopie von alle Karten
-    for (let index = 4; index > 0; index--) { //Von box 4 bis box 1 durchlaufen
-      const box = cards.filter(card => card.box === index);
-      if (box.length > 0) { //Falls in einem Box mindestens eine karte gibtdann sollte wir oberste Level finden.
-        const cards = box.filter(card => card.level === maxLevel(box));//Karten mit oberste Levelzahl sind die Karten, die geübt werden müssen.
-        setCurrentCards(currentCards => [...currentCards, ...cards]);
+    const cards = [...flashcards]; //Eine Kopie von alle Karten
+    for (let index = 4; index > 0; index--) {
+      //Von box 4 bis box 1 durchlaufen
+      const box = cards.filter((card) => card.box === index);
+      if (box.length > 0) {
+        //Falls in einem Box mindestens eine karte gibtdann sollte wir oberste Level finden.
+        const cards = box.filter((card) => card.level === maxLevel(box)); //Karten mit oberste Levelzahl sind die Karten, die geübt werden müssen.
+        setCurrentCards((currentCards) => [...currentCards, ...cards]);
       }
     }
-  }
+  };
 
   const maxLevel = (box) => {
     let max = 1;
-    box.map(card => {
+    box.map((card) => {
       max = Math.max(max, card.level);
-    })
+    });
     return max;
-  }
-
-
+  };
 
   return (
     <Container>
       {/* npx json-server --watch database/db.json --port 8000 */}
 
       <Search flashcards={flashcards} />
-
 
       {/* <div className="d-flex justify-content-center">
         <Button className="mb-3" onClick={() => setAutomatically(!automatically)}>Start automatically</Button>
@@ -228,7 +258,7 @@ function App() {
         <VocabularyForm addFlashcard={addFlashcard} />
 
         {/* Die automatically Button ist nocht nicht fertig */}
-        {!automatically ?
+        {!automatically ? (
           <>
             <Box_0
               flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
@@ -236,7 +266,6 @@ function App() {
               correct_or_wrongAnswer={correct_or_wrongAnswer}
               editFlashcard={editFlashcard}
             />
-
 
             <BoxList
               flashcards={flashcards.filter(
@@ -253,24 +282,53 @@ function App() {
               correct_or_wrongAnswer={correct_or_wrongAnswer}
               editFlashcard={editFlashcard}
             />
-          </> :
+          </>
+        ) : (
           <>
             <div className="justify-content-center">
-              <Button className="mb-3" onClick={doAutomatically}>Start</Button>
+              <Button className="mb-3" onClick={doAutomatically}>
+                Start
+              </Button>
               <p>Anzahl: {currentCards.length}</p>
             </div>
-            <CardList flashcards={currentCards}
+            <CardList
+              flashcards={currentCards}
               deleteFlashcard={deleteFlashcard}
               correct_or_wrongAnswer={correct_or_wrongAnswer}
-              editFlashcard={editFlashcard} />
+              editFlashcard={editFlashcard}
+            />
             {/* <Button onClick={handleFinishCurrentCards}>Fertig</Button> */}
             <Button>Finish</Button>
           </>
-
-        }
-
+        )}
       </div>
-
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Enter Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="password">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            F
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handlePasswordSubmit}>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }
