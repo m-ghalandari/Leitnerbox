@@ -8,6 +8,7 @@ import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
 import CardList from "./components/CardList";
+import OpenAIComponent from "./components/Gpt-api";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
@@ -243,6 +244,9 @@ function App() {
 
       <div className="App d-grid gap-4">
         <VocabularyForm addFlashcard={addFlashcard} />
+        <>
+          <OpenAIComponent addFlashcard={addFlashcard} />
+        </>
 
         {/* Die automatically Button ist nocht nicht fertig */}
         {!automatically ? (
@@ -289,7 +293,7 @@ function App() {
           </>
         )}
       </div>
-      <Modal
+      {/* <Modal
         show={showModal}
         onHide={() => alert("You have to enter the password.")}
       >
@@ -314,7 +318,7 @@ function App() {
             Submit
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </Container>
   );
 }
