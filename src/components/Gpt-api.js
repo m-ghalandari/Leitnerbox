@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Card, Container, Row, Col, Form } from "react-bootstrap";
 import { nanoid } from "nanoid";
 
-const API_KEY = "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";
+const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
 function OpenAIComponent({ addFlashcard }) {
   const [prompt, setPrompt] = useState("");
