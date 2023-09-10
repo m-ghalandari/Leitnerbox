@@ -16,8 +16,8 @@ function App() {
   const [automatically, setAutomatically] = useState(false);
   const [showModal, setShowModal] = useState(true);
   const [password, setPassword] = useState("");
+  const pin = process.env.REACT_APP_PASSWORD;
 
-  const ip = "84.150.44.36";
   const ip2 = "leitnerboxmomo.ddns.net";
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function App() {
 
   const handlePasswordSubmit = () => {
     // Check if the entered password is correct
-    if (password === "momo") {
+    if (password === pin) {
       setShowModal(false);
     } else {
       alert("Incorrect password. Please try again.");
@@ -244,9 +244,8 @@ function App() {
 
       <div className="App d-grid gap-4">
         <VocabularyForm addFlashcard={addFlashcard} />
-        <>
-          <OpenAIComponent addFlashcard={addFlashcard} />
-        </>
+
+        <OpenAIComponent addFlashcard={addFlashcard} />
 
         {/* Die automatically Button ist nocht nicht fertig */}
         {!automatically ? (
@@ -293,7 +292,7 @@ function App() {
           </>
         )}
       </div>
-      {/* <Modal
+      <Modal
         show={showModal}
         onHide={() => alert("You have to enter the password.")}
       >
@@ -318,7 +317,7 @@ function App() {
             Submit
           </Button>
         </Modal.Footer>
-      </Modal> */}
+      </Modal>
     </Container>
   );
 }

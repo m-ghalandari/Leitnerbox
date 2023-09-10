@@ -4,19 +4,23 @@ import { nanoid } from "nanoid";
 
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
-function OpenAIComponent({ addFlashcard }) {
+function OpenAIComponent({ addFlashcard, words }) {
   const [prompt, setPrompt] = useState("");
   const [answer, setAnswer] = useState([]);
 
   async function callOpenAiApi() {
-    console.log("calling the api.");
-
-    const con = `Please provide 5 English vocabulary word about ${prompt}, its translation in German, and an example sentence in English. Format it as follows:
-    {
-      "front": "[English word]",
-      "back": "[German translation]",
-      "example": "[Example sentence in English using the English word]"
-    }`;
+    // const con = `Please provide 5 English vocabulary words, its translation in German, and an example sentence in English. Format it as follows:
+    // {
+    //   "front": "[English word]",
+    //   "back": "[German translation]",
+    //   "example": "[Example sentence in English using the English word]"
+    // }`;
+    const con = `Provide ${prompt}, their German translations, and an example sentence in English for each. Ensure the response is formatted as:
+{
+  "front": "English term",
+  "back": "German translation",
+  "example": "Example sentence in English featuring the English term"
+}`;
 
     const APIBody = {
       model: "gpt-3.5-turbo",
@@ -25,7 +29,7 @@ function OpenAIComponent({ addFlashcard }) {
         { role: "user", content: prompt },
       ],
       temperature: 0,
-      max_tokens: 256,
+      max_tokens: 512,
     };
 
     await fetch("https://api.openai.com/v1/chat/completions", {
@@ -42,9 +46,18 @@ function OpenAIComponent({ addFlashcard }) {
       .then((data) => {
         console.log(data.choices[0].message.content);
         const jsonString = "[" + data.choices[0].message.content + "]";
+        console.log(jsonString);
 
         try {
-          const parsedAnswer = JSON.parse(jsonString);
+          let parsedAnswer = JSON.parse(jsonString);
+          if (
+            parsedAnswer.length &&
+            typeof parsedAnswer[0] === "object" &&
+            !parsedAnswer[0].front
+          ) {
+            // Convert the nested object format to the desired array of objects format
+            parsedAnswer = Object.values(parsedAnswer[0]).map((item) => item);
+          }
           setAnswer(parsedAnswer);
         } catch (error) {
           console.error("Error parsing JSON:", error);
@@ -81,7 +94,7 @@ function OpenAIComponent({ addFlashcard }) {
             <Form.Control
               as="textarea"
               rows={3}
-              placeholder="Input your text"
+              placeholder="Input your text (for example '5 English vocabulary word about food')"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
             />
