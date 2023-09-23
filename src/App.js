@@ -18,7 +18,7 @@ function App() {
   const [password, setPassword] = useState("");
   const pin = process.env.REACT_APP_PASSWORD;
 
-  const ip2 = "leitnerboxmomo.ddns.net";
+  const ip2 = process.env.REACT_APP_IP;
 
   useEffect(() => {
     axios.get("http://" + ip2 + ":3001/api/get").then((response) => {
