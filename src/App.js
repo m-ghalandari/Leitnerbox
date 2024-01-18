@@ -12,19 +12,31 @@ import OpenAIComponent from "./components/Gpt-api";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
+  const [completedCards, setCompletedCards] = useState([]);
   const [currentCards, setCurrentCards] = useState([]);
   const [automatically, setAutomatically] = useState(false);
   const [showModal, setShowModal] = useState(true);
   const [password, setPassword] = useState("");
-  const pin = process.env.REACT_APP_PASSWORD;
-
-  const ip2 = process.env.REACT_APP_IP;
+  //const pin = process.env.REACT_APP_PASSWORD;
+    const pin = "momo";
+  //const ip2 = process.env.REACT_APP_IP;
+  const ip2 = "192.168.178.97";
 
   useEffect(() => {
     axios.get("http://" + ip2 + ":3001/api/get").then((response) => {
       setFlashcards(response.data);
     });
   }, []);
+
+  const fetchCompletedCards = async () => {
+    try {
+      const response = await axios.get("http://" + ip2 + ":3001/api/getBox5");
+      setCompletedCards(response.data);
+    } catch (error) {
+      console.error("Error fetching completed cards:", error);
+      alert("Fehler beim Abrufen der abgeschlossenen Karten.");
+    }
+  };
 
   const handlePasswordSubmit = () => {
     // Check if the entered password is correct
@@ -238,9 +250,6 @@ function App() {
 
       <Search flashcards={flashcards} />
 
-      {/* <div className="d-flex justify-content-center">
-        <Button className="mb-3" onClick={() => setAutomatically(!automatically)}>Start automatically</Button>
-      </div> */}
 
       <div className="App d-grid gap-4">
         <VocabularyForm addFlashcard={addFlashcard} />
@@ -266,8 +275,9 @@ function App() {
               changeFlashcardsLevels={changeFlashcardsLevels} //for change a set of flashcardslevel
               editFlashcard={editFlashcard}
             />
+            
+
             <CompletedCards
-              flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
               deleteFlashcard={deleteFlashcard}
               correct_or_wrongAnswer={correct_or_wrongAnswer}
               editFlashcard={editFlashcard}

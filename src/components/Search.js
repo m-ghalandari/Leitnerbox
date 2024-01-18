@@ -19,13 +19,10 @@ export default function Search({flashcards}) {
     }
   })
   const number = flashcards.length;
-  const notCompletetCards = flashcards.filter(card => card.box !== 5);
-  const notCompletetCardsNumber = notCompletetCards.length;
-
+  
   return (
     <>
       <h1 className="text-center mt-3">Leitner-Box</h1>
-      <h5 className="text-center mt-3">The number of not completed flashcards: {notCompletetCardsNumber}</h5>
       <h5 className="text-center mt-3">The number of all flashcards: {number}</h5>
       <div className="input-group rounded mb-5 mt-3">
         <input

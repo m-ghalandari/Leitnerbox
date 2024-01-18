@@ -17,8 +17,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
+
 app.get("/api/get", async (req, res) => {
-  const sqlSelect = "SELECT * FROM flashcards;";
+  const sqlSelect = "SELECT * FROM flashcards WHERE box BETWEEN 1 AND 4;";
 
   try {
     const [rows, fields] = await db.query(sqlSelect);
@@ -29,6 +30,20 @@ app.get("/api/get", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+app.get("/api/getBox5", async (req, res) => {
+  const sqlSelect = "SELECT * FROM flashcards WHERE box = 5;";
+
+  try {
+    const [rows, fields] = await db.query(sqlSelect);
+    console.log(fields);
+    res.send(rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 
 app.delete("/api/delete/:id", async (req, res) => {
   const id = req.params.id;
