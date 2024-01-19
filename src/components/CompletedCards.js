@@ -1,29 +1,50 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import axios from "axios";
+import { Button, Container } from "react-bootstrap";
 import CardList from "./CardList";
 
 export default function CompletedCards({
-  flashcards,
   deleteFlashcard,
-  updateFlashcard,
+  correct_or_wrongAnswer,
+  editFlashcard
 }) {
+  const [completedCards, setCompletedCards] = useState([]);
   const [showCompletedCards, setShowCompletedCards] = useState(false);
+
+  const fetchCompletedCards = async () => {
+    const ip2 = "192.168.178.97"; // oder aus einer Umgebungsvariable
+    try {
+      const response = await axios.get(`http://${ip2}:3001/api/getBox5`);
+      setCompletedCards(response.data);
+    } catch (error) {
+      console.error("Error fetching completed cards:", error);
+      alert("Fehler beim Abrufen der abgeschlossenen Karten.");
+    }
+  };
+
+  const handleShowCompletedCards = () => {
+    setShowCompletedCards(!showCompletedCards);
+    if (!showCompletedCards) {
+      fetchCompletedCards();
+    }
+  };
 
   return (
     <div className="text-center mt-5">
-      <button
-        type="button"
-        className="btn btn-outline-info mb-3 "
-        onClick={() => setShowCompletedCards(!showCompletedCards)}
+      <Button
+        variant="outline-info"
+        className="mb-3"
+        onClick={handleShowCompletedCards}
       >
-        All completed cards
-      </button>
+        Completed Cards anzeigen ({completedCards.length})
+      </Button>
 
       {showCompletedCards && (
         <CardList
-          flashcards={flashcards}
+          flashcards={completedCards}
           deleteFlashcard={deleteFlashcard}
-          updateFlashcard={updateFlashcard}
+          correct_or_wrongAnswer={correct_or_wrongAnswer}
+          editFlashcard={editFlashcard}
         />
       )}
     </div>

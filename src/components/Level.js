@@ -1,25 +1,22 @@
-import React, { useContext } from "react";
-import { Container } from "react-bootstrap";
+import React from "react";
 import CardList from "./CardList";
 
 export default function Level({
   flashcards,
   deleteFlashcard,
-  updateFlashcard,
-  UpdateText
+  correct_or_wrongAnswer,
+  editFlashcard
 }) {
+
+  
   return (
     <>
-      {flashcards.length > 0 ? (
-        <CardList
+      <CardList
           flashcards={flashcards}
           deleteFlashcard={deleteFlashcard}
-          updateFlashcard={updateFlashcard}
-          UpdateText={UpdateText}
+          correct_or_wrongAnswer={correct_or_wrongAnswer}
+          editFlashcard={editFlashcard}
         />
-      ) : (
-        <Container>Leer</Container>
-      )}
     </>
   );
 }

@@ -2,77 +2,107 @@ import VocabularyForm from "./components/VocabularyForm";
 import Box_0 from "./components/Box_0";
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container } from "react-bootstrap";
+import { Button, Container, Modal, Form } from "react-bootstrap";
 import BoxList from "./components/BoxList";
 import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
-import { EventEmitter } from 'events';
-
-
-const myEmitter = new EventEmitter();
-myEmitter.setMaxListeners(40);
+import CardList from "./components/CardList";
+import OpenAIComponent from "./components/Gpt-api";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(false);
-  const [search, setSearch] = useState("");
-  // box 5 is final. it indicates the completed cards
-  // const [flashcards, isPending, error] = useFetch("http://localhost:8000/flashcards");
+  const [completedCards, setCompletedCards] = useState([]);
+  const [currentCards, setCurrentCards] = useState([]);
+  const [automatically, setAutomatically] = useState(false);
+  const [showModal, setShowModal] = useState(true);
+  const [password, setPassword] = useState("");
+  //const pin = process.env.REACT_APP_PASSWORD;
+    const pin = "momo";
+  //const ip2 = process.env.REACT_APP_IP;
+  const ip2 = "192.168.178.97";
 
   useEffect(() => {
-    (async () => {
-      try {
-        setError(false);
-        setIsPending(true);
-        const result = await axios.get("http://localhost:8000/flashcards");
-        setFlashcards(result.data);
-        setIsPending(false);
-        setError(false);
-      } catch (error) {
-        setError(true);
-        setIsPending(true);
-      }
-    })();
+    axios.get("http://" + ip2 + ":3001/api/get").then((response) => {
+      setFlashcards(response.data);
+    });
   }, []);
 
+  const fetchCompletedCards = async () => {
+    try {
+      const response = await axios.get("http://" + ip2 + ":3001/api/getBox5");
+      setCompletedCards(response.data);
+    } catch (error) {
+      console.error("Error fetching completed cards:", error);
+      alert("Fehler beim Abrufen der abgeschlossenen Karten.");
+    }
+  };
+
+  const handlePasswordSubmit = () => {
+    // Check if the entered password is correct
+    if (password === pin) {
+      setShowModal(false);
+    } else {
+      alert("Incorrect password. Please try again.");
+    }
+  };
+
   const addFlashcard = (newFlashcard) => {
-    setFlashcards([...flashcards, newFlashcard]);
+    axios
+      .post("http://" + ip2 + ":3001/api/insert", {
+        id: newFlashcard.id,
+        box: newFlashcard.box,
+        level: newFlashcard.level,
+        front: newFlashcard.front,
+        back: newFlashcard.back,
+        example: newFlashcard.example,
+      })
+      .then(() => {
+        setFlashcards([...flashcards, newFlashcard]);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
-  const deleteFlashcard = async (id) => {
-    const updatedFlashcards = flashcards.filter(
-      (flashcard) => id !== flashcard.id
-    );
-    setFlashcards(updatedFlashcards);
+  const deleteFlashcard = (id) => {
     // Delete the flashcard from the database
-    try {
-      await axios.delete(`http://localhost:8000/flashcards/${id}`);
-    } catch (error) {
-      console.error(error);
-    }
+    axios
+      .delete(`http://${ip2}:3001/api/delete/${id}`)
+      .then(() => {
+        const updatedFlashcards = flashcards.filter(
+          (flashcard) => id !== flashcard.id
+        );
+        setFlashcards(updatedFlashcards);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
-  const handleUpdate = async (id, newBox, newLevel) => {
-    const findedFlashcard = flashcards.find((flashcard) => flashcard.id === id);
-    try {
-      const updatedFlashcard = {
-        ...findedFlashcard,
-        box: newBox,
-        level: newLevel,
-      };
-      await axios.put(
-        `http://localhost:8000/flashcards/${id}`,
-        updatedFlashcard
-      );
-    } catch (error) {
-      console.error(error);
-    }
+  const editFlashcard = (updatedCard) => {
+    axios
+      .put("http://" + ip2 + ":3001/api/editCard", {
+        id: updatedCard.id,
+        box: updatedCard.box,
+        level: updatedCard.level,
+        front: updatedCard.front,
+        back: updatedCard.back,
+        example: updatedCard.example,
+      })
+      .then(() => {
+        const updatedFlashcards = flashcards.map((flashcard) =>
+          flashcard.id === updatedCard.id ? updatedCard : flashcard
+        );
+        setFlashcards(updatedFlashcards);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
-  // id:Flashcard id, box and level: have to change
-  const changeFlashcardProperties = (id, box, level) => {
+  //update box and level in flashcards and database
+  const changeFlashcardProperties = async (id, box, level) => {
     const updatedFlashcards = flashcards.map((flashcard) => {
       if (flashcard.id === id) {
         return {
@@ -84,10 +114,22 @@ function App() {
       return flashcard;
     });
     setFlashcards(updatedFlashcards);
-    handleUpdate(id, box, level);
+    const findedFlashcard = flashcards.find((flashcard) => flashcard.id === id);
+
+    const updatedFlashcard = {
+      ...findedFlashcard,
+      box: box,
+      level: level,
+    };
+    try {
+      editFlashcard(updatedFlashcard);
+    } catch (error) {
+      alert(error);
+    }
   };
 
-  const updateFlashcard = (card, nextLevel) => {
+  //correct or false answer?
+  const correct_or_wrongAnswer = (card, nextLevel) => {
     if (nextLevel) {
       if (card.box === 4 && card.level === 16) {
         changeFlashcardProperties(card.id, 5, 0);
@@ -113,24 +155,51 @@ function App() {
     }
   };
 
-  async function updateCards(cards) {
-    for (let i = 0; i < cards.length; i++) {
-      const flashcard = cards[i];
-      try {
-        const response = await axios.patch(
-          `http://localhost:8000/flashcards/${flashcard.id}`,
-          { level: flashcard.level + 1 }
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-      await new Promise(resolve => setTimeout(resolve, 500));
-    }
-  }
-
   //hier wird alle Flashcard ihre level um 1 erhöht
   const changeFlashcardsLevels = async (cards) => {
+    let box1 = false;
+    let box2 = false;
+    let box3 = false;
+    let box4 = false;
+
+    cards.forEach((card) => {
+      if (card.box === 1 && card.level >= 2) {
+        box1 = true;
+      }
+      if (card.box === 2 && card.level >= 4) {
+        box2 = true;
+      }
+      if (card.box === 3 && card.level >= 8) {
+        box3 = true;
+      }
+      if (card.box === 4 && card.level >= 16) {
+        box4 = true;
+      }
+    });
+    if (box1) {
+      alert(
+        "Warnung: Mindestens eine Karte aus Box 1 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen."
+      );
+      return;
+    }
+    if (box2) {
+      alert(
+        "Warnung: Mindestens eine Karte aus Box 2 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen."
+      );
+      return;
+    }
+    if (box3) {
+      alert(
+        "Warnung: Mindestens eine Karte aus Box 3 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen."
+      );
+      return;
+    }
+    if (box4) {
+      alert(
+        "Warnung: Mindestens eine Karte aus Box 4 hat das maximale Level erreicht. Es muss zuerst letzte Level frei machen."
+      );
+      return;
+    }
 
     cards.map((card) => {
       setFlashcards((prevFlashcards) =>
@@ -143,70 +212,122 @@ function App() {
       );
     });
 
-
-    updateCards(cards);
-
+    axios
+      .put("http://" + ip2 + ":3001/api/increaseLevels", {
+        cards,
+      })
+      .then(() => {})
+      .catch((err) => {
+        alert(err);
+      });
   };
 
-  const UpdateText = (updatedCard, oldCard) => {
-    //komplete Flashcard wird aktualisiert
-    const updatedFlashcard = { ...oldCard, ...updatedCard };
+  const doAutomatically = () => {
+    setCurrentCards([]);
+    const cards = [...flashcards]; //Eine Kopie von alle Karten
+    for (let index = 4; index > 0; index--) {
+      //Von box 4 bis box 1 durchlaufen
+      const box = cards.filter((card) => card.box === index);
+      if (box.length > 0) {
+        //Falls in einem Box mindestens eine karte gibtdann sollte wir oberste Level finden.
+        const cards = box.filter((card) => card.level === maxLevel(box)); //Karten mit oberste Levelzahl sind die Karten, die geübt werden müssen.
+        setCurrentCards((currentCards) => [...currentCards, ...cards]);
+      }
+    }
+  };
 
-    axios.put(`http://localhost:8000/flashcards/${oldCard.id}`, updatedFlashcard)
-      .then((response) => {
-        console.log(response.data);
-        const updatedFlashcards = flashcards.map((flashcard) =>
-          flashcard.id === oldCard.id ? updatedFlashcard : flashcard
-        );
-        setFlashcards(updatedFlashcards);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-
-  }
-
-
+  const maxLevel = (box) => {
+    let max = 1;
+    box.map((card) => {
+      max = Math.max(max, card.level);
+    });
+    return max;
+  };
 
   return (
     <Container>
       {/* npx json-server --watch database/db.json --port 8000 */}
-      {error ? (
-        <p>Something went wrong</p>
-      ) : (
-        isPending && <div>is loading...</div>
-      )}
+
       <Search flashcards={flashcards} />
 
-      {!isPending && (
-        <div className="App d-grid gap-4">
-          <VocabularyForm addFlashcard={addFlashcard} />
 
-          <Box_0
-            flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
-            deleteFlashcard={deleteFlashcard}
-            updateFlashcard={updateFlashcard}
-            UpdateText={UpdateText}
-          />
+      <div className="App d-grid gap-4">
+        <VocabularyForm addFlashcard={addFlashcard} />
 
-          <BoxList
-            flashcards={flashcards.filter(
-              (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
-            )}
-            deleteFlashcard={deleteFlashcard}
-            updateFlashcard={updateFlashcard}
-            changeFlashcardsLevels={changeFlashcardsLevels}
-            UpdateText={UpdateText}
-          />
+        <OpenAIComponent addFlashcard={addFlashcard} />
 
-          <CompletedCards
-            flashcards={flashcards.filter((flashcard) => flashcard.box === 5)}
-            deleteFlashcard={deleteFlashcard}
-            updateFlashcard={updateFlashcard}
-          />
-        </div>
-      )}
+        {/* Die automatically Button ist nocht nicht fertig */}
+        {!automatically ? (
+          <>
+            <Box_0
+              flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
+              deleteFlashcard={deleteFlashcard}
+              correct_or_wrongAnswer={correct_or_wrongAnswer}
+              editFlashcard={editFlashcard}
+            />
+
+            <BoxList
+              flashcards={flashcards.filter(
+                (flashcard) => flashcard.box !== 0 && flashcard.box !== 5
+              )}
+              deleteFlashcard={deleteFlashcard}
+              correct_or_wrongAnswer={correct_or_wrongAnswer} //for correct and wrong answer
+              changeFlashcardsLevels={changeFlashcardsLevels} //for change a set of flashcardslevel
+              editFlashcard={editFlashcard}
+            />
+            
+
+            <CompletedCards
+              deleteFlashcard={deleteFlashcard}
+              correct_or_wrongAnswer={correct_or_wrongAnswer}
+              editFlashcard={editFlashcard}
+            />
+          </>
+        ) : (
+          <>
+            <div className="justify-content-center">
+              <Button className="mb-3" onClick={doAutomatically}>
+                Start
+              </Button>
+              <p>Anzahl: {currentCards.length}</p>
+            </div>
+            <CardList
+              flashcards={currentCards}
+              deleteFlashcard={deleteFlashcard}
+              correct_or_wrongAnswer={correct_or_wrongAnswer}
+              editFlashcard={editFlashcard}
+            />
+            {/* <Button onClick={handleFinishCurrentCards}>Fertig</Button> */}
+            <Button>Finish</Button>
+          </>
+        )}
+      </div>
+      <Modal
+        show={showModal}
+        onHide={() => alert("You have to enter the password.")}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Enter Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="password">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handlePasswordSubmit}>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }

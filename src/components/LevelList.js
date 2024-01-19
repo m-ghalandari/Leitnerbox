@@ -1,20 +1,38 @@
-import React, { useState, Fragment  } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Level from "./Level";
 import { BsArrowDownCircle } from "react-icons/bs";
+
 const LevelList = ({
   numberOfLevelBox,
   flashcards,
   deleteFlashcard,
-  updateFlashcard,
+  correct_or_wrongAnswer,
   changeFlashcardsLevels,
-  UpdateText
+  editFlashcard,
 }) => {
   const [showLevels, setShowLevels] = useState(
     Array(numberOfLevelBox).fill(false)
   );
-  
+
+  useEffect(() => {
+    setShowLevels((prev) =>
+      prev.map((val, i) => {
+        const levelFlashcards = flashcards.filter(
+          (flashcard) => flashcard.level === i + 1
+        );
+        return levelFlashcards.length > 0 ? val : false;
+      })
+    );
+  }, [flashcards]);
+
+  const handleLevelButtonClick = (index) => {
+    setShowLevels((prev) =>
+      prev.map((val, i) => (i === index ? !val : val))
+    );
+  };
+
   return (
     <Container>
       <div className="d-grid gap-4">
@@ -22,7 +40,8 @@ const LevelList = ({
           const levelFlashcards = flashcards.filter(
             (flashcard) => flashcard.level === i + 1
           );
-          const buttonVariant = levelFlashcards.length > 0 ? "primary" : "danger";
+          const buttonVariant =
+            levelFlashcards.length > 0 ? "primary" : "danger";
           const flashcardNumber = levelFlashcards.length;
 
           return (
@@ -30,29 +49,30 @@ const LevelList = ({
               <Button
                 variant={buttonVariant}
                 size="sm"
-                onClick={() =>
-                  setShowLevels((prev) =>
-                    prev.map((val, j) => (j === i ? !val : val))
-                  )
-                }
+                onClick={() => handleLevelButtonClick(i)}
               >
-                Level {i + 1} 
-                <span> ( {flashcardNumber} )</span> 
+                Level {i + 1}
+                <span> ( {flashcardNumber} )</span>
               </Button>
 
-              {showLevels[i] && (
+              {showLevels[i] && flashcardNumber > 0 && (
                 <Level
                   flashcards={levelFlashcards}
                   deleteFlashcard={deleteFlashcard}
-                  updateFlashcard={updateFlashcard}
-                  UpdateText={UpdateText}
+                  correct_or_wrongAnswer={correct_or_wrongAnswer}
+                  editFlashcard={editFlashcard}
                 />
               )}
             </Fragment>
           );
         })}
         <div className="text-left">
-          <BsArrowDownCircle size="30" onClick={()=>{changeFlashcardsLevels(flashcards)}}/>
+          <BsArrowDownCircle
+            size="30"
+            onClick={() => {
+              changeFlashcardsLevels(flashcards);
+            }}
+          />
         </div>
       </div>
     </Container>
