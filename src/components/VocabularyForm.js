@@ -69,7 +69,7 @@ export default function VocabularyForm({ addFlashcard }) {
       <div className="App d-grid gap-4">
 
         <Button
-          variant="primary"
+          variant="dark"
           size="lg"
           onClick={() => setShowVocabularyForm(!showVocabularyForm)}
         >
@@ -140,9 +140,9 @@ export default function VocabularyForm({ addFlashcard }) {
             }
 
             <div className="d-flex justify-content-between">
-              {!showBoxLevel && <button className="btn btn-primary mt-3" onClick={() => setShowBoxLevel(true)}>SET BOX AND LEVEL</button>}
-              {showBoxLevel && <button className="btn btn-primary mt-3" onClick={() => setShowBoxLevel(false)}>HIDE BOX AND LEVEL</button>}
-              <button className="btn btn-primary mt-3">SAVE</button>
+              {!showBoxLevel && <button className="btn btn-dark mt-3" onClick={() => setShowBoxLevel(true)}>SET BOX AND LEVEL</button>}
+              {showBoxLevel && <button className="btn btn-dark mt-3" onClick={() => setShowBoxLevel(false)}>HIDE BOX AND LEVEL</button>}
+              <button className="btn btn-dark mt-3">SAVE</button>
             </div>
 
           </form>

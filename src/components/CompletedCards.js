@@ -10,12 +10,15 @@ export default function CompletedCards({
 }) {
   const [completedCards, setCompletedCards] = useState([]);
   const [showCompletedCards, setShowCompletedCards] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(false); // Es wird nur einmal die CompletedCards geladen.
 
   const fetchCompletedCards = async () => {
-    const ip2 = "192.168.178.97"; // oder aus einer Umgebungsvariable
+    const ip2 = "169.254.123.101"; // oder aus einer Umgebungsvariable
+
     try {
       const response = await axios.get(`http://${ip2}:3001/api/getBox5`);
       setCompletedCards(response.data);
+      setFirstLoad(true);
     } catch (error) {
       console.error("Error fetching completed cards:", error);
       alert("Fehler beim Abrufen der abgeschlossenen Karten.");
@@ -24,7 +27,7 @@ export default function CompletedCards({
 
   const handleShowCompletedCards = () => {
     setShowCompletedCards(!showCompletedCards);
-    if (!showCompletedCards) {
+    if (!showCompletedCards && !firstLoad) {
       fetchCompletedCards();
     }
   };
@@ -32,11 +35,11 @@ export default function CompletedCards({
   return (
     <div className="text-center mt-5">
       <Button
-        variant="outline-info"
+        variant="dark"
         className="mb-3"
         onClick={handleShowCompletedCards}
       >
-        Completed Cards anzeigen ({completedCards.length})
+        Completed Cards anzeigen ({completedCards.length!=0 ? completedCards.length : ""})
       </Button>
 
       {showCompletedCards && (

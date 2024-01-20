@@ -7,20 +7,18 @@ import BoxList from "./components/BoxList";
 import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
-import CardList from "./components/CardList";
 import OpenAIComponent from "./components/Gpt-api";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
-  const [completedCards, setCompletedCards] = useState([]);
-  const [currentCards, setCurrentCards] = useState([]);
-  const [automatically, setAutomatically] = useState(false);
   const [showModal, setShowModal] = useState(true);
   const [password, setPassword] = useState("");
+  
+  
   //const pin = process.env.REACT_APP_PASSWORD;
     const pin = "momo";
   //const ip2 = process.env.REACT_APP_IP;
-  const ip2 = "192.168.178.97";
+  const ip2 = "169.254.123.101";
 
   useEffect(() => {
     axios.get("http://" + ip2 + ":3001/api/get").then((response) => {
@@ -28,15 +26,6 @@ function App() {
     });
   }, []);
 
-  const fetchCompletedCards = async () => {
-    try {
-      const response = await axios.get("http://" + ip2 + ":3001/api/getBox5");
-      setCompletedCards(response.data);
-    } catch (error) {
-      console.error("Error fetching completed cards:", error);
-      alert("Fehler beim Abrufen der abgeschlossenen Karten.");
-    }
-  };
 
   const handlePasswordSubmit = () => {
     // Check if the entered password is correct
@@ -46,6 +35,7 @@ function App() {
       alert("Incorrect password. Please try again.");
     }
   };
+
 
   const addFlashcard = (newFlashcard) => {
     axios
@@ -222,31 +212,11 @@ function App() {
       });
   };
 
-  const doAutomatically = () => {
-    setCurrentCards([]);
-    const cards = [...flashcards]; //Eine Kopie von alle Karten
-    for (let index = 4; index > 0; index--) {
-      //Von box 4 bis box 1 durchlaufen
-      const box = cards.filter((card) => card.box === index);
-      if (box.length > 0) {
-        //Falls in einem Box mindestens eine karte gibtdann sollte wir oberste Level finden.
-        const cards = box.filter((card) => card.level === maxLevel(box)); //Karten mit oberste Levelzahl sind die Karten, die geübt werden müssen.
-        setCurrentCards((currentCards) => [...currentCards, ...cards]);
-      }
-    }
-  };
 
-  const maxLevel = (box) => {
-    let max = 1;
-    box.map((card) => {
-      max = Math.max(max, card.level);
-    });
-    return max;
-  };
 
   return (
     <Container>
-      {/* npx json-server --watch database/db.json --port 8000 */}
+    
 
       <Search flashcards={flashcards} />
 
@@ -256,10 +226,9 @@ function App() {
 
         <OpenAIComponent addFlashcard={addFlashcard} />
 
-        {/* Die automatically Button ist nocht nicht fertig */}
-        {!automatically ? (
+        
           <>
-            <Box_0
+            <Box_0  // Reserved Cards
               flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
               deleteFlashcard={deleteFlashcard}
               correct_or_wrongAnswer={correct_or_wrongAnswer}
@@ -283,25 +252,11 @@ function App() {
               editFlashcard={editFlashcard}
             />
           </>
-        ) : (
-          <>
-            <div className="justify-content-center">
-              <Button className="mb-3" onClick={doAutomatically}>
-                Start
-              </Button>
-              <p>Anzahl: {currentCards.length}</p>
-            </div>
-            <CardList
-              flashcards={currentCards}
-              deleteFlashcard={deleteFlashcard}
-              correct_or_wrongAnswer={correct_or_wrongAnswer}
-              editFlashcard={editFlashcard}
-            />
-            {/* <Button onClick={handleFinishCurrentCards}>Fertig</Button> */}
-            <Button>Finish</Button>
-          </>
-        )}
+        
+          
+        
       </div>
+
       <Modal
         show={showModal}
         onHide={() => alert("You have to enter the password.")}
@@ -330,6 +285,9 @@ function App() {
       </Modal>
     </Container>
   );
+  
+ 
+  
 }
 
 export default App;
