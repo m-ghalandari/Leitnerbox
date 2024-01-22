@@ -41,7 +41,7 @@ const LevelList = ({
             (flashcard) => flashcard.level === i + 1
           );
           const buttonVariant =
-            levelFlashcards.length > 0 ? "primary" : "danger";
+            levelFlashcards.length > 0 ? "outline-success" : "outline-danger";
           const flashcardNumber = levelFlashcards.length;
 
           return (

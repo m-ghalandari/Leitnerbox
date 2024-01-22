@@ -101,7 +101,7 @@ function OpenAIComponent({ addFlashcard, words }) {
           </Form.Group>
           <Button
             className="mb-4 mt-2"
-            variant="primary"
+            variant="dark"
             onClick={callOpenAiApi}
           >
             Get the answer from api

@@ -27,7 +27,7 @@ export default function BoxList({
     <>
       {Array.from({ length: 4 }, (_, i) => (
         <Fragment key={i}>
-          <Button variant={hasFlashcard(i + 1) ? "success" : "danger"} size="lg" onClick={() => toggleBox(i)}>
+          <Button variant={hasFlashcard(i + 1) ? "info" : "danger"} size="lg" onClick={() => toggleBox(i)}>
             Box {i + 1}
           </Button>
           {showBoxes[i] && (
