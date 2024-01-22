@@ -8,17 +8,18 @@ import CompletedCards from "./components/CompletedCards";
 import axios from "axios";
 import Search from "./components/Search";
 import OpenAIComponent from "./components/Gpt-api";
+import LastLevelCards from "./components/LastLevelCards";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [password, setPassword] = useState("");
-  
+  const [autoLastLevel, setAutoLastLevel] = useState(false);
   
   //const pin = process.env.REACT_APP_PASSWORD;
     const pin = "momo";
   //const ip2 = process.env.REACT_APP_IP;
-  const ip2 = "169.254.123.101";
+  const ip2 = "192.168.178.97";
 
   useEffect(() => {
     axios.get("http://" + ip2 + ":3001/api/get").then((response) => {
@@ -213,6 +214,9 @@ function App() {
   };
 
 
+  const toggleAutoLastLevel = () => {
+    setAutoLastLevel(!autoLastLevel); // Schaltet zwischen den Modi um
+  };
 
   return (
     <Container>
@@ -220,8 +224,27 @@ function App() {
 
       <Search flashcards={flashcards} />
 
+      {/* Button zum Umschalten zwischen den Modi */}
+      <div className="d-flex justify-content-end">
+      <Button onClick={toggleAutoLastLevel} 
+          className="mb-4 mt-2"
+          variant="dark"
+          size="sm">
+        {autoLastLevel ? "Manuelles Durchgehen" : "Automatisches Durchgehen"}
+      </Button>
+      </div>
 
-      <div className="App d-grid gap-4">
+      {/* Anzeigen von LastLevelCards basierend auf dem Zustand */}
+      {autoLastLevel && (
+        <LastLevelCards
+          flashcards={flashcards}
+          deleteFlashcard={deleteFlashcard}
+          correct_or_wrongAnswer={correct_or_wrongAnswer}
+          editFlashcard={editFlashcard}
+        />
+      )}
+
+      {!autoLastLevel && <div className="App d-grid gap-4">
         <VocabularyForm addFlashcard={addFlashcard} />
 
         <OpenAIComponent addFlashcard={addFlashcard} />
@@ -255,7 +278,7 @@ function App() {
         
           
         
-      </div>
+      </div> }
 
       <Modal
         show={showModal}
