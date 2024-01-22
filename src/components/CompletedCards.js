@@ -12,7 +12,7 @@ export default function CompletedCards({
   const [showCompletedCards, setShowCompletedCards] = useState(false);
 
   const fetchCompletedCards = async () => {
-    const ip2 = "192.168.178.97"; // oder aus einer Umgebungsvariable
+    const ip2 = process.env.REACT_APP_IP;
     try {
       const response = await axios.get(`http://${ip2}:3001/api/getBox5`);
       setCompletedCards(response.data);

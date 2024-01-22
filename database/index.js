@@ -19,7 +19,7 @@ app.use(express.json());
 
 
 app.get("/api/get", async (req, res) => {
-  const sqlSelect = "SELECT * FROM flashcards WHERE box BETWEEN 1 AND 4;";
+  const sqlSelect = "SELECT * FROM flashcards WHERE box BETWEEN 0 AND 4;";
 
   try {
     const [rows, fields] = await db.query(sqlSelect);
