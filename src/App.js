@@ -14,12 +14,19 @@ function App() {
   const [flashcards, setFlashcards] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [password, setPassword] = useState("");
+
   const [autoLastLevel, setAutoLastLevel] = useState(false);
   
   //const pin = process.env.REACT_APP_PASSWORD;
-    const pin = "momo";
-  //const ip2 = process.env.REACT_APP_IP;
-  const ip2 = "192.168.178.97";
+   //const pin = "momo";
+
+
+
+  const pin = process.env.REACT_APP_PASSWORD;
+  //  const pin = "momo";
+  const ip2 = process.env.REACT_APP_IP;
+  //const ip2 = "192.168.178.97";
+
 
   useEffect(() => {
     axios.get("http://" + ip2 + ":3001/api/get").then((response) => {
