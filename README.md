@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Leitnerbox
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Leitnerbox is a web application built with React that helps users learn and memorize vocabulary using the Leitner System—a well-known spaced repetition technique. The app supports English-German vocabulary learning and leverages OpenAI GPT to generate new vocabulary flashcards with example sentences.
 
-## Available Scripts
+## Features
+
+- **Spaced Repetition Learning:** Organize flashcards in different "boxes" according to the Leitner system. Progress cards by successfully recalling them.
+- **English-German Vocabulary:** Store and review vocabulary pairs with example sentences.
+- **AI-Powered Flashcard Generation:** Use OpenAI GPT to generate English words, their German translations, and example sentences in English.
+- **CRUD Operations:** Add, edit, and delete vocabulary flashcards.
+- **Password Protection:** Simple authentication to restrict access.
+- **Persistent Storage:** Flashcards are stored and retrieved from a backend server.
+- **Search Functionality:** Search among your vocabulary cards.
+- **Responsive UI:** Built with React Bootstrap for a modern look and feel.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (>=14)
+- [npm](https://www.npmjs.com/)
+- [A backend server](https://github.com/Mamali99/Leitnerbox-backend) (or your own implementation with compatible endpoints)
+- OpenAI API key (for GPT-powered flashcard generation)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Mamali99/Leitnerbox.git
+   cd Leitnerbox
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables:**
+
+   Create a `.env` file in the root directory and add:
+   ```
+   REACT_APP_PASSWORD=your_password_here
+   REACT_APP_IP=your_backend_ip_or_localhost
+   REACT_APP_OPENAI_API_KEY=your_openai_api_key
+   ```
+
+4. **Start the application:**
+   ```bash
+   npm start
+   ```
+   Access the app at [http://localhost:3000](http://localhost:3000)
+
+## Usage
+
+- **Add Vocabulary:**
+  - Use the form to add new English-German vocabulary with example sentences.
+  - Or use the "Get the answer from api" button to generate vocabulary via GPT.
+- **Review & Progress:**
+  - Cards start in the reserved box and move through levels as you review them correctly.
+  - Completed cards appear in a separate section.
+- **Edit/Delete:** Modify or remove cards as needed.
+- **Authentication:** Enter the password on first load to access the app.
+
+## Project Structure
+
+```
+Leitnerbox/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Gpt-api.js       # OpenAI GPT integration for generating flashcards
+│   │   ├── Box_0.js         # Reserved cards
+│   │   ├── BoxList.js       # Main Leitner boxes
+│   │   ├── CompletedCards.js# Completed cards section
+│   │   ├── VocabularyForm.js# Add/edit vocabulary
+│   │   ├── Search.js        # Search functionality
+│   │   └── useFetch.js      # Custom hook for fetching data
+│   ├── App.js               # Main application logic
+│   └── index.js
+└── README.md
+```
+
+## Environment Variables
+
+- `REACT_APP_PASSWORD`: The password for accessing the app.
+- `REACT_APP_IP`: The IP address or hostname of the backend server.
+- `REACT_APP_OPENAI_API_KEY`: Your OpenAI API key for GPT integration.
+
+## Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+- `npm start` — Runs the app in development mode.
+- `npm test` — Launches the test runner.
+- `npm run build` — Builds the app for production.
+- `npm run eject` — Ejects the configuration for advanced customization.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Backend API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The app expects a backend with the following endpoints (example using Express, see [Leitnerbox-backend](https://github.com/Mamali99/Leitnerbox-backend)):
 
-### `npm test`
+- `GET /api/get` — Retrieve all flashcards
+- `POST /api/insert` — Add a new flashcard
+- `PUT /api/editCard` — Edit an existing flashcard
+- `DELETE /api/delete/:id` — Delete a flashcard
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Contributing
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are welcome! Please open an issue or submit a pull request.
