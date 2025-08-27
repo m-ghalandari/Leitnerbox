@@ -19,9 +19,13 @@ function App() {
 
   const pin = "momo";
 
+  const API_BASE_URL =
+    process.env.REACT_APP_BACKEND_URL ||
+    `http://${window.location.hostname}:3001`;
+
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/get") // backend URL
+      .get(`${API_BASE_URL}/api/get`) // backend URL
       .then((res) => setFlashcards(res.data))
       .catch((err) => console.error("API error:", err));
   }, []);
@@ -37,7 +41,7 @@ function App() {
 
   const addFlashcard = (newFlashcard) => {
     axios
-      .post("http://localhost:3001/api/insert", {
+      .post(`${API_BASE_URL}/api/insert`, {
         id: newFlashcard.id,
         box: newFlashcard.box,
         level: newFlashcard.level,
@@ -56,7 +60,7 @@ function App() {
   const deleteFlashcard = (id) => {
     // Delete the flashcard from the database
     axios
-      .delete(`http://localhost:3001/api/delete/${id}`)
+      .delete(`${API_BASE_URL}/api/delete/${id}`)
       .then(() => {
         const updatedFlashcards = flashcards.filter(
           (flashcard) => id !== flashcard.id
@@ -70,7 +74,7 @@ function App() {
 
   const editFlashcard = (updatedCard) => {
     axios
-      .put("http://localhost:3001/api/editCard", {
+      .put(`${API_BASE_URL}/api/editCard`, {
         id: updatedCard.id,
         box: updatedCard.box,
         level: updatedCard.level,
@@ -201,7 +205,7 @@ function App() {
     });
 
     axios
-      .put("http://localhost:3001/api/increaseLevels", {
+      .put(`${API_BASE_URL}/api/increaseLevels`, {
         cards,
       })
       .then(() => {})
