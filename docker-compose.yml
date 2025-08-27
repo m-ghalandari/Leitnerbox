@@ -1,0 +1,69 @@
+version: "3.8"
+
+name: leitnerbox
+
+networks:
+  default:
+    name: leitnerbox-net
+
+volumes:
+  leitnerbox-mysql-data:
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: leitnerbox-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 19981998M.gh
+      MYSQL_DATABASE: cards
+    ports:
+      - "3306:3306"
+    volumes:
+      - leitnerbox-mysql-data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h localhost -p$${MYSQL_ROOT_PASSWORD} || exit 1",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: leitnerbox-backend
+    container_name: leitnerbox-backend
+    environment:
+      NODE_ENV: production
+      MYSQL_HOST: db # service name of the DB in this compose file
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 19981998M.gh
+      MYSQL_DATABASE: cards
+      MYSQL_PORT: 3306
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: leitnerbox-frontend
+    container_name: leitnerbox-frontend
+    environment:
+      # Your React dev server will read this at runtime (npm start).
+      # It also falls back to http://<host>:3001 as in your code.
+      REACT_APP_BACKEND_URL: http://localhost:3001
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
