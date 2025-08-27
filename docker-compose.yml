@@ -16,6 +16,8 @@ services:
       DB_USER: root
       DB_PASS: 19981998M.gh
       DB_NAME: cards
+    ports:
+      - "3001:3001"
     depends_on:
       - db
 
