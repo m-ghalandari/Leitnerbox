@@ -16,24 +16,15 @@ function App() {
   const [password, setPassword] = useState("");
 
   const [autoLastLevel, setAutoLastLevel] = useState(false);
-  
-  //const pin = process.env.REACT_APP_PASSWORD;
-   //const pin = "momo";
 
-
-
-  const pin = process.env.REACT_APP_PASSWORD;
-  //  const pin = "momo";
-  const ip2 = process.env.REACT_APP_IP;
-  //const ip2 = "192.168.178.97";
-
+  const pin = "momo";
 
   useEffect(() => {
-    axios.get("http://" + ip2 + ":3001/api/get").then((response) => {
-      setFlashcards(response.data);
-    });
+    axios
+      .get("http://localhost:3001/api/get") // backend URL
+      .then((res) => setFlashcards(res.data))
+      .catch((err) => console.error("API error:", err));
   }, []);
-
 
   const handlePasswordSubmit = () => {
     // Check if the entered password is correct
@@ -44,10 +35,9 @@ function App() {
     }
   };
 
-
   const addFlashcard = (newFlashcard) => {
     axios
-      .post("http://" + ip2 + ":3001/api/insert", {
+      .post("http://localhost:3001/api/insert", {
         id: newFlashcard.id,
         box: newFlashcard.box,
         level: newFlashcard.level,
@@ -66,7 +56,7 @@ function App() {
   const deleteFlashcard = (id) => {
     // Delete the flashcard from the database
     axios
-      .delete(`http://${ip2}:3001/api/delete/${id}`)
+      .delete(`http://localhost:3001/api/delete/${id}`)
       .then(() => {
         const updatedFlashcards = flashcards.filter(
           (flashcard) => id !== flashcard.id
@@ -80,7 +70,7 @@ function App() {
 
   const editFlashcard = (updatedCard) => {
     axios
-      .put("http://" + ip2 + ":3001/api/editCard", {
+      .put("http://localhost:3001/api/editCard", {
         id: updatedCard.id,
         box: updatedCard.box,
         level: updatedCard.level,
@@ -211,7 +201,7 @@ function App() {
     });
 
     axios
-      .put("http://" + ip2 + ":3001/api/increaseLevels", {
+      .put("http://localhost:3001/api/increaseLevels", {
         cards,
       })
       .then(() => {})
@@ -220,25 +210,24 @@ function App() {
       });
   };
 
-
   const toggleAutoLastLevel = () => {
     setAutoLastLevel(!autoLastLevel); // Schaltet zwischen den Modi um
   };
 
   return (
     <Container>
-    
-
       <Search flashcards={flashcards} />
 
       {/* Button zum Umschalten zwischen den Modi */}
       <div className="d-flex justify-content-end">
-      <Button onClick={toggleAutoLastLevel} 
+        <Button
+          onClick={toggleAutoLastLevel}
           className="mb-4 mt-2"
           variant="dark"
-          size="sm">
-        {autoLastLevel ? "Manuelles Durchgehen" : "Automatisches Durchgehen"}
-      </Button>
+          size="sm"
+        >
+          {autoLastLevel ? "Manuelles Durchgehen" : "Automatisches Durchgehen"}
+        </Button>
       </div>
 
       {/* Anzeigen von LastLevelCards basierend auf dem Zustand */}
@@ -251,14 +240,14 @@ function App() {
         />
       )}
 
-      {!autoLastLevel && <div className="App d-grid gap-4">
-        <VocabularyForm addFlashcard={addFlashcard} />
+      {!autoLastLevel && (
+        <div className="App d-grid gap-4">
+          <VocabularyForm addFlashcard={addFlashcard} />
 
-        <OpenAIComponent addFlashcard={addFlashcard} />
+          <OpenAIComponent addFlashcard={addFlashcard} />
 
-        
           <>
-            <Box_0  // Reserved Cards
+            <Box_0 // Reserved Cards
               flashcards={flashcards.filter((flashcard) => flashcard.box === 0)}
               deleteFlashcard={deleteFlashcard}
               correct_or_wrongAnswer={correct_or_wrongAnswer}
@@ -274,7 +263,6 @@ function App() {
               changeFlashcardsLevels={changeFlashcardsLevels} //for change a set of flashcardslevel
               editFlashcard={editFlashcard}
             />
-            
 
             <CompletedCards
               deleteFlashcard={deleteFlashcard}
@@ -282,10 +270,8 @@ function App() {
               editFlashcard={editFlashcard}
             />
           </>
-        
-          
-        
-      </div> }
+        </div>
+      )}
 
       <Modal
         show={showModal}
@@ -315,9 +301,6 @@ function App() {
       </Modal>
     </Container>
   );
-  
- 
-  
 }
 
 export default App;
