@@ -7,16 +7,16 @@ const fs = require("fs");
 const axios = require("axios");
 
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "19981998M.gh",
-  database: "cards",
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  port: process.env.MYSQL_PORT || 3306,
 });
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 app.get("/api/get", async (req, res) => {
   const sqlSelect = "SELECT * FROM flashcards WHERE box BETWEEN 0 AND 4;";
@@ -43,7 +43,6 @@ app.get("/api/getBox5", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
 
 app.delete("/api/delete/:id", async (req, res) => {
   const id = req.params.id;
