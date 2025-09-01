@@ -14,6 +14,15 @@ const db = mysql.createPool({
   port: process.env.MYSQL_PORT || 3306,
 });
 
+/*
+const db = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "19981998M.gh",
+  database: "cards",
+});
+*/
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());

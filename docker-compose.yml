@@ -61,7 +61,7 @@ services:
     environment:
       # Your React dev server will read this at runtime (npm start).
       # It also falls back to http://<host>:3001 as in your code.
-      REACT_APP_BACKEND_URL: http://localhost:3001
+      REACT_APP_BACKEND_URL: http://192.168.0.3:3001
     depends_on:
       - backend
     ports:
