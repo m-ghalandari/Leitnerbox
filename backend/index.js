@@ -6,6 +6,9 @@ const mysql = require("mysql2/promise");
 const fs = require("fs");
 const axios = require("axios");
 
+const OpenAI = require("openai");
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
 const db = mysql.createPool({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
@@ -26,6 +29,38 @@ const db = mysql.createPool({
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.post("/api/generate-vocab", async (req, res) => {
+  const { prompt } = req.body;
+  try {
+    const system = [
+      "You return only JSON (no prose).",
+      'Return an object: { "items": [ { "front": "English term", "back": "German translation", "example": "English sentence" }, ... ] }',
+      "Do not include markdown or explanations.",
+    ].join(" ");
+
+    const completion = await openai.chat.completions.create({
+      model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+      temperature: 0,
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: `Provide ${prompt}.` },
+      ],
+    });
+
+    const content = completion.choices[0]?.message?.content ?? "{}";
+    const parsed = JSON.parse(content);
+    const items = Array.isArray(parsed) ? parsed : parsed.items;
+    if (!items || !Array.isArray(items)) {
+      return res.status(502).json({ error: "Invalid model output format" });
+    }
+    res.json({ items });
+  } catch (err) {
+    console.error("OpenAI error:", err?.response?.data || err.message);
+    res.status(500).json({ error: "Failed to generate vocabulary" });
+  }
+});
 
 app.get("/api/get", async (req, res) => {
   const sqlSelect = "SELECT * FROM flashcards WHERE box BETWEEN 0 AND 4;";
